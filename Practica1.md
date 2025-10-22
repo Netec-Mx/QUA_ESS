@@ -2,7 +2,7 @@
  
 ## Objetivos
 Al finalizar la práctica, serás capaz de:
-- Desarrollo de microservicios en un proyecto básico de Quarkus con endpoint REST simple.
+- Desarrollar microservicios en un proyecto básico de Quarkus con endpoint REST simple.
 
  ## Duración aproximada
 - 90 minutos.
