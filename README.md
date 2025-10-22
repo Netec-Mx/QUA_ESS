@@ -1,68 +1,68 @@
 <img src="images/neteclogo.png" alt="logo" width="300"/>
 
-# Nombre del curso
+# Quarkus
 
 ## Plataforma de laboratorios
 
-Bienvenido a la **plataforma de laboratorios** del curso **Nombre del curso**. Aquí podrás explorar diferentes tecnologías a través de prácticas guiadas. ¡Desarrolla tus habilidades y lleva tus conocimientos al siguiente nivel!
+Bienvenido a la **plataforma de laboratorios** del curso **Quarkus**. Aquí podrás explorar diferentes tecnologías a través de prácticas guiadas. ¡Desarrolla tus habilidades y lleva tus conocimientos al siguiente nivel!
 
 ## Lista de laboratorios
 
-Cada uno de estos laboratorios están diseñados para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
+Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
 
-### [Práctica 1. Nombre de la práctica](./Laboratorio_1.md) 
-    - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+### [Práctica 1. Proyecto Quarkus: Hola, mundo](CAPITULO 1/cl.alchemicaldata.banco/Practica1.md) 
+    - **Descripción**: desarrollo de microservicios en un proyecto básico de Quarkus con endpoint REST simple.
+    - ⏱️ **Duración estimada**: 90 min.
 
 ### [Práctica 2. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
     - **Descripción**: xxx.
-    - ⏱️**Duración estimada**: xx min.
+    - ⏱️**Duración estimada**: 90 min.
 ### [Práctica 3. Nombre de la práctica](./Laboratorio_1.md) 
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
 
 ### [Práctica 4. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
     - **Descripción**: xxx.
-    - ⏱️**Duración estimada**: xx min.
+    - ⏱️**Duración estimada**: 90 min.
 ### [Práctica 4.1. Nombre de la práctica](./Laboratorio_1.md) 
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
 
 ### [Práctica 4.2. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
     - **Descripción**: xxx.
-    - ⏱️**Duración estimada**: xx min.
+    - ⏱️**Duración estimada**: 90 min.
 
 ### [Práctica 4.3. Nombre de la práctica](./Laboratorio_1.md) 
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
 
 ### [Práctica 4.2. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
     - **Descripción**: xxx.
-    - ⏱️**Duración estimada**: xx min.
+    - ⏱️**Duración estimada**: 90 min.
 
 ### [Práctica 5. Nombre de la práctica](./Laboratorio_1.md) 
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
 
 ### [Práctica 6. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
     - **Descripción**: xxx.
-    - ⏱️**Duración estimada**: xx min.
+    - ⏱️**Duración estimada**: 90 min.
 
 ### [Práctica 7. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
-    - ⏱️ **Duración estimada**: xx min.
+    - ⏱️ **Duración estimada**: 90 min.
     - **Descripción**: xxx.
-    - ⏱️**Duración estimada**: xx min.
+    - ⏱️**Duración estimada**: 90 min.
 
 ---
 
