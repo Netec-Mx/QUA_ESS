@@ -1,21 +1,23 @@
-# 🚀 Proyecto Quarkus - Hola Mundo
+# Práctica 1. Proyecto Quarkus: Hola, mundo
+ 
+## Objetivos
+Al finalizar la práctica, serás capaz de:
+- Desarrollo de microservicios en un proyecto básico de Quarkus con endpoint REST simple.
 
-Proyecto básico de Quarkus con endpoint REST simple para aprender desarrollo de microservicios.
+ ## Duración aproximada
+- 90 minutos.
+ 
+##  Prerrequisitos
+- **Java 17 o superior** (recomendado: Java 21 LTS).
+- **Maven 3.9+** (incluido en el proyecto como Maven Wrapper).
+- **IDE** (VS Code, IntelliJ IDEA, Eclipse).
+- **Terminal** (Git Bash, PowerShell, terminal de macOS).
 
-## 📋 Prerequisitos
-
-- **Java 17 o superior** (recomendado Java 21 LTS)
-- **Maven 3.9+** (incluido en el proyecto como Maven Wrapper)
-- **IDE** (VS Code, IntelliJ IDEA, Eclipse)
-- **Terminal** (Git Bash, PowerShell, Terminal de macOS)
-
----
-
-## 🛠️ Instalación del Entorno
+## 🛠️ Instalación del entorno
 
 ### 🍎 macOS
 
-**Opción 1: Con Homebrew (Recomendado)**
+**Opción 1. Con Homebrew (recomendado)**
 
 ```bash
 # Instalar Homebrew si no lo tienes
@@ -36,7 +38,7 @@ java -version
 quarkus --version
 ```
 
-**Opción 2: Con SDKMAN (Para gestión avanzada de versiones)**
+**Opción 2. Con SDKMAN (para gestión avanzada de versiones)**
 
 ```bash
 # Instalar SDKMAN
@@ -59,10 +61,10 @@ quarkus --version
 
 ### 🪟 Windows
 
-**Opción 1: Con Chocolatey (Recomendado para Windows)**
+**Opción 1. Con Chocolatey (recomendado para Windows)**
 
 ```powershell
-# 1. Instalar Chocolatey (ejecutar PowerShell como Administrador)
+# 1. Instalar Chocolatey (ejecutar PowerShell como administrador)
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 # 2. Instalar Java 21
@@ -76,7 +78,7 @@ java -version
 quarkus --version
 ```
 
-**Opción 2: Con Scoop (Alternativa moderna)**
+**Opción 2. Con Scoop (alternativa moderna)**
 
 ```powershell
 # 1. Instalar Scoop (PowerShell normal, no requiere admin)
@@ -96,35 +98,35 @@ java -version
 quarkus --version
 ```
 
-**Opción 3: Instalación Manual**
+**Opción 3. Instalación manual**
 
-1. **Descargar Java 21:**
-   - Ir a [Adoptium](https://adoptium.net/)
-   - Descargar "Eclipse Temurin 21 (LTS)"
-   - Instalar siguiendo el wizard
+1. **Descargar Java 21**
+   - Ve a [Adoptium](https://adoptium.net/).
+   - Descarga "Eclipse Temurin 21 (LTS)".
+   - Instala siguiendo el wizard.
 
-2. **Configurar Variables de Entorno:**
-   - Abrir "Variables de entorno del sistema"
-   - Crear `JAVA_HOME` apuntando a: `C:\Program Files\Eclipse Adoptium\jdk-21.x.x`
-   - Agregar a `PATH`: `%JAVA_HOME%\bin`
+2. **Configurar variables de entorno**
+   - Abre "Variables de entorno del sistema".
+   - Crea `JAVA_HOME` apuntando a: `C:\Program Files\Eclipse Adoptium\jdk-21.x.x`.
+   - Agrega a `PATH`: `%JAVA_HOME%\bin`.
 
-3. **Descargar Quarkus CLI:**
-   - Ir a [Quarkus CLI Releases](https://github.com/quarkusio/quarkus/releases)
-   - Descargar y agregar al PATH
+3. **Descargar Quarkus CLI**
+   - Ve a [Quarkus CLI Releases](https://github.com/quarkusio/quarkus/releases)
+   - Descarga y agrega al `PATH`.
 
-4. **Verificar:**
+4. **Verificar**
    ```cmd
    java -version
    quarkus --version
    ```
 
-**Opción 4: WSL2 + SDKMAN (Para desarrolladores avanzados)**
+**Opción 4. WSL2 + SDKMAN (para desarrolladores avanzados)**
 
 ```bash
 # 1. Instalar WSL2 (PowerShell como admin)
 wsl --install
 
-# 2. Reiniciar y abrir Ubuntu/WSL
+# 2. Reiniciar y abrir Ubuntu/WSL.
 # 3. Seguir los pasos de SDKMAN de macOS
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -134,9 +136,9 @@ sdk install quarkus
 
 ---
 
-## 🏗️ Creación del Proyecto
-
-### Opción 1: Con Quarkus CLI (Recomendado)
+## Instrucciones
+### Tarea 1
+#### Opción 1. Con Quarkus CLI (recomendado)
 
 ```bash
 # Crear proyecto con extensión REST
@@ -148,7 +150,7 @@ quarkus create app cl.alchemicaldata:banco \
 cd banco
 ```
 
-### Opción 2: Con Quarkus CLI sin código (Educativo)
+#### Opción 2. Con Quarkus CLI sin código (educativo)
 
 ```bash
 # Crear proyecto limpio
@@ -161,7 +163,7 @@ cd banco
 ./mvnw quarkus:add-extension -Dextensions="rest"
 ```
 
-### Opción 3: Desde Maven Archetype
+#### Opción 3. Desde Maven Archetype
 
 ```bash
 mvn io.quarkus.platform:quarkus-maven-plugin:3.15.1:create \
@@ -173,7 +175,7 @@ mvn io.quarkus.platform:quarkus-maven-plugin:3.15.1:create \
 cd banco
 ```
 
-### Opción 4: Desde Web (Más visual)
+#### Opción 4. Desde la web (más visual)
 
 1. Ir a [code.quarkus.io](https://code.quarkus.io)
 2. Configurar:
@@ -187,7 +189,7 @@ cd banco
 
 ---
 
-## 📁 Estructura del Proyecto
+### Tarea 2. Estructurar el proyecto
 
 ```
 banco/
@@ -213,9 +215,9 @@ banco/
 
 ---
 
-## 🔧 Configuración Inicial
+### Tarea 3. Configuración inicial
 
-### 1. Posicionarse en el directorio del proyecto
+**Paso 1.** Posicionarse en el directorio del proyecto.
 
 ```bash
 # macOS/Linux/Git Bash
@@ -225,15 +227,15 @@ cd banco
 cd banco
 ```
 
-### 2. Dar permisos al Maven Wrapper (solo macOS/Linux/Git Bash)
+**Paso 2.** Dar permisos al Maven Wrapper (solo macOS/Linux/Git Bash).
 
 ```bash
 chmod +x mvnw
 ```
 
-### 3. Verificar que la extensión REST está instalada
+**Paso 3.** Verificar que la extensión REST está instalada.
 
-Revisar el archivo `pom.xml`, debe contener:
+Revisar que el archivo `pom.xml` contenga:
 
 ```xml
 <dependency>
@@ -242,7 +244,7 @@ Revisar el archivo `pom.xml`, debe contener:
 </dependency>
 ```
 
-Si no está, agregarla:
+Si no está, agregar:
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -256,9 +258,10 @@ mvnw.cmd quarkus:add-extension -Dextensions="rest"
 
 ---
 
-## ✍️ Crear el Endpoint HelloResource
+ 
+### Tarea 4. Crear el endpoint `HelloResource`
 
-Crear el archivo: `src/main/java/cl/alchemicaldata/banco/HelloResource.java`
+**Paso 1.** Crear el archivo: `src/main/java/cl/alchemicaldata/banco/HelloResource.java`
 
 ```java
 package cl.alchemicaldata.banco;
@@ -281,9 +284,9 @@ public class HelloResource {
 
 ---
 
-## ▶️ Ejecución del Proyecto
+### Tarea 5. Ejecución del proyecto
 
-### Modo Desarrollo (Hot Reload Automático)
+#### Modo: desarrollo (hot reload automático)
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -295,7 +298,8 @@ public class HelloResource {
 mvnw.cmd quarkus:dev
 ```
 
-**Salida esperada:**
+## Resultado esperado
+
 ```
 __  ____  __  _____   ___  __ ____  ______ 
  --/ __ \/ / / / _ | / _ \/ //_/ / / / __/ 
@@ -309,13 +313,13 @@ Tests paused
 Press [e] to edit command line args, [r] to resume testing, [h] for more options>
 ```
 
-**Accesos:**
+**Accesos**
 - **Endpoint:** http://localhost:8080/hello
 - **Dev UI:** http://localhost:8080/q/dev
 - **Health Check:** http://localhost:8080/q/health
 - **Metrics:** http://localhost:8080/q/metrics
 
-### Compilar sin ejecutar
+**Paso 1.** Compilar sin ejecutar
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -327,7 +331,7 @@ Press [e] to edit command line args, [r] to resume testing, [h] for more options
 mvnw.cmd clean compile
 ```
 
-### Empaquetar aplicación (JAR)
+**Paso 2.** Empaquetar aplicación (JAR)
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -339,7 +343,7 @@ mvnw.cmd clean compile
 mvnw.cmd package
 ```
 
-### Ejecutar JAR empaquetado
+**Paso 3.** Ejecutar JAR empaquetado
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -353,30 +357,30 @@ java -jar target\quarkus-app\quarkus-run.jar
 
 ---
 
-## 🧪 Pruebas
+### Tarea 6. Pruebas
 
-### Probar el endpoint manualmente
+**Paso 1.** Probar el endpoint manualmente
 
-**Opción 1: Navegador**
+**Opción 1. Navegador**
 ```
 http://localhost:8080/hello
 ```
 
-**Opción 2: curl (macOS/Linux/Git Bash)**
+**Opción 2. curl (macOS/Linux/Git Bash)**
 ```bash
 curl http://localhost:8080/hello
 ```
 
-**Opción 3: PowerShell (Windows)**
+**Opción 3. PowerShell (Windows)**
 ```powershell
 Invoke-WebRequest -Uri http://localhost:8080/hello | Select-Object -Expand Content
 ```
 
-**Opción 4: Postman/Insomnia**
+**Opción 4. Postman/Insomnia**
 - Method: GET
 - URL: http://localhost:8080/hello
 
-### Ejecutar tests automatizados
+**Paso 2.** Ejecutar tests automatizados
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -390,21 +394,21 @@ mvnw.cmd test
 
 ---
 
-## 🐳 Docker (Opcional)
+### Tarea 6. Docker (opcional)
 
-### Construir imagen Docker (JVM Mode)
+**Paso 1.** Construir imagen Docker (JVM Mode)
 
 ```bash
 docker build -f src/main/docker/Dockerfile.jvm -t banco:1.0.0-jvm .
 ```
 
-### Ejecutar contenedor
+**Paso 2.** Ejecutar contenedor
 
 ```bash
 docker run -i --rm -p 8080:8080 banco:1.0.0-jvm
 ```
 
-### Construir imagen nativa (requiere GraalVM)
+**Paso 3.** Construir imagen nativa (requiere GraalVM)
 
 ```bash
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
@@ -413,7 +417,7 @@ docker build -f src/main/docker/Dockerfile.native -t banco:1.0.0-native .
 
 ---
 
-## 🔍 Comandos Útiles en Modo Dev
+## 🔍 Comandos útiles en modo dev
 
 Cuando la aplicación está corriendo con `quarkus:dev`, puedes usar estas teclas:
 
@@ -429,7 +433,7 @@ Cuando la aplicación está corriendo con `quarkus:dev`, puedes usar estas tecla
 
 ---
 
-## ⚙️ Configuración (application.properties)
+## ⚙️ Configuración (`application.properties`)
 
 Archivo: `src/main/resources/application.properties`
 
@@ -450,13 +454,13 @@ quarkus.live-reload.instrumentation=true
 
 ---
 
-## 🚨 Solución de Problemas Comunes
+## 🚨 Solución de problemas comunes
 
-### ❌ Error: "jakarta.ws.rs not found" o imports subrayados en rojo
+### ❌ Error: `jakarta.ws.rs not found` o` imports` subrayados en rojo.
 
-**Causa:** Falta la extensión REST
+**Causa:** falta la extensión `REST`.
 
-**Solución:**
+**Solución**
 ```bash
 # macOS/Linux/Git Bash
 ./mvnw quarkus:add-extension -Dextensions="rest"
@@ -465,39 +469,41 @@ quarkus.live-reload.instrumentation=true
 mvnw.cmd quarkus:add-extension -Dextensions="rest"
 ```
 
-### ❌ Error: "Permission denied: ./mvnw" (macOS/Linux)
+### ❌ Error: `Permission denied: ./mvnw` (macOS/Linux).
 
-**Causa:** El wrapper no tiene permisos de ejecución
+**Causa:** el wrapper no tiene permisos de ejecución.
 
-**Solución:**
+**Solución**
 ```bash
 chmod +x mvnw
 ```
 
-### ❌ Error: "Port 8080 already in use"
+### ❌ Error: `Port 8080 already in use`.
 
-**Causa:** Otro proceso está usando el puerto 8080
+**Causa:** otro proceso está usando el puerto 8080.
 
-**Solución 1 - Cambiar puerto:**
+**Solución 1. Cambiar puerto.**
 
 En `application.properties`:
 ```properties
 quarkus.http.port=8081
 ```
 
-**Solución 2 - Liberar puerto (macOS/Linux):**
+**Solución 2. Liberar puerto.**
+
+ Para macOS/Linux:
 ```bash
 lsof -ti:8080 | xargs kill -9
 ```
 
-**Solución 2 - Liberar puerto (Windows PowerShell como admin):**
+Para Windows PowerShell como admin:
 ```powershell
 Get-Process -Id (Get-NetTCPConnection -LocalPort 8080).OwningProcess | Stop-Process
 ```
 
-### ❌ Error: "JAVA_HOME is not set" (Windows)
+### ❌ Error: `JAVA_HOME is not set` (Windows).
 
-**Solución:**
+**Solución**
 ```cmd
 # Verificar si Java está instalado
 java -version
@@ -508,31 +514,31 @@ java -version
 # Reiniciar PowerShell
 ```
 
-### ❌ Maven Wrapper no funciona en Windows
+### ❌ Error: Maven Wrapper no funciona en Windows.
 
-**Causa:** Estás usando `./mvnw` en CMD/PowerShell
+**Causa:** estás usando `./mvnw` en `CMD/PowerShell`.
 
-**Solución:** Usar `mvnw.cmd`
+**Solución:** usar `mvnw.cmd`.
 ```cmd
 mvnw.cmd quarkus:dev
 ```
 
-### ❌ Error: "Failed to execute goal... dependencies could not be resolved"
+### ❌ Error: `Failed to execute goal... dependencies could not be resolved`.
 
-**Causa:** Maven no puede descargar dependencias
+**Causa:** Maven no puede descargar dependencias.
 
-**Solución:**
+**Solución**
 ```bash
-# Limpiar cache de Maven y reintentar
+# Limpiar caché de Maven y reintentar
 ./mvnw dependency:purge-local-repository
 ./mvnw clean install
 ```
 
 ---
 
-## 📚 Recursos Adicionales
+## 📚 Recursos adicionales
 
-### Documentación Oficial
+### Documentación oficial
 - [Guías de Quarkus](https://quarkus.io/guides/)
 - [Quarkus Cheat Sheet](https://lordofthejars.github.io/quarkus-cheat-sheet/)
 - [REST con Quarkus](https://quarkus.io/guides/rest)
@@ -543,7 +549,7 @@ mvnw.cmd quarkus:dev
 - [Stack Overflow - Tag: quarkus](https://stackoverflow.com/questions/tagged/quarkus)
 - [Quarkus Zulip Chat](https://quarkusio.zulipchat.com/)
 
-### Extensiones Útiles para VS Code
+### Extensiones útiles para VS Code
 - **Extension Pack for Java** (Microsoft)
 - **Quarkus Tools** (Red Hat)
 - **REST Client** (Huachao Mao)
@@ -551,28 +557,22 @@ mvnw.cmd quarkus:dev
 
 ---
 
-## 📝 Notas Importantes para Estudiantes
+## 📝 Notas importantes 
 
-### Para Usuarios de Windows
-- Recomiendo usar **PowerShell** o **Git Bash** en lugar de CMD
-- Si usan Git Bash, los comandos son iguales a macOS/Linux (`./mvnw`)
-- Si usan CMD/PowerShell, deben usar `mvnw.cmd` en lugar de `./mvnw`
-- **Chocolatey** facilita mucho la instalación, consideren usarlo
+### Para usuarios de Windows
+- Se recomienda usar **PowerShell** o **Git Bash** en lugar de CMD.
+- Si usas Git Bash, los comandos son iguales a macOS/Linux (`./mvnw`).
+- Si usan CMD/PowerShell, deben usar `mvnw.cmd` en lugar de `./mvnw`.
+- **Chocolatey** facilita la instalación, considera usarlo.
 
-### Para Usuarios de macOS
-- **Homebrew** es la forma más simple de instalar todo
-- **SDKMAN** es útil si necesitan cambiar versiones de Java frecuentemente
-- El terminal por defecto (zsh) funciona perfecto
+### Para usuarios de macOS
+- **Homebrew** es la forma más simple de instalar todo.
+- **SDKMAN** es útil si necesitas cambiar versiones de Java frecuentemente.
+- El terminal por defecto (zsh) funciona perfecto.
 
-### Mejores Prácticas
-1. **Siempre** estar en el directorio raíz del proyecto (donde está `pom.xml`)
-2. **Verificar** que Java y Maven estén instalados antes de empezar
-3. **Usar modo dev** (`quarkus:dev`) durante desarrollo para hot reload
-4. **Revisar logs** cuando algo falle, Quarkus da mensajes claros
-5. **Explorar Dev UI** (`http://localhost:8080/q/dev`) tiene muchas herramientas útiles
-
----
-
-## 📄 Licencia
-
-Este proyecto es material educativo de NETEC
+### Buenas prácticas
+1. **Siempre** estar en el directorio raíz del proyecto (donde está `pom.xml`).
+2. **Verificar** que Java y Maven estén instalados antes de empezar.
+3. **Usar modo dev** (`quarkus:dev`) durante desarrollo para hot reload.
+4. **Revisar logs** cuando algo falle, Quarkus da mensajes claros.
+5. **Explorar Dev UI** (`http://localhost:8080/q/dev`) tiene muchas herramientas útiles.
