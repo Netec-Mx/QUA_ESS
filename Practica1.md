@@ -61,7 +61,7 @@ quarkus --version
 
 ### 🪟 Windows
 
-**Opción 1. Con Chocolatey (recomendado para Windows)**
+**Opción 1. Con Chocolatey (recomendado)**
 
 ```powershell
 # 1. Instalar Chocolatey (ejecutar PowerShell como administrador)
