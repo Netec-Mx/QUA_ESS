@@ -112,7 +112,7 @@ quarkus --version
 
 ## Instrucciones
 ### Tarea 1
-**Paso 1.** Crear proyecto Quarkus**
+**Paso 1.** Crear proyecto Quarkus.
 
 **macOS/Linux/Git Bash:**
 ```bash
