@@ -17,11 +17,52 @@ Cada uno de estos laboratorios están diseñados para ofrecerte una experiencia 
 ### [Práctica 2. Nombre de la práctica](./Laboratorio_2.md)
     - **Descripción**: xxx.
     - ⏱️ **Duración estimada**: xx min.
+    - **Descripción**: xxx.
+    - ⏱️**Duración estimada**: xx min.
+### [Práctica 3. Nombre de la práctica](./Laboratorio_1.md) 
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
 
-### [Práctica 3. Nombre de la práctica](./Laboratorio_3.md)
+### [Práctica 4. Nombre de la práctica](./Laboratorio_2.md)
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+    - **Descripción**: xxx.
+    - ⏱️**Duración estimada**: xx min.
+### [Práctica 4.1. Nombre de la práctica](./Laboratorio_1.md) 
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+
+### [Práctica 4.2. Nombre de la práctica](./Laboratorio_2.md)
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
     - **Descripción**: xxx.
     - ⏱️**Duración estimada**: xx min.
 
+### [Práctica 4.3. Nombre de la práctica](./Laboratorio_1.md) 
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+
+### [Práctica 4.2. Nombre de la práctica](./Laboratorio_2.md)
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+    - **Descripción**: xxx.
+    - ⏱️**Duración estimada**: xx min.
+
+### [Práctica 5. Nombre de la práctica](./Laboratorio_1.md) 
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+
+### [Práctica 6. Nombre de la práctica](./Laboratorio_2.md)
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+    - **Descripción**: xxx.
+    - ⏱️**Duración estimada**: xx min.
+
+### [Práctica 7. Nombre de la práctica](./Laboratorio_2.md)
+    - **Descripción**: xxx.
+    - ⏱️ **Duración estimada**: xx min.
+    - **Descripción**: xxx.
+    - ⏱️**Duración estimada**: xx min.
 
 ---
 
