@@ -1,4 +1,4 @@
-<img width="2666" height="238" alt="image" src="https://github.com/user-attachments/assets/a8f1b74b-fa05-405f-90e7-4b55ea1a7806" /><img src="images/neteclogo.png" alt="logo" width="300"/>
+<img src="images/neteclogo.png" alt="logo" width="300"/>
 
 # Quarkus
 
