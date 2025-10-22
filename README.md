@@ -15,8 +15,8 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - ⏱️ **Duración estimada**: 90 min.
 
 ### [Práctica 2. Validador de cuentas bancarias con Contract-First](./Practica2.md)
- -**Descripción**: Implementar Contract-First con OpenAPI para validar números de una cuenta bancaria en un proyecto Quarkus.
- -⏱️ **Duración estimada**: 90 min.
+- **Descripción**: Implementar Contract-First con OpenAPI para validar números de una cuenta bancaria en un proyecto Quarkus.
+- ⏱️ **Duración estimada**: 90 min.
     
 ### [Práctica 3. Nombre de la práctica](./Laboratorio_1.md) 
  -**Descripción**: xxx.
