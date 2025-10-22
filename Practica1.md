@@ -261,7 +261,7 @@ mvnw.cmd quarkus:add-extension -Dextensions="rest"
  
 ### Tarea 4. Crear el endpoint `HelloResource`
 
-**Paso 1.** Crear el archivo: `src/main/java/cl/alchemicaldata/banco/HelloResource.java`
+**Paso 1.** Crear el archivo: `src/main/java/cl/alchemicaldata/banco/HelloResource.java`.
 
 ```java
 package cl.alchemicaldata.banco;
@@ -319,7 +319,7 @@ Press [e] to edit command line args, [r] to resume testing, [h] for more options
 - **Health Check:** http://localhost:8080/q/health
 - **Metrics:** http://localhost:8080/q/metrics
 
-**Paso 1.** Compilar sin ejecutar
+**Paso 1.** Compilar sin ejecutar.
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -331,7 +331,7 @@ Press [e] to edit command line args, [r] to resume testing, [h] for more options
 mvnw.cmd clean compile
 ```
 
-**Paso 2.** Empaquetar aplicación (JAR)
+**Paso 2.** Empaquetar aplicación (JAR).
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -343,7 +343,7 @@ mvnw.cmd clean compile
 mvnw.cmd package
 ```
 
-**Paso 3.** Ejecutar JAR empaquetado
+**Paso 3.** Ejecutar JAR empaquetado.
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -359,7 +359,7 @@ java -jar target\quarkus-app\quarkus-run.jar
 
 ### Tarea 6. Pruebas
 
-**Paso 1.** Probar el endpoint manualmente
+**Paso 1.** Probar el endpoint manualmente.
 
 **Opción 1. Navegador**
 ```
@@ -380,7 +380,7 @@ Invoke-WebRequest -Uri http://localhost:8080/hello | Select-Object -Expand Conte
 - Method: GET
 - URL: http://localhost:8080/hello
 
-**Paso 2.** Ejecutar tests automatizados
+**Paso 2.** Ejecutar tests automatizados.
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -396,19 +396,19 @@ mvnw.cmd test
 
 ### Tarea 6. Docker (opcional)
 
-**Paso 1.** Construir imagen Docker (JVM Mode)
+**Paso 1.** Construir imagen Docker (JVM Mode).
 
 ```bash
 docker build -f src/main/docker/Dockerfile.jvm -t banco:1.0.0-jvm .
 ```
 
-**Paso 2.** Ejecutar contenedor
+**Paso 2.** Ejecutar contenedor.
 
 ```bash
 docker run -i --rm -p 8080:8080 banco:1.0.0-jvm
 ```
 
-**Paso 3.** Construir imagen nativa (requiere GraalVM)
+**Paso 3.** Construir imagen nativa (requiere GraalVM).
 
 ```bash
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
