@@ -10,7 +10,7 @@ Bienvenido a la **plataforma de laboratorios** del curso **Quarkus**. Aquí podr
 
 Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
 
-### [Práctica 1. Proyecto Quarkus: Hola, mundo](CAPITULO 1/cl.alchemicaldata.banco/Practica1.md) 
+### [Práctica 1. Proyecto Quarkus: Hola, mundo](.Practica1.md) 
     - **Descripción**: desarrollo de microservicios en un proyecto básico de Quarkus con endpoint REST simple.
     - ⏱️ **Duración estimada**: 90 min.
 
