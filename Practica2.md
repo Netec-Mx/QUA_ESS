@@ -561,7 +561,7 @@ mvnw.cmd package
 
 ---
 
-## Resultado esperado
+## Resultados esperados
 - Crear proyecto Quarkus desde CLI.
 - Configurar extensiones necesarias.
 - Diseñar contratos OpenAPI primero.
