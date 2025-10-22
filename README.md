@@ -1,4 +1,4 @@
-<img src="images/neteclogo.png" alt="logo" width="300"/>
+<img width="2666" height="238" alt="image" src="https://github.com/user-attachments/assets/a8f1b74b-fa05-405f-90e7-4b55ea1a7806" /><img src="images/neteclogo.png" alt="logo" width="300"/>
 
 # Quarkus
 
@@ -18,7 +18,7 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: Implementar Contract-First con OpenAPI para validar números de una cuenta bancaria en un proyecto Quarkus.
 - ⏱️ **Duración estimada**: 90 min.
     
-### [Práctica 3. Nombre de la práctica](./Laboratorio_1.md) 
+### [Práctica 3. Microservicio de gestión de cuentas bancarias](./Practica3.md) 
  -**Descripción**: xxx.
  -⏱️ **Duración estimada**: 90 min.
 
