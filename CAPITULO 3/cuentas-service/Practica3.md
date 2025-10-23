@@ -1,20 +1,24 @@
-# 🏦 Capítulo 3: Microservicio de Gestión de Cuentas Bancarias
+# Práctica 3. Microservicio de gestión de cuentas bancarias
+ 
+## Objetivos
+Al finalizar la práctica, serás capaz de:
+- Desarrollar por completo un microservicio REST con CRUD, inyección de dependencias (CDI) y arquitectura en capas.
+ 
+## Duración aproximada
+-	90 minutos.
 
-Desarrollo completo de un microservicio REST con CRUD, inyección de dependencias (CDI) y arquitectura en capas.
+
+## 📋 Prerrequisitos
+
+- **Java 17 o superior** (recomendado: Java 21 LTS).
+- **Maven 3.9+** (incluido en el proyecto como Maven Wrapper). 
+- **Quarkus CLI** (opcional, pero recomendado).
+- **IDE** (VS Code, IntelliJ IDEA, Eclipse).
+- **Postman o Swagger UI** (para probar endpoints).
 
 ---
 
-## 📋 Prerequisitos
-
-- **Java 21** (OpenJDK recomendado)
-- **Maven 3.9+** (o Maven Wrapper incluido)
-- **Quarkus CLI** (opcional)
-- **IDE** (IntelliJ IDEA Community, VSCode, Eclipse)
-- **Postman o Swagger UI** (para probar endpoints)
-
----
-
-## 🎯 Objetivos del Capítulo
+## 🎯 Objetivos del capítulo
 
 Al completar este ejercicio, dominarás:
 
@@ -28,7 +32,7 @@ Al completar este ejercicio, dominarás:
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## 🏗️ Arquitectura del proyecto
 
 ```
 pe.banco.cuentas
@@ -43,7 +47,7 @@ pe.banco.cuentas
     └── CuentaResource.java  (@Inject Service)
 ```
 
-### Flujo de Petición
+### Flujo de petición
 
 ```
 Cliente HTTP
@@ -57,9 +61,9 @@ Map<String, Cuenta> (Datos en memoria)
 
 ---
 
-## 🚀 Creación del Proyecto Paso a Paso
-
-### **PASO 1: Crear proyecto Quarkus**
+## Instrucciones
+### Tarea 1
+**Paso 1.** Crear proyecto Quarkus.
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -90,7 +94,7 @@ cd cuentas-service
 
 ---
 
-### **PASO 2: Crear estructura de packages**
+**Paso 2.** Crear estructura de packages.
 
 **macOS/Linux:**
 ```bash
@@ -115,7 +119,7 @@ mkdir src\main\java\pe\banco\cuentas\resource
 
 ---
 
-### **PASO 3: Crear el DTO (Cuenta)**
+**Paso 3.** Crear el DTO (cuenta).
 
 **Crear archivo:** `src/main/java/pe/banco/cuentas/model/Cuenta.java`
 
@@ -178,7 +182,7 @@ public class Cuenta {
 
 ---
 
-### **PASO 4: Crear el Service con CDI**
+**Paso 4.** Crear el Service con CDI.
 
 **Crear archivo:** `src/main/java/pe/banco/cuentas/service/CuentaService.java`
 
@@ -233,14 +237,14 @@ public class CuentaService {
 }
 ```
 
-**Conceptos clave:**
-- `@ApplicationScoped`: Una sola instancia del servicio en toda la aplicación
-- `ConcurrentHashMap`: Thread-safe para entorno concurrente
-- Datos en memoria (sin base de datos)
+**Conceptos clave**
+- `@ApplicationScoped`: una sola instancia del servicio en toda la aplicación.
+- `ConcurrentHashMap`: Thread-safe para entorno concurrente.
+- Datos en memoria (sin base de datos).
 
 ---
 
-### **PASO 5: Crear el Resource (REST Endpoints)**
+**Paso 5.** Crear el Resource (REST Endpoints).
 
 **Crear archivo:** `src/main/java/pe/banco/cuentas/resource/CuentaResource.java`
 
@@ -307,14 +311,14 @@ public class CuentaResource {
 ```
 
 **Conceptos clave:**
-- `@Inject`: Inyección de dependencias (CDI)
-- `@Path`: Ruta base del recurso
-- `@Produces/@Consumes`: Tipo de contenido JSON
-- `Response.status()`: Control de códigos HTTP
+- `@Inject`: inyección de dependencias (CDI).
+- `@Path`: ruta base del recurso.
+- `@Produces/@Consumes`: tipo de contenido JSON.
+- `Response.status()`: control de códigos HTTP.
 
 ---
 
-### **PASO 6: Ejecutar el proyecto**
+**Paso 6.** Ejecutar el proyecto.
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -339,9 +343,9 @@ INFO  [io.quarkus] Listening on: http://localhost:8080
 
 ---
 
-## 🧪 Probar el Microservicio
+### Tarea 2. Probar el microservicio
 
-### URLs Importantes
+### URL importantes
 
 | Recurso | URL |
 |---------|-----|
@@ -353,9 +357,9 @@ INFO  [io.quarkus] Listening on: http://localhost:8080
 
 ---
 
-### Pruebas con Navegador
+**Opción 1.** Navegador.
 
-#### **1. Listar todas las cuentas (GET)**
+**Paso 1.** Listar todas las cuentas (GET).
 
 ```
 http://localhost:8080/cuentas
@@ -385,7 +389,7 @@ http://localhost:8080/cuentas
 ]
 ```
 
-#### **2. Obtener una cuenta específica (GET)**
+**Paso 2.** Obtener una cuenta específica (GET).
 
 ```
 http://localhost:8080/cuentas/1000000001
@@ -403,14 +407,14 @@ http://localhost:8080/cuentas/1000000001
 
 ---
 
-### Pruebas con Swagger UI
+**Opción 2.** Swagger UI.
 
-**Abrir:** http://localhost:8080/q/swagger-ui
+**Paso 1.** Abrir: http://localhost:8080/q/swagger-ui.
 
-#### **3. Crear cuenta (POST)**
+**Paso 2.** Crear cuenta (POST).
 
-1. Expandir **POST /cuentas**
-2. Click en **"Try it out"**
+1. Expandir **POST /cuentas**.
+2. Click en **"Try it out"**.
 3. Request body:
 ```json
 {
@@ -420,19 +424,19 @@ http://localhost:8080/cuentas/1000000001
   "tipoCuenta": "AHORRO"
 }
 ```
-4. Click **"Execute"**
+4. Click **"Execute"**.
 
 **Respuesta esperada:** `201 Created`
 
-#### **4. Actualizar cuenta (PUT)**
+**Paso 3.** Actualizar cuenta (PUT).
 
-1. Expandir **PUT /cuentas/{numero}**
+1. Expandir **PUT /cuentas/{número}**
 2. Click en **"Try it out"**
-3. En **numero**: `1000000004`
+3. En **número**: `1000000004`
 4. Request body:
 ```json
 {
-  "numero": "1000000004",
+  "número": "1000000004",
   "titular": "Ana Torres",
   "saldo": 5000.00,
   "tipoCuenta": "CORRIENTE"
@@ -442,30 +446,30 @@ http://localhost:8080/cuentas/1000000001
 
 **Respuesta esperada:** `200 OK` con cuenta actualizada
 
-#### **5. Eliminar cuenta (DELETE)**
+**Paso 4.** Eliminar cuenta (DELETE).
 
-1. Expandir **DELETE /cuentas/{numero}**
-2. Click en **"Try it out"**
-3. En **numero**: `1000000003`
-4. Click **"Execute"**
+1. Expandir **DELETE /cuentas/{número}**.
+2. Click en **"Try it out"**.
+3. En **número**: `1000000003`.
+4. Click `Execute`
 
 **Respuesta esperada:** `204 No Content`
 
 ---
 
-### Pruebas con curl
+**Opción 2.** curl (macOS/Linux/Git Bash).
 
-#### **GET - Listar todas**
+#### **GET: listar todas**
 ```bash
 curl http://localhost:8080/cuentas
 ```
 
-#### **GET - Obtener una**
+#### **GET: obtener una**
 ```bash
 curl http://localhost:8080/cuentas/1000000001
 ```
 
-#### **POST - Crear**
+#### **POST: crear**
 ```bash
 curl -X POST http://localhost:8080/cuentas \
   -H "Content-Type: application/json" \
@@ -477,7 +481,7 @@ curl -X POST http://localhost:8080/cuentas \
   }'
 ```
 
-#### **PUT - Actualizar**
+#### **PUT: actualizar**
 ```bash
 curl -X PUT http://localhost:8080/cuentas/1000000004 \
   -H "Content-Type: application/json" \
@@ -489,21 +493,21 @@ curl -X PUT http://localhost:8080/cuentas/1000000004 \
   }'
 ```
 
-#### **DELETE - Eliminar**
+#### **DELETE: eliminar**
 ```bash
 curl -X DELETE http://localhost:8080/cuentas/1000000003
 ```
 
 ---
 
-### Pruebas con PowerShell (Windows)
+**Opción 3.** PowerShell (Windows).
 
 #### **GET - Listar**
 ```powershell
 Invoke-WebRequest -Uri http://localhost:8080/cuentas | Select-Object -Expand Content
 ```
 
-#### **POST - Crear**
+#### **POST: crear**
 ```powershell
 $body = @{
     numero = "1000000004"
@@ -518,7 +522,7 @@ Invoke-WebRequest -Method POST -Uri http://localhost:8080/cuentas `
 
 ---
 
-## 📁 Estructura Final del Proyecto
+## 📁 Estructura final del proyecto
 
 ```
 cuentas-service/
@@ -544,9 +548,9 @@ cuentas-service/
 
 ---
 
-## 🎯 Conceptos Cubiertos
+## 🎯 Conceptos cubiertos
 
-### 1. **Inyección de Dependencias (CDI)**
+#### ✅ 1. Inyección de dependencias (CDI).
 
 ```java
 @ApplicationScoped              // Scope del bean
@@ -562,11 +566,11 @@ public class CuentaResource {
 ```
 
 **Scopes disponibles:**
-- `@ApplicationScoped`: Una instancia por aplicación (Singleton)
-- `@RequestScoped`: Una instancia por request HTTP
-- `@Dependent`: Nueva instancia cada vez (por defecto)
+- `@ApplicationScoped`: una instancia por aplicación (Singleton).
+- `@RequestScoped`: una instancia por request HTTP.
+- `@Dependent`: nueva instancia cada vez (por defecto).
 
-### 2. **CRUD Completo**
+#### ✅ 2. CRUD completo.
 
 | Operación | Verbo HTTP | Endpoint | Código HTTP |
 |-----------|------------|----------|-------------|
@@ -576,7 +580,7 @@ public class CuentaResource {
 | **Update** | PUT | `/cuentas/{numero}` | 200 OK / 404 Not Found |
 | **Delete** | DELETE | `/cuentas/{numero}` | 204 No Content / 404 Not Found |
 
-### 3. **Arquitectura en Capas**
+#### ✅ 3. Arquitectura en capas.
 
 ```
 Resource Layer (REST)
@@ -587,12 +591,12 @@ Data Layer (En memoria - futuro: DB)
 ```
 
 **Ventajas:**
-- ✅ Separación de responsabilidades
-- ✅ Código mantenible
-- ✅ Fácil testing
-- ✅ Reutilización de lógica
+- ✅ Separación de responsabilidades.
+- ✅ Código mantenible.
+- ✅ Fácil testing.
+- ✅ Reutilización de lógica.
 
-### 4. **Manejo de Errores**
+#### ✅ 4. Manejo de errores.
 
 ```java
 if (cuenta == null) {
@@ -610,11 +614,11 @@ if (cuenta == null) {
 
 ---
 
-## 🔥 Hot Reload en Acción
+## 🔥 Hot Reload en acción.
 
 Con `quarkus:dev` corriendo:
 
-1. **Modificar** `CuentaService.java`:
+**Paso 1.** Modificar `CuentaService.java`.
 ```java
 public List<Cuenta> listarTodas() {
     System.out.println("🔥 Listando cuentas...");  // Agregar log
@@ -622,34 +626,34 @@ public List<Cuenta> listarTodas() {
 }
 ```
 
-2. **Guardar** el archivo (Cmd+S / Ctrl+S)
+**Paso 2.** Guardar el archivo (`Cmd+S / Ctrl+S`).
 
-3. **Refrescar** `http://localhost:8080/cuentas`
+**Paso 3.** Refrescar `http://localhost:8080/cuentas`.
 
-4. **Ver el log** en la consola 🔥
+**Paso 4.** Ver el log en la consola.
 
 **¡Los cambios se aplican instantáneamente!**
 
 ---
 
-## 🚨 Solución de Problemas
+## 🚨 Solución de problemas
 
-### Error: "Port 8080 already in use"
+### ❌ Error: `Port 8080 already in use`.
 
-**Causa:** Otro proceso usa el puerto 8080
+**Causa:** otro proceso usa el puerto 8080.
 
-**Solución 1 (macOS/Linux):**
+**Solución 1 (macOS/Linux)**
 ```bash
 lsof -ti:8080 | xargs kill -9
 ./mvnw quarkus:dev
 ```
 
-**Solución 2 (Windows PowerShell como admin):**
+**Solución 2 (Windows PowerShell como admin)**
 ```powershell
 Get-Process -Id (Get-NetTCPConnection -LocalPort 8080).OwningProcess | Stop-Process
 ```
 
-**Solución 3 (Cambiar puerto):**
+**Solución 3 (cambiar puerto)**
 
 En `application.properties`:
 ```properties
@@ -658,26 +662,26 @@ quarkus.http.port=8081
 
 ### Error: "CuentaService cannot be resolved"
 
-**Causa:** Falta compilar
+**Causa:** falta compilar
 
-**Solución:**
+**Solución**
 ```bash
 ./mvnw clean compile
 ./mvnw quarkus:dev
 ```
 
-### Error: 404 en todos los endpoints
+### ❌ Error: 404 en todos los endpoints.
 
-**Causa:** `@Path` incorrecto o package mal ubicado
+**Causa:** `@Path` incorrecto o package mal ubicado.
 
-**Solución:**
-1. Verificar que `CuentaResource` tenga `@Path("/cuentas")`
-2. Verificar packages: `pe.banco.cuentas.resource`
-3. Recompilar: `./mvnw clean compile`
+**Solución**
+1. Verificar que `CuentaResource` tenga `@Path("/cuentas")`.
+2. Verificar packages: `pe.banco.cuentas.resource`.
+3. Recompilar: `./mvnw clean compile`.
 
 ---
 
-## 📚 Recursos Adicionales
+## 📚 Recursos adicionales
 
 ### Documentación
 
@@ -685,30 +689,29 @@ quarkus.http.port=8081
 - [Quarkus REST Guide](https://quarkus.io/guides/rest)
 - [JAX-RS Specification](https://jakarta.ee/specifications/restful-ws/)
 
-### Siguientes Pasos
+### Siguientes pasos
 
 Después de dominar este capítulo:
-1. **Capítulo 4:** Persistencia con Hibernate ORM Panache
-2. **Capítulo 5:** Validaciones con Bean Validation
-3. **Capítulo 6:** Manejo avanzado de errores
-4. **Capítulo 7:** Seguridad y autenticación
+1. **Capítulo 4.** Persistencia con Hibernate ORM Panache.
+2. **Capítulo 5.** Validaciones con Bean Validation.
+3. **Capítulo 6.** Manejo avanzado de errores.
+4. **Capítulo 7.** Seguridad y autenticación.
 
 ---
 
-## ✅ Checklist de Aprendizaje
+## ✅ Checklist de aprendizaje
 
-Después de completar este ejercicio, deberías poder:
-
-- [ ] Crear proyecto Quarkus desde CLI
-- [ ] Organizar código en packages (model, service, resource)
-- [ ] Usar `@Inject` para inyección de dependencias
-- [ ] Entender `@ApplicationScoped` y otros scopes
-- [ ] Implementar CRUD completo con JAX-RS
-- [ ] Usar `@Path`, `@PathParam`, `@QueryParam`
-- [ ] Manejar Request body con JSON
-- [ ] Retornar Response con códigos HTTP correctos
-- [ ] Probar endpoints con Swagger UI
-- [ ] Aprovechar hot reload para desarrollo rápido
+Después de completar este ejercicio, serás capaz de:
+- [ ] Crear proyecto Quarkus desde CLI.
+- [ ] Organizar código en packages (model, service, resource).
+- [ ] Usar `@Inject` para inyección de dependencias.
+- [ ] Entender `@ApplicationScoped` y otros scopes.
+- [ ] Implementar CRUD completo con JAX-RS.
+- [ ] Usar `@Path`, `@PathParam`, `@QueryParam`.
+- [ ] Manejar Request body con JSON.
+- [ ] Retornar Response con códigos HTTP correctos.
+- [ ] Probar endpoints con Swagger UI.
+- [ ] Aprovechar hot reload para desarrollo rápido.
 
 ---
 
