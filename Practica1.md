@@ -4,7 +4,7 @@
 Al finalizar la práctica, serás capaz de:
 - Desarrollar microservicios en un proyecto básico de Quarkus con endpoint REST simple.
 
- ## Duración aproximada
+## Duración aproximada
 - 90 minutos.
  
 ##  Prerrequisitos
