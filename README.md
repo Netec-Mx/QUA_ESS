@@ -10,7 +10,7 @@ Te damos la bienvenida a la **plataforma de laboratorios** del curso **Quarkus**
 
 Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
 
-### [Práctica 1. Proyecto Quarkus: Hola, mundo](Practica1.md) 
+### [Práctica 1. Proyecto Quarkus: Hola, mundo](./Practica1.md) 
 - **Descripción**: desarrollo de microservicios en un proyecto básico de Quarkus con endpoint REST simple.
 - ⏱️ **Duración estimada**: 90 min.
 
@@ -18,7 +18,7 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: implementar Contract-First con OpenAPI para validar números de una cuenta bancaria en un proyecto Quarkus.
 - ⏱️ **Duración estimada**: 90 min.
     
-### [Práctica 3. Microservicio de gestión de cuentas bancarias](Practica3.md) 
+### [Práctica 3. Microservicio de gestión de cuentas bancarias](./Practica3.md) 
 - **Descripción**: desarrollar por completo un microservicio REST con CRUD, inyección de dependencias (CDI) y arquitectura en capas.
 - ⏱️ **Duración estimada**: 90 min.
 
