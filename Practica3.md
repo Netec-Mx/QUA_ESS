@@ -63,7 +63,7 @@ Map<String, Cuenta> (Datos en memoria)
 
 ## Instrucciones
 ### Tarea 1
-**Paso 1.** Crear proyecto Quarkus.
+**Paso 1.** Crear un proyecto Quarkus.
 
 **macOS/Linux/Git Bash:**
 ```bash
