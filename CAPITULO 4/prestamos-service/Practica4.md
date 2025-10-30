@@ -1,36 +1,35 @@
-# 🏦 Capítulo 4: Sistema de Préstamos Bancarios con Persistencia
+# Práctica 4. Sistema de préstamos bancarios con persistencia
 
-Desarrollo completo de un microservicio con **Hibernate ORM + Panache**, persistencia en base de datos, y patrones Active Record y Repository.
+## Objetivos
+Al finalizar la práctica, serás capaz de:
+- Desarrollar completo un microservicio con **Hibernate ORM + Panache**, persistencia en base de datos y patrones Active Record y Repository.
+- Dominarás:
+- **Hibernate ORM con Panache** - Simplificación de JPA  
+- **Active Record Pattern** - Entidades con lógica de persistencia  
+- **Repository Pattern** - Separación de acceso a datos  
+- **Relaciones JPA** - @OneToMany, @ManyToOne  
+- **Generación automática de datos** - Cuotas de préstamos  
+- **Transacciones** con `@Transactional`  
+- **Lazy Loading** y `@JsonIgnore` para evitar loops  
+- **PostgreSQL** - Base de datos relacional real
+  
+## Duración aproximada
+- 90 minutos.
+
+--
+
+## Prerrequisitos
+
+- **Java 21** (OpenJDK recomendado).
+- **Maven 3.9+** (o Maven Wrapper incluido).
+- **PostgreSQL** (o H2 como alternativa).
+- **Quarkus CLI** (opcional pero recomendado).
+- **IDE** (IntelliJ IDEA Community, VSCode, Eclipse).
+- **Postman o Swagger UI** (para probar endpoints).
 
 ---
 
-## 📋 Prerequisitos
-
-- **Java 21** (OpenJDK recomendado)
-- **Maven 3.9+** (o Maven Wrapper incluido)
-- **PostgreSQL** (o H2 como alternativa)
-- **Quarkus CLI** (opcional pero recomendado)
-- **IDE** (IntelliJ IDEA Community, VSCode, Eclipse)
-- **Postman o Swagger UI** (para probar endpoints)
-
----
-
-## 🎯 Objetivos del Capítulo
-
-Al completar este ejercicio, dominarás:
-
-✅ **Hibernate ORM con Panache** - Simplificación de JPA  
-✅ **Active Record Pattern** - Entidades con lógica de persistencia  
-✅ **Repository Pattern** - Separación de acceso a datos  
-✅ **Relaciones JPA** - @OneToMany, @ManyToOne  
-✅ **Generación automática de datos** - Cuotas de préstamos  
-✅ **Transacciones** con `@Transactional`  
-✅ **Lazy Loading** y `@JsonIgnore` para evitar loops  
-✅ **PostgreSQL** - Base de datos relacional real  
-
----
-
-## 🗂️ Arquitectura del Proyecto
+## Arquitectura del proyecto
 
 ```
 pe.banco.prestamos
@@ -48,7 +47,7 @@ pe.banco.prestamos
     └── PrestamoResource.java
 ```
 
-### Modelo de Datos
+### Modelo de datos
 
 ```
 ┌──────────────┐
@@ -92,9 +91,9 @@ pe.banco.prestamos
 
 ---
 
-## 🚀 Creación del Proyecto Paso a Paso
+### Tarea 1
 
-### **PASO 1: Crear proyecto Quarkus**
+**Paso 1.** Crea un proyecto Quarkus.
 
 **macOS/Linux/Git Bash:**
 ```bash
@@ -121,9 +120,9 @@ cd prestamos-service
 
 ---
 
-### **PASO 2: Configurar Base de Datos**
+**Paso 2.** Configura la base de datos.
 
-Edita `src/main/resources/application.properties`:
+Edita `src/main/resources/application.properties`.
 
 ```properties
 # ===================================
@@ -154,30 +153,30 @@ quarkus.log.level=INFO
 quarkus.log.category."pe.banco.prestamos".level=DEBUG
 ```
 
-**Importante:**
-- `update` → Mantiene datos entre reinicios (vs `drop-and-create`)
-- `log.sql=true` → Muestra queries SQL en consola
-- Asegúrate que PostgreSQL esté corriendo en `localhost:5432`
+**Importante**
+- `update` → Mantiene datos entre reinicios (vs. `drop-and-create`).
+- `log.sql=true` → Muestra queries SQL en consola.
+- Asegúrate que PostgreSQL esté corriendo en `localhost:5432`.
 
 ---
 
-### **PASO 3: Crear estructura de packages**
+**Paso 3.** Crea la estructura de packages.
 
-**macOS/Linux/Git Bash:**
+**macOS/Linux/Git Bash**
 ```bash
 mkdir -p src/main/java/pe/banco/prestamos/model
 mkdir -p src/main/java/pe/banco/prestamos/repository
 mkdir -p src/main/java/pe/banco/prestamos/resource
 ```
 
-**Windows (PowerShell):**
+**Windows (PowerShell)**
 ```powershell
 New-Item -Path "src\main\java\pe\banco\prestamos\model" -ItemType Directory -Force
 New-Item -Path "src\main\java\pe\banco\prestamos\repository" -ItemType Directory -Force
 New-Item -Path "src\main\java\pe\banco\prestamos\resource" -ItemType Directory -Force
 ```
 
-**Windows (CMD):**
+**Windows (CMD)**
 ```cmd
 mkdir src\main\java\pe\banco\prestamos\model
 mkdir src\main\java\pe\banco\prestamos\repository
@@ -186,7 +185,7 @@ mkdir src\main\java\pe\banco\prestamos\resource
 
 ---
 
-### **PASO 4: Crear entidad Cliente (Active Record)**
+**Paso 4.** Crear entidad `Cliente` (Active Record).
 
 **Archivo:** `src/main/java/pe/banco/prestamos/model/Cliente.java`
 
@@ -230,7 +229,7 @@ public class Cliente extends PanacheEntity {
 }
 ```
 
-**Conceptos clave:**
+**Conceptos clave**
 - `extends PanacheEntity` → Active Record (incluye `id` auto-generado)
 - Campos públicos (estilo Panache)
 - `@JsonIgnore` → Evita serializar `prestamos` (previene referencias circulares)
@@ -238,7 +237,7 @@ public class Cliente extends PanacheEntity {
 
 ---
 
-### **PASO 5: Crear entidad Prestamo**
+**Paso 5.** Crea la entidad `prestamo`.
 
 **Archivo:** `src/main/java/pe/banco/prestamos/model/Prestamo.java`
 
@@ -300,7 +299,7 @@ public class Prestamo extends PanacheEntity {
 }
 ```
 
-**Conceptos clave:**
+**Conceptos clave**
 - `@ManyToOne` → Muchos préstamos pertenecen a un cliente
 - `BigDecimal` → Para dinero (precisión exacta)
 - `LocalDate` → Fechas modernas Java 8+
@@ -309,7 +308,7 @@ public class Prestamo extends PanacheEntity {
 
 ---
 
-### **PASO 6: Crear entidad Cuota**
+**Paso 6.** Crea la entidad `cuota`.
 
 **Archivo:** `src/main/java/pe/banco/prestamos/model/Cuota.java`
 
@@ -361,7 +360,7 @@ public class Cuota extends PanacheEntity {
 }
 ```
 
-**Conceptos clave:**
+**Conceptos clave**
 - `@JsonIgnore` en `prestamo` → Evita Prestamo → Cuota → Prestamo loop
 - `fechaPago` nullable → `null` si aún no se pagó
 - `pagada` Boolean → Estado de pago
@@ -778,7 +777,7 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 }
 ```
 
-4. Click **"Execute"**
+4. Haz click en `Execute`.
 
 **Respuesta esperada:** `201 Created` con:
 - Préstamo creado
