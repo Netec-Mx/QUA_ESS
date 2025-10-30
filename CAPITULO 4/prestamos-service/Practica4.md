@@ -367,7 +367,7 @@ public class Cuota extends PanacheEntity {
 
 ---
 
-### **PASO 7: Crear ClienteRepository (Repository Pattern)**
+**Paso 7.** Crear `ClienteRepository` (Repository Pattern).
 
 **Archivo:** `src/main/java/pe/banco/prestamos/repository/ClienteRepository.java`
 
