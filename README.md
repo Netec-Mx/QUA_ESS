@@ -22,7 +22,7 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: desarrollar por completo un microservicio REST con CRUD, inyección de dependencias (CDI) y arquitectura en capas.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 4. Sistema de préstamos bancarios con persistencia](./Laboratorio_2.md)
+### [Práctica 4. Sistema de préstamos bancarios con persistencia](Practica4.md)
  - **Descripción**: desarrollar por completo un microservicio con Hibernate ORM + Panache, persistencia en base de datos y patrones Active Record y Repository.
  - ⏱️ **Duración estimada**: 90 min.
 
