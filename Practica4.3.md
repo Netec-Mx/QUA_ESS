@@ -402,5 +402,3 @@ SHOW client_encoding;
 - Perder la clave significa perder TODOS los datos cifrados (sin recuperación). 
 
 ---
-
-**¡Happy coding!** 🚀🔐
