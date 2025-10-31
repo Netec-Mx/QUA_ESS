@@ -368,15 +368,15 @@ return repository.persistirLote(productos);
 
 ## Solución de problemas
 
-### Error: "Unable to find JDBC driver"
+### ❌ Error: "Unable to find JDBC driver"
 **Solución:** verificar que `quarkus.datasource.jdbc=false` esté en `application.properties`.
 
-### Error: "Connection refused"
+### ❌ Error: "Connection refused"
 **Solución:** verificar que PostgreSQL esté corriendo:
 ```bash
 psql -U postgres -c "SELECT version();"
 ```
 
-### Tabla vacía
+### ❌ Tabla vacía
 **Solución:** verificar que `import.sql` esté en `src/main/resources/` y que use IDs explícitos.
 
