@@ -1,26 +1,26 @@
-# 🔐 Cifrado de Datos Sensibles con Google Tink en Quarkus
+# Cifrado de datos sensibles con Google Tink en Quarkus
 
 Ejercicio práctico de cifrado a nivel de aplicación usando Google Tink con AES-256-GCM para proteger datos sensibles antes de persistirlos en PostgreSQL.
 
-> 📚 **Documentación complementaria:**  
+> **Documentación complementaria:**  
 > • [Ver fundamentos teóricos de criptografía](./TEORIA.md)  
 > • [Ver conceptos técnicos del cifrado con Tink](./CIFRADO.md)
 
 ---
 
-## 📋 Requisitos Previos
+## Requisitos previos
 
-- **Java 21** (JDK)
-- **Maven 3.8+**
-- **PostgreSQL 12+** (instalado y corriendo)
-- Cliente SQL (pgAdmin, DBeaver, psql, etc.)
-- **curl** o Postman para probar la API
+- **Java 21** (JDK).
+- **Maven 3.8+**.
+- **PostgreSQL 12+** (instalado y corriendo).
+- Cliente SQL (pgAdmin, DBeaver, psql, etc.).
+- **cURL** o Postman para probar la API.
 
 ---
 
-## 🚀 Instalación y Configuración
+## Instalación y configuración
 
-### 1. Crear el proyecto
+**1. Crea el proyecto.**
 
 ```bash
 mvn io.quarkus:quarkus-maven-plugin:3.28.3:create \
@@ -32,7 +32,7 @@ mvn io.quarkus:quarkus-maven-plugin:3.28.3:create \
 cd documentos-cifrados
 ```
 
-### 2. Agregar Google Tink al pom.xml
+**2. Agrega Google Tink al `pom.xml`.**
 
 Agrega esta dependencia en la sección `<dependencies>`:
 
@@ -44,7 +44,7 @@ Agrega esta dependencia en la sección `<dependencies>`:
 </dependency>
 ```
 
-### 3. Configurar PostgreSQL
+**3. Configura PostgreSQL**
 
 Edita `src/main/resources/application.properties`:
 
@@ -67,7 +67,7 @@ quarkus.http.port=8080
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 documentos-cifrados/
@@ -88,7 +88,7 @@ documentos-cifrados/
 
 ---
 
-## 🏗️ Componentes Principales
+## Componentes principales
 
 ### CryptoService.java
 
@@ -113,7 +113,7 @@ public class CryptoService {
 }
 ```
 
-**⚠️ IMPORTANTE:** La clave se genera en cada inicio. En producción debe persistirse en un KMS o archivo seguro.
+**⚠️ IMPORTANTE:** La clave se genera en cada inicio. En producción debe persistirse en un KMS o en un archivo seguro.
 
 ### Documento.java
 
@@ -135,15 +135,15 @@ public class Documento extends PanacheEntity {
 ### DocumentoResource.java
 
 Controlador REST que:
-- **Cifra** el contenido antes de persistir
-- **Descifra** el contenido al leer de BD
-- Expone endpoints REST para CRUD
+- **Cifra** el contenido antes de persistir.
+- **Descifra** el contenido al leer la BD.
+- Expone endpoints REST para CRUD.
 
 ---
 
-## ▶️ Ejecutar la Aplicación
+## Ejecutar la aplicación
 
-### Modo desarrollo (con hot reload)
+### Modo desarrollo (con hot reload).
 
 ```bash
 ./mvnw quarkus:dev
@@ -158,9 +158,9 @@ Listening on: http://localhost:8080
 
 ---
 
-## 🧪 Probar la API
+## Probar la API
 
-### 1. Crear un documento (cifrado automático)
+**1. Crea un documento (cifrado automático).**
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/documentos \
@@ -183,13 +183,13 @@ curl -X POST http://localhost:8080/api/v1/documentos \
 
 ✅ El contenido se devuelve **descifrado** en la respuesta.
 
-### 2. Listar todos los documentos
+**2. Lista todos los documentos.**
 
 ```bash
 curl http://localhost:8080/api/v1/documentos
 ```
 
-### 3. Buscar documento por ID
+**3. Busca un documento por ID.**
 
 ```bash
 curl http://localhost:8080/api/v1/documentos/1
@@ -197,7 +197,7 @@ curl http://localhost:8080/api/v1/documentos/1
 
 ---
 
-## 🔍 Verificar el Cifrado en la Base de Datos
+## Verifica el cifrado en la base de datos
 
 Abre tu cliente SQL y ejecuta:
 
@@ -211,11 +211,11 @@ SELECT * FROM documento;
 |----|--------|-------------------|----------------|
 | 1 | Documento Secreto | `AebqJ3oc/tkB8ryE+6YZ4i3oWlS/SBhcyPul` | 2025-10-15... |
 
-🔐 **Observa que `contenido_cifrado` contiene texto ilegible (Base64)**, mientras que el API devuelve el contenido descifrado.
+**Observa que `contenido_cifrado` contiene texto ilegible (Base64)**, mientras que el API devuelve el contenido descifrado.
 
 ---
 
-## 🎯 Flujo de Cifrado/Descifrado
+## Flujo de cifrado/descifrado
 
 ```
 POST /documentos
@@ -239,38 +239,38 @@ API devuelve: "Contenido secreto"  ← DESCIFRADO
 
 ---
 
-## 🔐 Conceptos de Seguridad
+## Conceptos de seguridad
 
 ### ¿Qué es AEAD?
 
 **Authenticated Encryption with Associated Data**
 
-- **Cifra** el contenido (confidencialidad)
-- **Autentica** que no fue modificado (integridad)
-- **AES-256-GCM**: Algoritmo simétrico moderno y eficiente
+- **Cifra** el contenido (confidencialidad).
+- **Autentica** que no fue modificado (integridad).
+- **AES-256-GCM**: algoritmo simétrico moderno y eficiente.
 
 ### ¿Por qué Google Tink?
 
-- API simple y segura por diseño
-- Previene errores comunes de criptografía
-- Soporte para rotación de claves
-- Mantenido por Google
-- Integración con KMS (AWS, GCP, Azure)
+- Es un API simple y seguro por diseño.
+- Previene errores comunes de criptografía.
+- Da soporte para rotación de claves.
+- Es mantenido por Google.
+- Está integrado con KMS (AWS, GCP, Azure).
 
-### Cifrado Simétrico vs Asimétrico
+### Cifrado simétrico vs asimétrico
 
 | Tipo | Clave | Velocidad | Uso |
 |------|-------|-----------|-----|
 | **Simétrico** (AES) | Misma clave para cifrar/descifrar | ⚡ Rápido | Datos en reposo |
 | **Asimétrico** (RSA) | Par de claves (pública/privada) | 🐌 Lento | Intercambio de claves |
 
-En este ejercicio usamos **simétrico** porque es ideal para cifrar grandes volúmenes de datos.
+En este ejercicio usas **simétrico** porque es ideal para cifrar grandes volúmenes de datos.
 
 ---
 
-## ⚠️ Limitaciones de la Implementación Actual
+## ⚠️ Limitaciones de la implementación actual
 
-### 🚨 Clave efímera (solo para DEMO)
+### 🚨 Clave efímera (solo para DEMO).
 
 La clave se **regenera cada vez** que la aplicación arranca:
 
@@ -279,12 +279,12 @@ KeysetHandle keysetHandle = KeysetHandle.generateNew(...);  // ❌ Nueva cada ve
 ```
 
 **Consecuencia:**
-- Reiniciar la app → Pierdes acceso a datos cifrados anteriormente
-- Los documentos NO se pueden descifrar con la nueva clave
+- Al reiniciar la app pierdes acceso a datos cifrados anteriormente.
+- Los documentos **no** se pueden descifrar con la nueva clave.
 
-### ✅ Solución para PRODUCCIÓN
+### Solución para producción
 
-**Opción 1: Persistir en archivo**
+**Opción 1. Persistir en archivo.**
 
 ```java
 // Guardar clave
@@ -297,13 +297,13 @@ KeysetHandle keysetHandle = CleartextKeysetHandle.read(
     JsonKeysetReader.withFile(new File(keysetFilename)));
 ```
 
-**Opción 2: Usar KMS (recomendado)**
-- AWS KMS
-- Google Cloud KMS
-- Azure Key Vault
-- HashiCorp Vault
+**Opción 2. Usar KMS (recomendado).**
+- AWS KMS.
+- Google Cloud KMS.
+- Azure Key Vault.
+- HashiCorp Vault.
 
-**Opción 3: Variable de entorno**
+**Opción 3. Variable de entorno.**
 
 ```java
 String keysetJson = System.getenv("TINK_KEYSET");
@@ -311,16 +311,16 @@ String keysetJson = System.getenv("TINK_KEYSET");
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-### Error: "Could not find or load main class"
+### ❌ Error: "Could not find or load main class"
 
 ```bash
 ./mvnw clean install
 ./mvnw quarkus:dev
 ```
 
-### Error: "Connection refused to PostgreSQL"
+### ❌ Error: "Connection refused to PostgreSQL"
 
 Verifica que PostgreSQL esté corriendo:
 
@@ -332,7 +332,7 @@ sudo service postgresql status
 netstat -an | grep 5432
 ```
 
-### Error: "GeneralSecurityException: decryption failed"
+### ❌ Error: "GeneralSecurityException: decryption failed"
 
 La clave cambió (app reiniciada). Borra los datos:
 
@@ -340,7 +340,7 @@ La clave cambió (app reiniciada). Borra los datos:
 TRUNCATE TABLE documento RESTART IDENTITY;
 ```
 
-### Base de datos con caracteres raros
+### ❌ Base de datos con caracteres raros
 
 Verifica encoding UTF-8 en PostgreSQL:
 
@@ -350,21 +350,21 @@ SHOW client_encoding;
 
 ---
 
-## 📚 Ejercicios Propuestos
+## Ejercicios
 
-1. **Persistencia de clave:** Modifica `CryptoService` para guardar/cargar la clave desde un archivo JSON
+1. **Persistencia de clave:** modifica `CryptoService` para guardar/cargar la clave desde un archivo JSON.
 
-2. **Múltiples claves:** Implementa diferentes claves para diferentes tipos de documentos (públicos, privados, confidenciales)
+2. **Múltiples claves:** implementa diferentes claves para diferentes tipos de documentos (públicos, privados, confidenciales).
 
-3. **Cifrado híbrido:** Investiga cómo usar RSA para cifrar la clave AES y AES para cifrar el contenido
+3. **Cifrado híbrido:** investiga cómo usar RSA para cifrar la clave AES y AES para cifrar el contenido.
 
-4. **Búsqueda segura:** Implementa búsqueda por hash del contenido sin descifrar (hint: SHA-256)
+4. **Búsqueda segura:** implementa búsqueda por hash del contenido sin descifrar (hint: SHA-256).
 
-5. **Auditoría:** Agrega logs de quién accede a datos descifrados
+5. **Auditoría:** agrega logs de quién accede a datos descifrados.
 
 ---
 
-## 🔗 Referencias
+## Referencias
 
 - [Google Tink Documentation](https://github.com/google/tink)
 - [Tink Java HOW-TO](https://github.com/google/tink/blob/master/docs/JAVA-HOWTO.md)
@@ -373,9 +373,9 @@ SHOW client_encoding;
 
 ---
 
-## 📝 Notas Finales
+## Notas finales
 
-### Diferencias con Always Encrypted
+**Diferencias con Always Encrypted.**
 
 | Aspecto | Always Encrypted | Tink (App-level) |
 |---------|------------------|------------------|
@@ -385,27 +385,21 @@ SHOW client_encoding;
 | **Control** | Limitado | Total |
 | **Complejidad** | Alta configuración | Código explícito |
 
-### Cuándo usar cada uno
+**Cuándo usar cada uno.**
 
-- **Always Encrypted:** Cuando SQL Server debe proteger datos sin que la app vea las claves
-- **Tink:** Cuando necesitas control total y portabilidad entre BDs
-- **Ambos:** Defense in depth (máxima paranoia) 🛡️
-
----
-
-## 🎓 Puntos Clave
-
-✅ El cifrado se hace **antes de persistir**, el descifrado **después de leer**  
-✅ La BD nunca almacena contenido en texto plano  
-✅ AEAD garantiza confidencialidad + integridad  
-✅ En producción: **NUNCA** regenerar claves, usar KMS  
-✅ Perder la clave = perder TODOS los datos cifrados (sin recuperación)  
+- **Always Encrypted:** cuando SQL Server debe proteger datos sin que la app vea las claves.
+- **Tink:** cuando necesitas control total y portabilidad entre BD.
+- **Ambos:** defense in depth (máxima paranoia).
 
 ---
 
-## 👨‍💻 Autor
+## Puntos clave
 
-Ejercicio desarrollado para el curso de Quarkus - Capítulo 4: Persistencia y Seguridad
+- El cifrado se hace **antes de persistir**, el descifrado **después de leer**.
+- La BD nunca almacena contenido en texto plano.
+- AEAD garantiza confidencialidad + integridad.
+- En producción: **NUNCA** regenerar claves, usar KMS.
+- Perder la clave significa perder TODOS los datos cifrados (sin recuperación). 
 
 ---
 
