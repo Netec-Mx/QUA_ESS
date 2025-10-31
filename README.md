@@ -42,8 +42,6 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: evaluar solicitudes de crédito de consumo mediante un algoritmo de scoring crediticio automatizado.
 - ⏱️ **Duración estimada**: 90 min.
 
-## Capítulo 6
-
 ### [Capítulo 6. Práctica 6.1. VaultCorp API: sistema de gestión de secretos con Quarkus](Práctica-6.1..md)
 - **Descripción**: VaultCorp API es un microservicio educativo desarrollado con Quarkus que implementa un sistema completo de gestión de secretos corporativos con tres niveles de seguridad.
 - ⏱️ **Duración estimada**: 90 min.
