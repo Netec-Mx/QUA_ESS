@@ -1,21 +1,21 @@
-# Proyecto Quarkus - Persistencia Reactiva con Panache
+# Proyecto Quarkus - Persistencia reactiva con Panache
 
-Ejercicio práctico para demostrar persistencia reactiva usando **Quarkus 3.28.3**, **Hibernate Reactive Panache** y **PostgreSQL**.
-
----
-
-## 📋 Requisitos Previos
-
-- Java 21
-- Maven 3.8+
-- PostgreSQL 12+ (corriendo en `localhost:5432`)
-- cURL (incluido en Windows 10+, macOS y Linux)
+Ejercicio práctico para demostrar la persistencia reactiva usando **Quarkus 3.28.3**, **Hibernate Reactive Panache** y **PostgreSQL**.
 
 ---
 
-## 🚀 Creación del Proyecto
+## Requisitos previos
 
-### Paso 1: Crear el proyecto Quarkus
+- Java 21.
+- Maven 3.8+.
+- PostgreSQL 12+ (corriendo en `localhost:5432`).
+- cURL (incluido en Windows 10+, macOS y Linux).
+
+---
+
+## Creación del proyecto
+
+### Paso 1. Crea el proyecto Quarkus.
 
 ```bash
 mvn io.quarkus.platform:quarkus-maven-plugin:3.28.3:create \
@@ -25,19 +25,19 @@ mvn io.quarkus.platform:quarkus-maven-plugin:3.28.3:create \
     -Dextensions="resteasy-reactive-jackson,hibernate-reactive-panache,reactive-pg-client,smallrye-openapi"
 ```
 
-### Paso 2: Entrar al proyecto
+### Paso 2. Entra al proyecto.
 
 ```bash
 cd productos-reactive
 ```
 
-### Paso 3: Crear la base de datos en PostgreSQL
+### Paso 3. Crea la base de datos en PostgreSQL.
 
 ```bash
 psql -U postgres -c "CREATE DATABASE productos_db;"
 ```
 
-### Paso 4: Configurar `application.properties`
+### Paso 4. Configura `application.properties`.
 
 ```properties
 # PostgreSQL reactivo
@@ -56,7 +56,7 @@ quarkus.hibernate-orm.sql-load-script=import.sql
 quarkus.http.port=8080
 ```
 
-### Paso 5: Crear datos iniciales (`import.sql`)
+### Paso 5. Crea datos iniciales (`import.sql`).
 
 ```sql
 INSERT INTO Producto (id, nombre, descripcion, precio, stock) VALUES (1, 'Laptop Dell XPS', 'Laptop de alto rendimiento', 1500.00, 10);
@@ -67,7 +67,7 @@ ALTER SEQUENCE Producto_SEQ RESTART WITH 4;
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 pe.banco.productos
@@ -83,7 +83,7 @@ pe.banco.productos
 
 ---
 
-## ▶️ Ejecutar el Proyecto
+## Ejecuta el proyecto
 
 ```bash
 ./mvnw quarkus:dev
@@ -96,9 +96,9 @@ pe.banco.productos
 
 ---
 
-## 🧪 Pruebas con cURL
+## Pruebas con cURL
 
-### 1. Listar todos los productos
+### 1. Lista todos los productos.
 
 ```bash
 curl http://localhost:8080/api/v1/productos/reactivo
@@ -120,7 +120,7 @@ curl http://localhost:8080/api/v1/productos/reactivo
 
 ---
 
-### 2. Buscar producto por ID
+### 2. Busca un producto por ID.
 
 ```bash
 curl http://localhost:8080/api/v1/productos/reactivo/1
@@ -128,7 +128,7 @@ curl http://localhost:8080/api/v1/productos/reactivo/1
 
 ---
 
-### 3. Crear nuevo producto
+### 3. Crea un nuevo producto.
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/productos/reactivo \
@@ -154,7 +154,7 @@ curl -X POST http://localhost:8080/api/v1/productos/reactivo \
 
 ---
 
-### 4. Actualizar producto
+### 4. Actualiza un producto.
 
 ```bash
 curl -X PUT http://localhost:8080/api/v1/productos/reactivo/1 \
@@ -169,7 +169,7 @@ curl -X PUT http://localhost:8080/api/v1/productos/reactivo/1 \
 
 ---
 
-### 5. Eliminar producto
+### 5. Elimina un producto.
 
 ```bash
 curl -X DELETE http://localhost:8080/api/v1/productos/reactivo/2
@@ -177,7 +177,7 @@ curl -X DELETE http://localhost:8080/api/v1/productos/reactivo/2
 
 ---
 
-### 6. Buscar productos con stock bajo
+### 6. Busca productos con stock bajo.
 
 ```bash
 curl http://localhost:8080/api/v1/productos/reactivo/stock-bajo/20
@@ -187,7 +187,7 @@ curl http://localhost:8080/api/v1/productos/reactivo/stock-bajo/20
 
 ---
 
-### 7. Carga masiva (demuestra concurrencia reactiva)
+### 7. Haz una carga masiva (demuestra concurrencia reactiva).
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/productos/reactivo/carga-masiva/100
@@ -197,7 +197,7 @@ curl -X POST http://localhost:8080/api/v1/productos/reactivo/carga-masiva/100
 
 ---
 
-## 🎯 Endpoints Disponibles
+## Endpoints disponibles
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
@@ -211,49 +211,49 @@ curl -X POST http://localhost:8080/api/v1/productos/reactivo/carga-masiva/100
 
 ---
 
-## 🔍 Alternativas a cURL
+## Alternativas a cURL
 
 ### Postman (Windows/Mac/Linux)
 1. Descargar: https://www.postman.com/downloads/
 2. Importar endpoints desde Swagger: http://localhost:8080/q/swagger-ui
 
 ### Thunder Client (VS Code)
-1. Instalar extensión "Thunder Client" en VS Code
-2. Crear requests con interfaz gráfica
+1. Instalar extensión "Thunder Client" en VS Code.
+2. Crear requests con interfaz gráfica.
 
-### Swagger UI (incluido) ⭐ Recomendado para Windows
+### Swagger UI (incluido) - Recomendado para Windows
 
 **URL:** http://localhost:8080/q/swagger-ui
 
-#### Cómo usar Swagger UI:
+#### Cómo usar Swagger UI.
 
 1. **Abrir en el navegador:** http://localhost:8080/q/swagger-ui
-2. **Expandir** el endpoint que quieres probar (clic en la fila)
-3. **Clic en "Try it out"**
-4. **Completar los parámetros** según la tabla abajo
-5. **Clic en "Execute"**
-6. **Ver la respuesta** en la sección "Response body"
+2. **Expandir** el endpoint que quieres probar (click en la fila).
+3. Dar click en **"Try it out".**
+4. **Completar los parámetros** según la tabla.
+5. Dar click en **"Execute".**
+6. **Ver la respuesta** en la sección "Response body".
 
 ---
 
-#### 📝 Datos para cada endpoint en Swagger:
+#### Datos para cada endpoint en Swagger:
 
-##### 1️⃣ GET - Listar todos los productos
-- **Endpoint:** `/api/v1/productos/reactivo`
-- **Parámetros:** Ninguno
-- **Action:** Solo clic en "Execute"
-
----
-
-##### 2️⃣ GET - Buscar por ID
-- **Endpoint:** `/api/v1/productos/reactivo/{id}`
-- **Parámetro `id`:** `1`
-- **Action:** Clic en "Execute"
+##### GET. Listar todos los productos
+- **Endpoint:** `/api/v1/productos/reactivo`.
+- **Parámetros:** ninguno.
+- **Action:** da click en "Execute".
 
 ---
 
-##### 3️⃣ POST - Crear producto
-- **Endpoint:** `/api/v1/productos/reactivo`
+##### GET. Buscar por ID
+- **Endpoint:** `/api/v1/productos/reactivo/{id}`.
+- **Parámetro `id`:** `1`.
+- **Action:** da click en "Execute".
+
+---
+
+##### POST. Crear producto
+- **Endpoint:** `/api/v1/productos/reactivo`.
 - **Request body:**
 ```json
 {
@@ -263,13 +263,13 @@ curl -X POST http://localhost:8080/api/v1/productos/reactivo/carga-masiva/100
   "stock": 8
 }
 ```
-- **Action:** Pegar el JSON y clic en "Execute"
+- **Action:** pega el JSON y da click en "Execute".
 
 ---
 
-##### 4️⃣ PUT - Actualizar producto
-- **Endpoint:** `/api/v1/productos/reactivo/{id}`
-- **Parámetro `id`:** `1`
+##### PUT. Actualizar producto
+- **Endpoint:** `/api/v1/productos/reactivo/{id}`.
+- **Parámetro `id`:** `1`.
 - **Request body:**
 ```json
 {
@@ -279,77 +279,77 @@ curl -X POST http://localhost:8080/api/v1/productos/reactivo/carga-masiva/100
   "stock": 15
 }
 ```
-- **Action:** Pegar el JSON y clic en "Execute"
+- **Action:** pega el JSON y da click en "Execute".
 
 ---
 
-##### 5️⃣ DELETE - Eliminar producto
-- **Endpoint:** `/api/v1/productos/reactivo/{id}`
-- **Parámetro `id`:** `2`
-- **Action:** Clic en "Execute"
+##### DELETE. Eliminar producto
+- **Endpoint:** `/api/v1/productos/reactivo/{id}`.
+- **Parámetro `id`:** `2`.
+- **Action:** da click en "Execute".
 
 ---
 
-##### 6️⃣ GET - Stock bajo
-- **Endpoint:** `/api/v1/productos/reactivo/stock-bajo/{umbral}`
-- **Parámetro `umbral`:** `20`
-- **Action:** Clic en "Execute"
-- **Resultado:** Muestra productos con stock menor a 20
+##### GET. Stock bajo
+- **Endpoint:** `/api/v1/productos/reactivo/stock-bajo/{umbral}`.
+- **Parámetro `umbral`:** `20`.
+- **Action:** da click en "Execute".
+- **Resultado:** muestra productos con stock menor a 20.
 
 ---
 
-##### 7️⃣ POST - Carga masiva (demuestra concurrencia)
-- **Endpoint:** `/api/v1/productos/reactivo/carga-masiva/{cantidad}`
-- **Parámetro `cantidad`:** `100`
-- **Action:** Clic en "Execute"
-- **Resultado:** Crea 100 productos reactivamente
+##### POST. Carga masiva (demuestra concurrencia).
+- **Endpoint:** `/api/v1/productos/reactivo/carga-masiva/{cantidad}`.
+- **Parámetro `cantidad`:** `100`.
+- **Action:** da click en "Execute".
+- **Resultado:** crea 100 productos reactivamente.
 
 ---
 
-**💡 Tip:** Swagger UI es la forma más fácil de probar la API en Windows sin instalar nada adicional.
+**💡 Tip:** Swagger UI es la forma más fácil de probar la API en Windows sin instalar algo adicional.
 
 ---
 
-## 📊 Conceptos Reactivos Demostrados
+## Conceptos reactivos demostrados
 
-### ✅ `Uni<T>` - Operación asíncrona que retorna un solo valor
+### `Uni<T>` Operación asíncrona que retorna un solo valor.
 ```java
 public Uni<List<Producto>> listarTodos() {
     return repository.listAll();
 }
 ```
 
-### ✅ Composición Reactiva
+### Composición reactiva.
 ```java
 return repository.findById(id)
     .onItem().ifNotNull().transform(producto -> Response.ok(producto).build())
     .onItem().ifNull().continueWith(Response.status(404).build());
 ```
 
-### ✅ Transacciones Reactivas
+### Transacciones reactivas.
 ```java
 return Panache.withTransaction(() -> repository.persist(producto));
 ```
 
-### ✅ Operaciones en Lote
+### Operaciones en lote.
 ```java
 return repository.persistirLote(productos);
 ```
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías utilizadas
 
-- **Quarkus 3.28.3** - Framework Java supersónico
-- **Hibernate Reactive Panache** - ORM reactivo simplificado
-- **PostgreSQL** - Base de datos relacional
-- **SmallRye Mutiny** - Librería reactiva (Uni/Multi)
-- **RESTEasy Reactive** - REST endpoints reactivos
-- **SmallRye OpenAPI** - Documentación automática (Swagger)
+- **Quarkus 3.28.3:** framework Java supersónico.
+- **Hibernate Reactive Panache:** ORM reactivo simplificado.
+- **PostgreSQL:** base de datos relacional.
+- **SmallRye Mutiny:** librería reactiva (Uni/Multi).
+- **RESTEasy Reactive:** REST endpoints reactivos.
+- **SmallRye OpenAPI:** documentación automática (Swagger).
 
 ---
 
-## 📚 Recursos Adicionales
+## Recursos adicionales
 
 - [Quarkus - Hibernate Reactive Panache](https://quarkus.io/guides/hibernate-reactive-panache)
 - [SmallRye Mutiny](https://smallrye.io/smallrye-mutiny/)
@@ -357,26 +357,26 @@ return repository.persistirLote(productos);
 
 ---
 
-## 🎓 Ejercicio Propuesto
+## Ejercicio propuesto
 
-1. Ejecutar carga masiva de 500 productos
-2. Observar los logs SQL
-3. Comparar tiempos con diferentes cantidades
-4. Analizar: ¿Por qué el enfoque reactivo es más eficiente en alta concurrencia?
+1. Ejecutar carga masiva de 500 productos.
+2. Observar los logs SQL.
+3. Comparar tiempos con diferentes cantidades.
+4. Analizar: ¿por qué el enfoque reactivo es más eficiente en alta concurrencia?
 
 ---
 
-## 🐛 Solución de Problemas
+## Solución de problemas
 
 ### Error: "Unable to find JDBC driver"
-**Solución:** Verificar que `quarkus.datasource.jdbc=false` esté en `application.properties`
+**Solución:** verificar que `quarkus.datasource.jdbc=false` esté en `application.properties`.
 
 ### Error: "Connection refused"
-**Solución:** Asegurarse de que PostgreSQL esté corriendo:
+**Solución:** verificar que PostgreSQL esté corriendo:
 ```bash
 psql -U postgres -c "SELECT version();"
 ```
 
 ### Tabla vacía
-**Solución:** Verificar que `import.sql` esté en `src/main/resources/` y que use IDs explícitos.
+**Solución:** verificar que `import.sql` esté en `src/main/resources/` y que use IDs explícitos.
 
