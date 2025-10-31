@@ -38,7 +38,7 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: usar Google Tink con AES-256-GCM para la protección de datos sensibles antes de persistirlos en PostgreSQL.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 5. Sistema de evaluación crediticia: Quarkus](Práctica 5.md) 
+### [Práctica 5. Sistema de evaluación crediticia: Quarkus](Practica5.md) 
 - **Descripción**: evaluar solicitudes de crédito de consumo mediante un algoritmo de scoring crediticio automatizado.
 - ⏱️ **Duración estimada**: 90 min.
 
