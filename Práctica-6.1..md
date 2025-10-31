@@ -1,27 +1,25 @@
-# 🔐 VaultCorp API - Sistema de Gestión de Secretos con Quarkus
+# VaultCorp API: sistema de gestión de secretos con Quarkus
 
-## 📖 Descripción del Proyecto
+## Descripción del proyecto
 
 **VaultCorp API** es un microservicio educativo desarrollado con **Quarkus** que implementa un sistema completo de gestión de secretos corporativos con **tres niveles de seguridad**:
 
-1. **Autenticación Básica** (Basic Auth) para administradores
-2. **JWT (JSON Web Token)** para empleados internos
-3. **OIDC (OpenID Connect)** para clientes externos (Parte 3 - próximamente)
+1. **Autenticación Básica** (Basic Auth) para administradores.
+2. **JWT (JSON Web Token)** para empleados internos.
+3. **OIDC (OpenID Connect)** para clientes externos.
 
-### 🎯 Objetivos Pedagógicos
+### Objetivos:
 
-Este proyecto está diseñado para enseñar de forma práctica:
-
-- ✅ Diferentes métodos de autenticación en microservicios
-- ✅ Autorización basada en roles (`@RolesAllowed`)
-- ✅ Generación y validación de tokens JWT con RSA
-- ✅ Aislamiento de datos por usuario (multi-tenancy)
-- ✅ Buenas prácticas de seguridad en APIs REST
-- ✅ Testing automatizado de seguridad
+- Conocer diferentes métodos de autenticación en microservicios.
+- Manejar la autorización basada en roles (`@RolesAllowed`).
+- Generar y validar tokens JWT con RSA.
+- Aislar datos por usuario (multi-tenancy).
+- Tener buenas prácticas de seguridad en API REST.
+- Contar con un testing automatizado de seguridad.
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura del sistema
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -49,15 +47,15 @@ Este proyecto está diseñado para enseñar de forma práctica:
 
 ---
 
-## 📋 Requisitos Previos
+## Requisitos previos
 
-### Software Necesario
+### Software necesario
 
 | Herramienta | Versión Mínima | Verificación |
 |-------------|----------------|--------------|
 | **Java JDK** | 17+ | `java -version` |
 | **Maven** | 3.8+ | `mvn -version` |
-| **curl** | Cualquiera | `curl --version` |
+| **cURL** | Cualquiera | `curl --version` |
 | **Python 3** | 3.6+ (opcional, para formatear JSON) | `python3 --version` |
 | **OpenSSL** | 1.1+ (para generar llaves RSA) | `openssl version` |
 
@@ -81,9 +79,9 @@ sudo apt install openjdk-17-jdk maven
 
 ---
 
-## 🚀 Creación del Proyecto desde Cero
+## Creación del proyecto desde cero
 
-### Paso 1: Crear el Proyecto Quarkus
+### Paso 1. Crea el proyecto Quarkus.
 
 ```bash
 mvn io.quarkus:quarkus-maven-plugin:3.15.1:create \
@@ -96,21 +94,21 @@ mvn io.quarkus:quarkus-maven-plugin:3.15.1:create \
 ```
 
 **¿Qué hace este comando?**
-- Crea un proyecto Maven con groupId `com.vaultcorp`
+- Crea un proyecto Maven con groupId `com.vaultcorp`.
 - Añade las extensiones necesarias:
-  - `resteasy-reactive-jackson` - REST APIs con JSON
-  - `hibernate-validator` - Validación de datos
-  - `smallrye-jwt` - Soporte para JWT
-  - `oidc` - OpenID Connect (Parte 3)
-  - `security` - Framework de seguridad base
+  - `resteasy-reactive-jackson`: REST APIs con JSON.
+  - `hibernate-validator`: validación de datos.
+  - `smallrye-jwt`: soporte para JWT.
+  - `oidc`: OpenID Connect.
+  - `security`: framework de seguridad base.
 
-### Paso 2: Navegar al Proyecto
+### Paso 2. Navega al proyecto.
 
 ```bash
 cd vault-api
 ```
 
-### Paso 3: Agregar Extensión Adicional
+### Paso 3. Agrega una extensión adicional.
 
 ```bash
 ./mvnw quarkus:add-extension -Dextensions="elytron-security-properties-file"
@@ -120,7 +118,7 @@ Esta extensión permite configurar usuarios embebidos para Basic Auth.
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 vault-api/
@@ -158,9 +156,9 @@ vault-api/
 
 ---
 
-## ⚙️ Configuración Inicial
+## Configuración inicial
 
-### 1. Configurar `application.properties`
+### 1. Configura `application.properties`.
 
 Edita `src/main/resources/application.properties`:
 
@@ -194,7 +192,7 @@ mp.jwt.verify.clock.skew=60
 quarkus.oidc.enabled=false
 ```
 
-### 2. Generar Llaves RSA para JWT
+### 2. Genera llaves RSA para JWT.
 
 ```bash
 # Generar llave privada (2048 bits)
@@ -204,45 +202,45 @@ openssl genrsa -out src/main/resources/privateKey.pem 2048
 openssl rsa -pubout -in src/main/resources/privateKey.pem -out src/main/resources/publicKey.pem
 ```
 
-**¿Por qué RSA?** Permite que diferentes microservicios validen tokens sin compartir la clave privada.
+**¿Por qué RSA?** Porque permite que diferentes microservicios validen tokens sin compartir la clave privada.
 
 ---
 
-## 🎓 Parte 1: Autenticación y Autorización Básica
+## Parte 1. Autenticación y autorización básica
 
-### Conceptos Clave
+### Conceptos clave.
 
-- **Basic Auth**: Usuario y contraseña en cada request
-- **@PermitAll**: Endpoint público sin autenticación
-- **@RolesAllowed**: Endpoint protegido por roles
-- **HTTP 401**: No autenticado
-- **HTTP 403**: Autenticado pero sin permiso
+- **Basic Auth**: usuario y contraseña en cada request.
+- **`@PermitAll`**: endpoint público sin autenticación.
+- **`@RolesAllowed`**: endpoint protegido por roles.
+- **`HTTP 401`**: no autenticado.
+- **`HTTP 403`**: autenticado pero sin permiso.
 
-### Usuarios y Roles
+### Usuarios y roles.
 
 | Username | Password | Rol | Permisos |
 |----------|----------|-----|----------|
 | `admin` | `admin123` | `vault-admin` | ✅ Leer, crear, eliminar secretos |
 | `auditor` | `auditor123` | `vault-auditor` | ✅ Solo lectura (stats) |
-| `employee` | `employee123` | `employee` | ✅ Login JWT (Parte 2) |
+| `employee` | `employee123` | `employee` | ✅ Login JWT |
 
-### Endpoints Administrativos
+### Endpoints administrativos.
 
 ```bash
-# ✅ Público - Health Check
+# ✅ Público: Health Check.
 curl http://localhost:8080/api/admin/secrets/health
 
-# 🔒 Admin - Listar todos los secretos
+# 🔒 Admin: listar todos los secretos.
 curl -u admin:admin123 http://localhost:8080/api/admin/secrets/all
 
-# 🔒 Admin - Eliminar un secreto
+# 🔒 Admin: eliminar un secreto.
 curl -X DELETE -u admin:admin123 http://localhost:8080/api/admin/secrets/{id}
 
-# 🔒 Admin/Auditor - Ver estadísticas
+# 🔒 Admin/Auditor: ver estadísticas.
 curl -u auditor:auditor123 http://localhost:8080/api/admin/secrets/stats
 ```
 
-### Ejecutar Pruebas Automatizadas
+### Ejecutar pruebas automatizadas.
 
 ```bash
 # Asegúrate de que Quarkus esté corriendo
@@ -252,21 +250,21 @@ curl -u auditor:auditor123 http://localhost:8080/api/admin/secrets/stats
 ./test-part1-security.sh
 ```
 
-**📖 Documentación completa:** Revisar código fuente de `AdminSecretResource.java`
+**Documentación completa:** revisa el código fuente de `AdminSecretResource.java`.
 
 ---
 
-## 🔐 Parte 2: Autenticación con JWT
+## Parte 2. Autenticación con JWT
 
-### Conceptos Clave
+### Conceptos clave.
 
-- **JWT**: Token autocontenido con información del usuario
-- **Stateless**: El servidor no guarda sesiones
-- **Bearer Token**: Se envía en header `Authorization: Bearer <token>`
-- **Claims**: Información dentro del JWT (sub, email, groups, exp)
-- **RSA Signature**: Firma criptográfica que garantiza integridad
+- **JWT**: token autocontenido con información del usuario.
+- **Stateless**: el servidor no guarda sesiones.
+- **Bearer Token**: se envía en header `Authorization: Bearer <token>`.
+- **Claims**: información dentro del JWT (sub, email, groups, exp).
+- **RSA Signature**: firma criptográfica que garantiza integridad.
 
-### Flujo de Autenticación
+### Flujo de autenticación.
 
 ```
 1. Login           2. Token          3. Request         4. Validación
@@ -277,7 +275,7 @@ curl -u auditor:auditor123 http://localhost:8080/api/admin/secrets/stats
 └────────┘        └────────┘        └────────┘        └────────┘
 ```
 
-### Usuarios para JWT
+### Usuarios para JWT.
 
 | Username | Password | Email | Rol |
 |----------|----------|-------|-----|
@@ -285,9 +283,9 @@ curl -u auditor:auditor123 http://localhost:8080/api/admin/secrets/stats
 | `emp002` | `pass002` | maria.gonzalez@vaultcorp.com | `employee` |
 | `emp003` | `pass003` | carlos.rodriguez@vaultcorp.com | `employee` |
 
-### Flujo Completo Paso a Paso
+### Flujo completo paso a paso.
 
-#### 1. Hacer Login y Obtener Token
+#### 1. Hacer login y obtener token.
 
 ```bash
 curl -X POST http://localhost:8080/api/auth/login \
@@ -307,7 +305,7 @@ curl -X POST http://localhost:8080/api/auth/login \
 }
 ```
 
-#### 2. Guardar el Token
+#### 2. Guardar el token.
 
 ```bash
 # Método 1: Manual
@@ -320,14 +318,14 @@ TOKEN=$(curl -s -X POST http://localhost:8080/api/auth/login \
   | grep -o '"token":"[^"]*"' | cut -d'"' -f4)
 ```
 
-#### 3. Ver Perfil
+#### 3. Ver el perfil.
 
 ```bash
 curl http://localhost:8080/api/internal/secrets/profile \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-#### 4. Crear un Secreto
+#### 4. Crear un secreto.
 
 ```bash
 curl -X POST http://localhost:8080/api/internal/secrets \
@@ -340,14 +338,14 @@ curl -X POST http://localhost:8080/api/internal/secrets \
   }'
 ```
 
-#### 5. Listar Mis Secretos
+#### 5. Listar "mis secretos".
 
 ```bash
 curl http://localhost:8080/api/internal/secrets/my-secrets \
   -H "Authorization: Bearer $TOKEN"
 ```
 
-### Ejecutar Pruebas Automatizadas
+#### 6. Ejecutar pruebas automatizadas.
 
 ```bash
 # Asegúrate de que Quarkus esté corriendo
@@ -357,13 +355,13 @@ curl http://localhost:8080/api/internal/secrets/my-secrets \
 ./test-part2-jwt.sh
 ```
 
-**📖 Documentación detallada:** Ver `README-PARTE2.md` y `TEORIA-PARTE2.md`
+**Documentación detallada:** ver `README-PARTE2.md` y `TEORIA-PARTE2.md`.
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto
+## Cómo ejecutar el proyecto
 
-### Opción 1: Modo Desarrollo (Recomendado)
+### Opción 1. Modo desarrollo (recomendado).
 
 ```bash
 # Iniciar en modo dev con hot reload
@@ -371,11 +369,11 @@ curl http://localhost:8080/api/internal/secrets/my-secrets \
 ```
 
 **Ventajas:**
-- ✅ Hot reload automático al cambiar código
-- ✅ Dev UI disponible en http://localhost:8080/q/dev
-- ✅ Logs en tiempo real
+- Hot reload automático al cambiar código.
+- Dev UI disponible en http://localhost:8080/q/dev .
+- Logs en tiempo real.
 
-### Opción 2: Compilar y Ejecutar JAR
+### Opción 2. Compilar y ejecutar JAR.
 
 ```bash
 # Compilar
@@ -385,7 +383,7 @@ curl http://localhost:8080/api/internal/secrets/my-secrets \
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-### Opción 3: Compilación Nativa con GraalVM (Avanzado)
+### Opción 3. Compilación nativa con GraalVM (avanzado).
 
 ```bash
 # Compilar binario nativo
@@ -397,9 +395,9 @@ java -jar target/quarkus-app/quarkus-run.jar
 
 ---
 
-## 🧪 Testing Completo
+## Testing completo
 
-### Pruebas Automatizadas
+### Pruebas automatizadas.
 
 ```bash
 # Parte 1: Autenticación Básica
@@ -409,39 +407,39 @@ java -jar target/quarkus-app/quarkus-run.jar
 ./test-part2-jwt.sh
 ```
 
-### Pruebas Manuales - Checklist
+### Pruebas manuales: checklist.
 
-#### ✅ Parte 1: Basic Auth
+#### Parte 1. Basic auth.
 
-- [ ] Health check funciona sin autenticación
-- [ ] Admin puede listar todos los secretos
-- [ ] Admin puede eliminar secretos
-- [ ] Auditor puede ver estadísticas
-- [ ] Auditor NO puede eliminar secretos
-- [ ] Requests sin credenciales son rechazadas (401)
+- [ ] Health check funciona sin autenticación.
+- [ ] Admin puede listar todos los secretos.
+- [ ] Admin puede eliminar secretos.
+- [ ] Auditor puede ver estadísticas.
+- [ ] Auditor no puede eliminar secretos.
+- [ ] Requests sin credenciales son rechazadas (401).
 
-#### ✅ Parte 2: JWT
+#### Parte 2. JWT.
 
-- [ ] Login genera token válido
-- [ ] Token contiene claims correctos (sub, email, groups)
-- [ ] Perfil muestra información del usuario
-- [ ] Empleado puede crear secretos propios
-- [ ] Empleado solo ve sus propios secretos
-- [ ] Segundo empleado no ve secretos del primero
-- [ ] Token expirado es rechazado (401)
+- [ ] Login genera token válido.
+- [ ] Token contiene claims correctos (sub, email, groups).
+- [ ] Perfil muestra información del usuario.
+- [ ] Empleado puede crear secretos propios.
+- [ ] Empleado solo ve sus propios secretos.
+- [ ] Segundo empleado no ve secretos del primero.
+- [ ] Token expirado es rechazado (401).
 
 ---
 
-## 📊 API Reference - Resumen de Endpoints
+## API Reference: resumen de endpoints
 
-### 🔓 Endpoints Públicos
+### Endpoints públicos
 
 | Método | Ruta | Descripción |
 |--------|------|-------------|
 | `GET` | `/api/admin/secrets/health` | Health check |
 | `POST` | `/api/auth/login` | Generar JWT |
 
-### 🔒 Endpoints con Basic Auth
+### Endpoints con basic auth
 
 | Método | Ruta | Rol Requerido | Descripción |
 |--------|------|---------------|-------------|
@@ -449,7 +447,7 @@ java -jar target/quarkus-app/quarkus-run.jar
 | `DELETE` | `/api/admin/secrets/{id}` | `vault-admin` | Eliminar secreto |
 | `GET` | `/api/admin/secrets/stats` | `vault-admin`, `vault-auditor` | Ver estadísticas |
 
-### 🔐 Endpoints con JWT
+### Endpoints con JWT
 
 | Método | Ruta | Rol Requerido | Descripción |
 |--------|------|---------------|-------------|
@@ -459,9 +457,9 @@ java -jar target/quarkus-app/quarkus-run.jar
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
-### Problema: "Port 8080 already in use"
+### ❌ Problema: "Port 8080 already in use".
 
 **Solución:**
 ```bash
@@ -475,156 +473,102 @@ kill -9 <PID>
 ./mvnw quarkus:dev -Dquarkus.http.port=8081
 ```
 
-### Problema: "Token issued to client quarkus-app is not active"
+### ❌ Problema: "Token issued to client quarkus-app is not active".
 
-**Causa:** Conflicto entre extensiones OIDC y JWT
+**Causa:** conflicto entre extensiones OIDC y JWT.
 
-**Solución:** Verificar que `application.properties` contenga:
+**Solución:** verificar que `application.properties` contenga
 ```properties
 quarkus.oidc.enabled=false
 ```
 
-### Problema: "401 Unauthorized" con Basic Auth
+### ❌ Problema: "401 Unauthorized" con basic auth.
 
 **Verificar:**
-1. ¿Estás usando el formato correcto? `curl -u username:password`
+1. ¿Estás usando el formato correcto? `curl -u username:password`.
 2. ¿El usuario existe en `application.properties`?
 3. ¿La contraseña es correcta?
 
-### Problema: "401 Unauthorized" con JWT
+### ❌ Problema: "401 Unauthorized" con JWT.
 
 **Verificar:**
-1. ¿El header es correcto? `Authorization: Bearer <token>`
-2. ¿El token expiró? Los tokens duran 1 hora
+1. ¿El header es correcto? `Authorization: Bearer <token>`.
+2. ¿El token expiró? Los tokens duran 1 hora.
 3. ¿Las llaves RSA existen en `src/main/resources/`?
 
-### Problema: No puedo ver secretos de otro usuario
+### ❌ Problema: no puedo ver secretos de otro usuario.
 
 **¡Eso es correcto!** Es una característica de seguridad (aislamiento multi-tenancy).
 
 ---
 
-## 📚 Recursos de Aprendizaje
+## Recursos de aprendizaje
 
-### Documentación Oficial
+### Documentación oficial:
 
-- [Quarkus Security](https://quarkus.io/guides/security)
-- [Quarkus JWT](https://quarkus.io/guides/security-jwt)
-- [RFC 7519 - JWT Standard](https://tools.ietf.org/html/rfc7519)
+- [Quarkus Security](https://quarkus.io/guides/security).
+- [Quarkus JWT](https://quarkus.io/guides/security-jwt).
+- [RFC 7519 - JWT Standard](https://tools.ietf.org/html/rfc7519).
 
-### Herramientas Útiles
+### Herramientas útiles:
 
-- [jwt.io](https://jwt.io) - Debugger de JWT
-- [Quarkus Dev UI](http://localhost:8080/q/dev) - Interfaz de desarrollo
-- [Postman](https://www.postman.com/) - Testing de APIs
+- [jwt.io](https://jwt.io), debugger de JWT.
+- [Quarkus Dev UI](http://localhost:8080/q/dev), interfaz de desarrollo.
+- [Postman](https://www.postman.com/), testing de API.
 
-### Archivos del Proyecto
+### Archivos del proyecto:
 
-- `README-PARTE2.md` - Guía detallada de JWT
-- `TEORIA-PARTE2.md` - Teoría completa de JWT
-- `test-part1-security.sh` - Script de pruebas Parte 1
-- `test-part2-jwt.sh` - Script de pruebas Parte 2
-
----
-
-## 🎯 Próximos Pasos
-
-### Parte 3: OIDC con Keycloak (Próximamente)
-
-- Integración con proveedores de identidad externos
-- OpenID Connect (OIDC)
-- Single Sign-On (SSO)
-- Keycloak como Identity Provider
-- Federación de identidades
-
-### Mejoras Adicionales
-
-- [ ] Persistencia con PostgreSQL
-- [ ] Cifrado de secretos en base de datos
-- [ ] Auditoría completa de accesos
-- [ ] Rate limiting
-- [ ] API versioning
-- [ ] OpenAPI/Swagger documentation
-- [ ] Docker Compose setup
-- [ ] CI/CD con GitHub Actions
+- `README-PARTE2.md`, guía detallada de JWT.
+- `TEORIA-PARTE2.md`, teoría completa de JWT.
+- `test-part1-security.sh`, script de pruebas, parte 1.
+- `test-part2-jwt.sh`, script de pruebas, parte 2.
 
 ---
 
-## 🤝 Contribuciones
+## Próximos pasos
 
-Este es un proyecto educativo. Sugerencias y mejoras son bienvenidas.
+### Parte 3. OIDC con Keycloak.
 
----
+- Integración con proveedores de identidad externos.
+- OpenID Connect (OIDC).
+- Single Sign-On (SSO).
+- Keycloak como Identity Provider.
+- Federación de identidades.
 
-## 📝 Licencia
+### Mejoras adicionales:
 
-Este proyecto es material educativo y está disponible libremente para propósitos de aprendizaje.
+- [ ] Persistencia con PostgreSQL.
+- [ ] Cifrado de secretos en base de datos.
+- [ ] Auditoría completa de accesos.
+- [ ] Rate limiting.
+- [ ] API versioning.
+- [ ] OpenAPI/Swagger documentation.
+- [ ] Docker Compose setup.
+- [ ] CI/CD con GitHub Actions.
 
----
+### Puntos clave:
 
-## 👨‍🏫 Notas para Instructores
-
-### Orden de Enseñanza Recomendado
-
-1. **Teoría de Autenticación/Autorización** (30 min)
-   - Diferencia entre autenticación y autorización
-   - HTTP 401 vs 403
-   - Basic Auth vs Token-based
-
-2. **Parte 1: Hands-on con Basic Auth** (60 min)
-   - Crear proyecto
-   - Implementar endpoints con `@RolesAllowed`
-   - Ejecutar script de pruebas
-   - Discutir limitaciones
-
-3. **Teoría de JWT** (45 min)
-   - Leer `TEORIA-PARTE2.md`
-   - Anatomía del JWT
-   - Stateless vs Stateful
-   - RSA vs HMAC
-
-4. **Parte 2: Hands-on con JWT** (90 min)
-   - Generar llaves RSA
-   - Implementar login y endpoints
-   - Ejecutar script de pruebas
-   - Decodificar tokens en jwt.io
-
-5. **Comparación y Discusión** (30 min)
-   - ¿Cuándo usar cada método?
-   - Trade-offs de seguridad
-   - Casos de uso reales
-
-### Puntos Clave a Enfatizar
-
-1. **JWT NO es encriptación**: El payload es visible
-2. **Stateless = Escalabilidad**: Pero dificulta revocación
-3. **Expiración es crítica**: Limitar ventana de ataque
-4. **RSA en microservicios**: Separación de responsabilidades
-5. **Aislamiento por diseño**: Filtrar siempre por usuario autenticado
+1. **JWT no es encriptación.** El payload es visible.
+2. **Stateless = escalabilidad.** Pero dificulta la revocación.
+3. **La expiración es crítica.** Limita la ventana de ataque.
+4. **RSA en microservicios.** Separación de responsabilidades.
+5. **Aislamiento por diseño.** Filtrar siempre por usuario autenticado.
 
 ---
 
-## ✅ Checklist de Verificación Final
+## ✅ Checklist de verificación final.
 
 Antes de dar por completado el ejercicio:
 
-- [ ] El proyecto compila sin errores
-- [ ] Quarkus arranca en modo dev
-- [ ] Health check responde
-- [ ] Basic Auth funciona con admin y auditor
-- [ ] Login genera JWT válido
-- [ ] JWT permite acceso a endpoints protegidos
-- [ ] Aislamiento entre usuarios funciona
-- [ ] Scripts de prueba ejecutan sin errores
-- [ ] Puedes decodificar un JWT en jwt.io
-- [ ] Entiendes la diferencia entre 401 y 403
+- [ ] El proyecto compila sin errores.
+- [ ] Quarkus arranca en modo dev.
+- [ ] Health check responde.
+- [ ] Basic auth funciona con admin y auditor.
+- [ ] Login genera un JWT válido.
+- [ ] JWT permite el acceso a endpoints protegidos.
+- [ ] El aislamiento entre usuarios funciona.
+- [ ] Los scripts de prueba se ejecutan sin errores.
+- [ ] Puedes decodificar un JWT en jwt.io.
+- [ ] Entiendes la diferencia entre 401 y 403.
 
 ---
-
-## 📞 Soporte
-
-Para dudas o problemas:
-1. Revisar sección de Troubleshooting
-2. Verificar logs de Quarkus
-3. Consultar documentación oficial de Quarkus
-4. Revisar archivos de teoría incluidos
