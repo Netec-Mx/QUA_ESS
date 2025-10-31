@@ -1,8 +1,8 @@
-# Sistema de Evaluación Crediticia - Quarkus
+# Sistema de evaluación crediticia - Quarkus
 
 Sistema bancario para evaluar solicitudes de crédito de consumo mediante un algoritmo de scoring crediticio automatizado.
 
-## 📚 Documentación del Proyecto
+## Documentación del proyecto
 
 <div align="center">
 
@@ -10,26 +10,26 @@ Sistema bancario para evaluar solicitudes de crédito de consumo mediante un alg
 
 </div>
 
-## 📋 Características
+## Características
 
-- ✅ **Evaluación crediticia automática** con algoritmo de scoring (0-1000 puntos)
-- ✅ **Validación exhaustiva** de datos (RUT chileno, email, rangos, etc.)
-- ✅ **Persistencia con Panache** (PostgreSQL)
-- ✅ **Dev Services** (base de datos automática en desarrollo)
-- ✅ **Tests completos** (unitarios, integración, REST)
-- ✅ **Compilación nativa** con GraalVM
-- ✅ **Manejo de errores** con Exception Mappers
-- ✅ **Validadores custom** (@ValidRut)
+- ✅ **Evaluación crediticia automática** con algoritmo de scoring (0-1000 puntos).
+- ✅ **Validación exhaustiva** de datos (RUT chileno, email, rangos, etc.).
+- ✅ **Persistencia con Panache** (PostgreSQL).
+- ✅ **Dev Services** (base de datos automática en desarrollo).
+- ✅ **Tests completos** (unitarios, integración, REST).
+- ✅ **Compilación nativa** con GraalVM.
+- ✅ **Manejo de errores** con Exception Mappers.
+- ✅ **Validadores custom** (`@ValidRut`).
 
 ---
 
-## 🛠️ Requisitos Previos
+## Requisitos previos
 
-### Ambos Sistemas (Mac y Windows)
+### Ambos sistemas (Mac y Windows)
 
-- **Java 21** ([Amazon Corretto](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html) o [Oracle JDK](https://www.oracle.com/java/technologies/downloads/#java21))
-- **Maven 3.9+** ([Descargar](https://maven.apache.org/download.cgi))
-- **Docker Desktop** (opcional, para producción con PostgreSQL real)
+- **Java 21** ([Amazon Corretto](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html) u [Oracle JDK](https://www.oracle.com/java/technologies/downloads/#java21)).
+- **Maven 3.9+** ([Descargar](https://maven.apache.org/download.cgi)).
+- **Docker Desktop** (opcional, para producción con PostgreSQL real).
 
 ### Verificar instalación:
 
@@ -47,15 +47,15 @@ mvn -version
 
 ---
 
-## 🚀 Instalación y Ejecución
+## Instalación y ejecución
 
-### 1️⃣ Clonar/Descargar el proyecto
+### Clonar/descargar el proyecto.
 
 ```bash
 cd evaluacion-crediticia
 ```
 
-### 2️⃣ Ejecutar en modo desarrollo
+### Ejecutar en modo desarrollo.
 
 Quarkus levantará automáticamente PostgreSQL con **Dev Services** (Testcontainers).
 
@@ -76,13 +76,13 @@ mvnw.cmd quarkus:dev
 
 La aplicación estará disponible en: **http://localhost:8080**
 
-**🔥 Hot Reload activado:** Cualquier cambio en el código se refleja automáticamente.
+**Hot Reload activado:** Cualquier cambio en el código se refleja automáticamente.
 
 ---
 
-## 🧪 Ejecutar Tests
+## Ejecutar tests
 
-### Tests unitarios y de integración
+### Tests unitarios y de integración.
 
 **Mac/Linux:**
 ```bash
@@ -94,7 +94,7 @@ La aplicación estará disponible en: **http://localhost:8080**
 mvnw.cmd clean test
 ```
 
-### Tests nativos (GraalVM)
+### Tests nativos (GraalVM).
 
 **Mac/Linux:**
 ```bash
@@ -106,7 +106,7 @@ mvnw.cmd clean test
 mvnw.cmd verify -Dnative
 ```
 
-### Ver cobertura de código
+### Ver cobertura de código.
 
 **Mac/Linux:**
 ```bash
@@ -122,9 +122,9 @@ start target\site\jacoco\index.html
 
 ---
 
-## 📦 Compilación
+## Compilación
 
-### Compilar JAR ejecutable (JVM)
+### Compilar JAR ejecutable (JVM).
 
 **Mac/Linux:**
 ```bash
@@ -138,10 +138,10 @@ mvnw.cmd clean package
 java -jar target\quarkus-app\quarkus-run.jar
 ```
 
-⏱️ **Tiempo de arranque JVM:** ~1.5 segundos  
-💾 **Memoria RSS:** ~150 MB
+**Tiempo de arranque JVM:** ~ 1.5 segundos.
+**Memoria RSS:** ~ 150 MB .
 
-### Compilar binario nativo (GraalVM)
+### Compilar binario nativo (GraalVM).
 
 Requiere **GraalVM 21** con Native Image instalado ([Descargar](https://www.graalvm.org/downloads/))
 
@@ -157,14 +157,14 @@ mvnw.cmd package -Dnative
 target\evaluacion-crediticia-1.0.0-SNAPSHOT-runner.exe
 ```
 
-⏱️ **Tiempo de arranque nativo:** ~0.015 segundos  
-💾 **Memoria RSS:** ~30 MB
+**Tiempo de arranque nativo:** ~ 0.015 segundos.
+**Memoria RSS:** ~ 30 MB .
 
 ---
 
-## 🧪 Probar la API
+## Probar la API
 
-### 1️⃣ Solicitud APROBADA (perfil excelente)
+### Solicitud aprobada (perfil excelente).
 
 **Mac/Linux (curl):**
 ```bash
@@ -214,7 +214,7 @@ Invoke-RestMethod -Uri http://localhost:8080/api/v1/creditos/evaluar `
 
 ---
 
-### 2️⃣ Solicitud RECHAZADA (DTI alto)
+### Solicitud rechazada (DTI alto).
 
 **Mac/Linux:**
 ```bash
@@ -264,7 +264,7 @@ Invoke-RestMethod -Uri http://localhost:8080/api/v1/creditos/evaluar `
 
 ---
 
-### 3️⃣ Validación de RUT inválido
+### Validación de RUT inválido.
 
 **Mac/Linux:**
 ```bash
@@ -291,7 +291,7 @@ curl -X POST http://localhost:8080/api/v1/creditos/evaluar \
 
 ---
 
-### 4️⃣ Listar todas las solicitudes
+### Listar todas las solicitudes.
 
 **Mac/Linux:**
 ```bash
@@ -305,7 +305,7 @@ Invoke-RestMethod -Uri http://localhost:8080/api/v1/creditos
 
 ---
 
-### 5️⃣ Obtener solicitud por ID
+### Obtener solicitud por ID.
 
 **Mac/Linux:**
 ```bash
@@ -319,32 +319,32 @@ Invoke-RestMethod -Uri http://localhost:8080/api/v1/creditos/1
 
 ---
 
-## 🎯 Algoritmo de Scoring
+## Algoritmo de scoring
 
-El sistema evalúa múltiples factores para calcular el score crediticio:
+El sistema evalúa múltiples factores para calcular el score crediticio.
 
 ### Factores evaluados:
 
 | Factor | Peso | Descripción |
 |--------|------|-------------|
-| **DTI (Debt-to-Income)** | Alto | Ratio deuda/ingreso. Límite: 50% |
+| **DTI (Debt-to-Income)** | Alto | Ratio deuda/ingreso. Límite: 50 % |
 | **Estabilidad laboral** | Medio | Meses en empleo actual |
-| **Capacidad de pago** | Alto | Cuota estimada vs 30% del ingreso |
-| **Edad** | Bajo | Rango óptimo: 25-55 años |
+| **Capacidad de pago** | Alto | Cuota estimada vs. 30 % del ingreso |
+| **Edad** | Bajo | Rango óptimo: 25 - 55 años |
 | **Monto solicitado** | Medio | Ratio monto/ingreso mensual |
 
 ### Escala de score:
 
-- **800-1000:** Excelente (aprobación inmediata, mejores tasas)
-- **650-799:** Bueno (aprobación estándar)
-- **500-649:** Regular (requiere análisis manual)
-- **0-499:** Malo (rechazo automático)
+- **800 - 1000:** excelente (aprobación inmediata, mejores tasas).
+- **650 - 799:** bueno (aprobación estándar).
+- **500 - 649:** regular (requiere análisis manual).
+- **0 - 499:** malo (rechazo automático).
 
-### Umbral de aprobación: **650 puntos**
+### Umbral de aprobación: **650 puntos.**
 
 ---
 
-## 🗂️ Estructura del Proyecto
+## Estructura del proyecto
 
 ```
 evaluacion-crediticia/
@@ -385,23 +385,23 @@ evaluacion-crediticia/
 
 ---
 
-## 📊 Cobertura de Tests
+## Cobertura de tests
 
 El proyecto incluye:
 
-- ✅ **Tests unitarios** (servicios, validadores)
-- ✅ **Tests de integración** (repositorios con BD)
-- ✅ **Tests REST** (endpoints con REST Assured)
-- ✅ **Tests parametrizados** (múltiples escenarios)
-- ✅ **Tests nativos** (compilación GraalVM)
+- ✅ **Tests unitarios** (servicios, validadores).
+- ✅ **Tests de integración** (repositorios con BD).
+- ✅ **Tests REST** (endpoints con REST Assured).
+- ✅ **Tests parametrizados** (múltiples escenarios).
+- ✅ **Tests nativos** (compilación GraalVM).
 
-**Cobertura objetivo:** > 85%
+**Cobertura objetivo:** > 85 % .
 
 ---
 
-## 🐳 Docker
+## Docker
 
-### Crear imagen Docker (JVM)
+### Crear imagen Docker (JVM).
 
 **Mac/Linux:**
 ```bash
@@ -417,7 +417,7 @@ docker build -f src/main/docker/Dockerfile.jvm -t evaluacion-crediticia:jvm .
 docker run -i --rm -p 8080:8080 evaluacion-crediticia:jvm
 ```
 
-### Crear imagen Docker (Nativa)
+### Crear imagen Docker (nativa).
 
 **Mac/Linux:**
 ```bash
@@ -432,14 +432,14 @@ mvnw.cmd package -Dnative -Dquarkus.native.container-build=true
 docker build -f src/main/docker/Dockerfile.native -t evaluacion-crediticia:native .
 docker run -i --rm -p 8080:8080 evaluacion-crediticia:native
 ```
-
+ 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
-### Problema: Tests fallan con "Connection refused"
+### ❌ Problema: los tests fallan con "Connection refused".
 
-**Solución:** Asegúrate de tener Docker Desktop ejecutándose (Dev Services lo necesita).
+**Solución:** asegúrate de tener Docker Desktop ejecutándose (Dev Services lo necesita).
 
 **Mac/Linux:**
 ```bash
@@ -455,9 +455,9 @@ Si Docker no está corriendo, inícialo desde Docker Desktop.
 
 ---
 
-### Problema: Puerto 8080 ya en uso
+### ❌ Problema: Puerto 8080 ya en uso.
 
-**Solución:** Cambia el puerto en `application.properties`:
+**Solución:** cambia el puerto en `application.properties`:
 
 ```properties
 quarkus.http.port=8081
@@ -477,7 +477,7 @@ Get-Process -Id (Get-NetTCPConnection -LocalPort 8080).OwningProcess | Stop-Proc
 
 ---
 
-### Problema: "JAVA_HOME not set"
+### ❌ Problema: "JAVA_HOME not set".
 
 **Mac/Linux:**
 ```bash
@@ -491,17 +491,12 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 
 ---
 
-## 📚 Recursos Adicionales
+## Recursos adicionales
 
-- 📖 [Documentación Quarkus](https://quarkus.io/guides/)
-- 🔧 [Panache Guide](https://quarkus.io/guides/hibernate-orm-panache)
-- 🧪 [Testing Guide](https://quarkus.io/guides/getting-started-testing)
-- 🚀 [Native Build Guide](https://quarkus.io/guides/building-native-image)
-- 🐳 [Container Guide](https://quarkus.io/guides/container-image)
+- [Documentación Quarkus](https://quarkus.io/guides/)
+- [Panache Guide](https://quarkus.io/guides/hibernate-orm-panache)
+- [Testing Guide](https://quarkus.io/guides/getting-started-testing)
+- [Native Build Guide](https://quarkus.io/guides/building-native-image)
+- [Container Guide](https://quarkus.io/guides/container-image)
 
 ---
-
-## 👨‍💻 NETEC
-
-**Capítulo 5 - Testing y Validación**  
-Curso Quarkus 3.28.3 + Java 21
