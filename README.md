@@ -54,8 +54,16 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: integrar OpenID Connect (OIDC) con Keycloak como proveedor de identidad externo para autenticar clientes externos. A diferencia de las partes anteriores donde nuestra aplicación gestionaba la autenticación, aquí delegamos esta responsabilidad a Keycloak.
 - ⏱️ **Duración estimada**: 90 min.
   
-### [Práctica 7. TasaCorp API: configuración y perfiles en Quarkus](Práctica-6.3..md)
-- **Descripción**: dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+### [Capítulo 7. TasaCorp API: configuración y perfiles en Quarkus](Practica7.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+- ⏱️ **Duración estimada**: 90 min.
+
+### [Capítulo 7.1. Externalización de Configuraciones](Practica7.1.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+- ⏱️ **Duración estimada**: 90 min.
+
+### [Capítulo 7.2. Perfiles y Configuración Sensible](Practica7.2.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
 - ⏱️ **Duración estimada**: 90 min.
 
 
