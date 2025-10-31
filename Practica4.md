@@ -2,16 +2,16 @@
 
 ## Objetivos
 Al finalizar la práctica, serás capaz de:
-- Desarrollar completo un microservicio con **Hibernate ORM + Panache**, persistencia en base de datos y patrones Active Record y Repository.
+- Desarrollar un microservicio completo con **Hibernate ORM + Panache**, persistencia en base de datos y patrones Active Record y Repository.
 - Dominarás:
-  - **Hibernate ORM con Panache** - Simplificación de JPA  
-  - **Active Record Pattern** - Entidades con lógica de persistencia  
-  - **Repository Pattern** - Separación de acceso a datos  
-  - **Relaciones JPA** - @OneToMany, @ManyToOne  
-  - **Generación automática de datos** - Cuotas de préstamos  
-  - **Transacciones** con `@Transactional`  
-  - **Lazy Loading** y `@JsonIgnore` para evitar loops  
-  - **PostgreSQL** - Base de datos relacional real
+  - **Hibernate ORM con Panache** - Simplificación de JPA.
+  - **Active Record Pattern** - Entidades con lógica de persistencia.
+  - **Repository Pattern** - Separación de acceso a datos.
+  - **Relaciones JPA** - `@OneToMany`, `@ManyToOne`.  
+  - **Generación automática de datos** - Cuotas de préstamos.
+  - **Transacciones** con `@Transactional`.
+  - **Lazy Loading** y `@JsonIgnore` para evitar loops.
+  - **PostgreSQL** - Base de datos relacional real.
   
 ## Duración aproximada
 - 90 minutos.
@@ -91,7 +91,7 @@ pe.banco.prestamos
 
 ---
 
-### Tarea 1
+### Tarea 1.
 
 **Paso 1.** Crea un proyecto Quarkus.
 
@@ -113,10 +113,10 @@ cd prestamos-service
 ```
 
 **Extensiones incluidas:**
-- ✅ `hibernate-orm-panache` → JPA simplificado
-- ✅ `jdbc-postgresql` → Driver PostgreSQL
-- ✅ `rest-jackson` → REST + JSON
-- ✅ `smallrye-openapi` → Swagger UI automático
+- `hibernate-orm-panache` → JPA simplificado.
+- `jdbc-postgresql` → Driver PostgreSQL.
+- `rest-jackson` → REST + JSON.
+- `smallrye-openapi` → Swagger UI automático.
 
 ---
 
@@ -154,8 +154,8 @@ quarkus.log.category."pe.banco.prestamos".level=DEBUG
 ```
 
 **Importante**
-- `update` → Mantiene datos entre reinicios (vs. `drop-and-create`).
-- `log.sql=true` → Muestra queries SQL en consola.
+- `update` → mantiene datos entre reinicios (vs. `drop-and-create`).
+- `log.sql=true` → muestra queries SQL en consola.
 - Asegúrate de que PostgreSQL esté corriendo en `localhost:5432`.
 
 ---
@@ -230,10 +230,10 @@ public class Cliente extends PanacheEntity {
 ```
 
 **Conceptos clave**
-- `extends PanacheEntity` → Active Record (incluye `id` auto-generado)
-- Campos públicos (estilo Panache)
-- `@JsonIgnore` → Evita serializar `prestamos` (previene referencias circulares)
-- `@OneToMany` → Un cliente puede tener muchos préstamos
+- `extends PanacheEntity` → Active Record (incluye `id` auto-generado).
+- Campos públicos (estilo Panache).
+- `@JsonIgnore` → evita serializar `prestamos` (previene referencias circulares).
+- `@OneToMany` → un cliente puede tener muchos préstamos.
 
 ---
 
@@ -404,7 +404,7 @@ public class ClienteRepository implements PanacheRepository<Cliente> {
 **Conceptos clave:**
 - `implements PanacheRepository<Cliente>` → Repository Pattern.
 - `@ApplicationScoped` → Singleton CDI.
-- Métodos custom de búsqueda
+- Métodos custom de búsqueda.
 - `Optional<T>` → Manejo moderno de null.
 
 ---
@@ -489,14 +489,14 @@ public class ClienteResource {
 ```
 
 **Conceptos clave:**
-- `@Transactional` → Obligatorio para modificar BD
-- Validación de duplicados (DNI, email)
-- `Optional.map()` → Programación funcional
-- HTTP 409 Conflict → Duplicados
+- `@Transactional` → obligatorio para modificar BD.
+- Validación de duplicados (DNI, email).
+- `Optional.map()` → programación funcional.
+- HTTP 409 Conflict → duplicados.
 
 ---
 
-**Paso 9.** Crear PrestamoResource
+**Paso 9.** Crea `PrestamoResource`.
 
 **Archivo:** `src/main/java/pe/banco/prestamos/resource/PrestamoResource.java`
 
@@ -639,14 +639,14 @@ public class PrestamoResource {
 ```
 
 **Conceptos clave:**
-- `Prestamo.listAll()` → Active Record
-- Generación automática de cuotas
-- Cambio de estado a PAGADO cuando todas las cuotas están pagadas
-- DTO `PrestamoRequest` para input
+- `Prestamo.listAll()` → Active Record.
+- Generación automática de cuotas.
+- Cambio de estado a **PAGADO** cuando todas las cuotas están pagadas.
+- DTO `PrestamoRequest` para input.
 
 ---
 
-### **PASO 10: Compilar y Ejecutar**
+### **PASO 10. Compilar y ejecutar.**
 
 **1. Compilar:**
 
@@ -689,9 +689,9 @@ CREATE TABLE cuotas (...)
 
 ---
 
-## 🧪 Pruebas con Swagger UI
+## Pruebas con Swagger UI
 
-### URLs Importantes
+### URL importantes
 
 | Recurso | URL |
 |---------|-----|
@@ -702,13 +702,13 @@ CREATE TABLE cuotas (...)
 
 ---
 
-### **PRUEBA 1: Crear Clientes**
+### **PRUEBA 1: crear clientes.**
 
 Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
-1. Expande **POST /clientes**
-2. Click **"Try it out"**
-3. Request body:
+1. Expande **POST /clientes.**
+2. Da click en **"Try it out".**
+3. Request body.
 
 **Cliente 1:**
 ```json
@@ -720,8 +720,8 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 }
 ```
 
-4. Click **"Execute"**
-5. **Respuesta esperada:** `201 Created`
+4. Da click en **"Execute".**
+5. **Respuesta esperada:** `201 Created`.
 
 **Cliente 2:**
 ```json
@@ -735,10 +735,10 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 ---
 
-### **PRUEBA 2: Listar Clientes**
+### **PRUEBA 2: listar clientes.**
 
-1. Expande **GET /clientes**
-2. Click **"Try it out"** → **"Execute"**
+1. Expande **GET /clientes.**
+2. Da click en **"Try it out"** → **"Execute".**
 
 **Respuesta esperada:**
 ```json
@@ -762,11 +762,11 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 ---
 
-### **PRUEBA 3: Crear Préstamo**
+### **PRUEBA 3: crear préstamo.**
 
-1. Expande **POST /prestamos**
-2. Click **"Try it out"**
-3. Request body:
+1. Expande **POST /prestamos.**
+2. Da click en **"Try it out".**
+3. Request body.
 
 ```json
 {
@@ -779,11 +779,11 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 4. Haz click en `Execute`.
 
-**Respuesta esperada:** `201 Created` con:
-- Préstamo creado
-- Estado: `ACTIVO`
-- **12 cuotas generadas automáticamente**
-- Fechas de vencimiento mensuales
+**Respuesta esperada:** `201 Created` con
+  - Préstamo creado.
+  - Estado: `ACTIVO`.
+  - **12 cuotas generadas automáticamente.**
+  - Fechas de vencimiento mensuales
 
 **Ejemplo de respuesta:**
 ```json
@@ -825,14 +825,14 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 ---
 
-### **PRUEBA 4: Pagar Cuota**
+### **PRUEBA 4: pagar cuota.**
 
-1. Expande **PUT /prestamos/{id}/pagar-cuota/{numeroCuota}**
-2. Click **"Try it out"**
+1. Expande **PUT /prestamos/{id}/pagar-cuota/{numeroCuota}.**
+2. Da click en **"Try it out".**
 3. Parámetros:
-   - `id` = **1** (préstamo)
-   - `numeroCuota` = **1** (primera cuota)
-4. Click **"Execute"**
+   - `id` = **1** (préstamo).
+   - `numeroCuota` = **1** (primera cuota).
+4. Da click en **"Execute"**.
 
 **Respuesta esperada:**
 ```json
@@ -850,20 +850,20 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 ---
 
-### **PRUEBA 5: Listar Préstamos de un Cliente**
+### **PRUEBA 5: listar los préstamos de un cliente.**
 
-1. Expande **GET /prestamos/cliente/{clienteId}**
-2. Click **"Try it out"**
-3. `clienteId` = **1**
-4. Click **"Execute"**
+1. Expande **GET /prestamos/cliente/{clienteId}.**
+2. Da click en **"Try it out".**
+3. `clienteId` = **1**.
+4. Da click en **"Execute"**.
 
 **Respuesta esperada:** Array con préstamos del cliente, incluyendo cuotas.
 
 ---
 
-### **PRUEBA 6: Validación de Duplicados**
+### **PRUEBA 6: validación de duplicados.**
 
-Intenta crear cliente con DNI duplicado:
+Intenta crear un cliente con DNI duplicado:
 
 **POST /clientes:**
 ```json
@@ -875,11 +875,11 @@ Intenta crear cliente con DNI duplicado:
 }
 ```
 
-**Respuesta esperada:** `409 Conflict` - "DNI ya registrado"
+**Respuesta esperada:** `409 Conflict` - "DNI ya registrado".
 
 ---
 
-## 📊 Pruebas con curl
+## Pruebas con curl
 
 ### Crear Cliente
 ```bash
@@ -922,7 +922,7 @@ curl http://localhost:8080/prestamos/cliente/1
 
 ---
 
-## 🔍 Estructura Final del Proyecto
+## Estructura Final del Proyecto
 
 ```
 prestamos-service/
@@ -951,7 +951,7 @@ prestamos-service/
 
 ---
 
-## 🎯 Conceptos Cubiertos
+## Conceptos cubiertos
 
 ### 1. **Hibernate ORM con Panache**
 
@@ -998,11 +998,11 @@ public Cliente cliente;
 ```
 
 **Cascade Types:**
-- `ALL` → Propaga todas las operaciones
-- `PERSIST` → Solo insert
-- `MERGE` → Solo update
-- `REMOVE` → Solo delete
-- `orphanRemoval = true` → Elimina huérfanos
+- `ALL` → propaga todas las operaciones.
+- `PERSIST` → solo insert.
+- `MERGE` → solo update.
+- `REMOVE` → solo delete.
+- `orphanRemoval = true` → elimina huérfanos.
 
 ### 3. **Transacciones**
 
@@ -1015,12 +1015,12 @@ public Response crear(Cliente cliente) {
 ```
 
 **Sin @Transactional:**
-- Solo lectura (SELECT)
-- Modificaciones fallan con error
+- Solo lectura (`SELECT`).
+- Las modificaciones fallan con error.
 
 **Con @Transactional:**
-- ACID garantizado
-- Rollback automático en excepción
+- ACID garantizado.
+- Rollback automático en excepción,
 
 ### 4. **Lazy Loading y @JsonIgnore**
 
@@ -1038,7 +1038,7 @@ public List<Prestamo> prestamos;
 
 Evita serializar colecciones que causan loops.
 
-### 5. **BigDecimal para Dinero**
+### 5. **BigDecimal para dinero**
 
 ```java
 @Column(precision = 12, scale = 2)
@@ -1048,11 +1048,11 @@ public double monto;      // ❌ Nunca usar
 ```
 
 **Por qué BigDecimal:**
-- Precisión exacta (no redondeo)
-- Estándar en finanzas
-- Evita bugs: `0.1 + 0.2 = 0.30000000000000004`
+- Precisión exacta (no redondeo).
+- Estándar en finanzas.
+- Evita bugs: `0.1 + 0.2 = 0.30000000000000004`.
 
-### 6. **Generación Automática de Cuotas**
+### 6. **Generación automática de cuotas**
 
 ```java
 private List<Cuota> generarCuotas(Prestamo prestamo) {
@@ -1073,7 +1073,7 @@ Lógica de negocio compleja encapsulada.
 
 ---
 
-## 🛠️ Solución de Problemas
+## Solución de Problemas
 
 ### Error: "role postgres does not exist"
 
