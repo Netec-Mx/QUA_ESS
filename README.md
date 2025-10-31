@@ -38,15 +38,25 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: usar Google Tink con AES-256-GCM para la protección de datos sensibles antes de persistirlos en PostgreSQL.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 5. Sistema de evaluación crediticia: Quarkus](./Laboratorio_1.md) 
+### [Práctica 5. Sistema de evaluación crediticia: Quarkus](Práctica 5.md) 
 - **Descripción**: evaluar solicitudes de crédito de consumo mediante un algoritmo de scoring crediticio automatizado.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 6. VaultCorp API: ejercicio completo de seguridad en Quarkus](./Laboratorio_2.md)
-- **Descripción**: cubrir tres métodos de autenticación y autorización en aplicaciones Quarkus.
+## Capítulo 6
+
+### [Capítulo 6. Práctica 6.1. VaultCorp API: sistema de gestión de secretos con Quarkus](Práctica-6.1..md)
+- **Descripción**: VaultCorp API es un microservicio educativo desarrollado con Quarkus que implementa un sistema completo de gestión de secretos corporativos con tres niveles de seguridad.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 7. TasaCorp API: configuración y perfiles en Quarkus](./Laboratorio_2.md)
+### [Capítulo 6. Práctica 6.2. Autenticación con JWT (JSON Web Token)](Práctica-6.2..md)
+- **Descripción**: JWT (JSON Web Token) es un estándar abierto (RFC 7519) que define una forma compacta y autocontenida de transmitir información de forma segura entre dos partes como un objeto JSON.
+- ⏱️ **Duración estimada**: 90 min.
+
+### [Capítulo 6. Práctica 6.3. Autenticación con OIDC y Keycloak](Práctica-6.3..md)
+- **Descripción**: integrar OpenID Connect (OIDC) con Keycloak como proveedor de identidad externo para autenticar clientes externos. A diferencia de las partes anteriores donde nuestra aplicación gestionaba la autenticación, aquí delegamos esta responsabilidad a Keycloak.
+- ⏱️ **Duración estimada**: 90 min.
+  
+### [Práctica 7. TasaCorp API: configuración y perfiles en Quarkus](Práctica-6.3..md)
 - **Descripción**: dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
 - ⏱️ **Duración estimada**: 90 min.
 
