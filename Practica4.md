@@ -4,14 +4,14 @@
 Al finalizar la práctica, serás capaz de:
 - Desarrollar completo un microservicio con **Hibernate ORM + Panache**, persistencia en base de datos y patrones Active Record y Repository.
 - Dominarás:
-- **Hibernate ORM con Panache** - Simplificación de JPA  
-- **Active Record Pattern** - Entidades con lógica de persistencia  
-- **Repository Pattern** - Separación de acceso a datos  
-- **Relaciones JPA** - @OneToMany, @ManyToOne  
-- **Generación automática de datos** - Cuotas de préstamos  
-- **Transacciones** con `@Transactional`  
-- **Lazy Loading** y `@JsonIgnore` para evitar loops  
-- **PostgreSQL** - Base de datos relacional real
+  - **Hibernate ORM con Panache** - Simplificación de JPA  
+  - **Active Record Pattern** - Entidades con lógica de persistencia  
+  - **Repository Pattern** - Separación de acceso a datos  
+  - **Relaciones JPA** - @OneToMany, @ManyToOne  
+  - **Generación automática de datos** - Cuotas de préstamos  
+  - **Transacciones** con `@Transactional`  
+  - **Lazy Loading** y `@JsonIgnore` para evitar loops  
+  - **PostgreSQL** - Base de datos relacional real
   
 ## Duración aproximada
 - 90 minutos.
@@ -156,7 +156,7 @@ quarkus.log.category."pe.banco.prestamos".level=DEBUG
 **Importante**
 - `update` → Mantiene datos entre reinicios (vs. `drop-and-create`).
 - `log.sql=true` → Muestra queries SQL en consola.
-- Asegúrate que PostgreSQL esté corriendo en `localhost:5432`.
+- Asegúrate de que PostgreSQL esté corriendo en `localhost:5432`.
 
 ---
 
@@ -185,7 +185,7 @@ mkdir src\main\java\pe\banco\prestamos\resource
 
 ---
 
-**Paso 4.** Crear entidad `Cliente` (Active Record).
+**Paso 4.** Crea la entidad `Cliente` (Active Record).
 
 **Archivo:** `src/main/java/pe/banco/prestamos/model/Cliente.java`
 
@@ -300,11 +300,11 @@ public class Prestamo extends PanacheEntity {
 ```
 
 **Conceptos clave**
-- `@ManyToOne` → Muchos préstamos pertenecen a un cliente
-- `BigDecimal` → Para dinero (precisión exacta)
-- `LocalDate` → Fechas modernas Java 8+
-- `@Enumerated(STRING)` → Guarda texto del enum, no ordinal
-- `cascade = ALL` → Operaciones en cascada a cuotas
+- `@ManyToOne` → muchos préstamos pertenecen a un cliente.
+- `BigDecimal` → para dinero (precisión exacta).
+- `LocalDate` → fechas modernas Java 8+.
+- `@Enumerated(STRING)` → guarda texto del enum, no ordinal.
+- `cascade = ALL` → operaciones en cascada a cuotas.
 
 ---
 
@@ -361,13 +361,13 @@ public class Cuota extends PanacheEntity {
 ```
 
 **Conceptos clave**
-- `@JsonIgnore` en `prestamo` → Evita Prestamo → Cuota → Prestamo loop
-- `fechaPago` nullable → `null` si aún no se pagó
-- `pagada` Boolean → Estado de pago
+- `@JsonIgnore` en `prestamo` → evita `Prestamo → Cuota → Prestamo loop`.
+- `fechaPago` nullable → `null` si aún no se pagó.
+- `pagada` Boolean → estado de pago.
 
 ---
 
-**Paso 7.** Crear `ClienteRepository` (Repository Pattern).
+**Paso 7.** Crea `ClienteRepository` (Repository Pattern).
 
 **Archivo:** `src/main/java/pe/banco/prestamos/repository/ClienteRepository.java`
 
@@ -402,14 +402,14 @@ public class ClienteRepository implements PanacheRepository<Cliente> {
 ```
 
 **Conceptos clave:**
-- `implements PanacheRepository<Cliente>` → Repository Pattern
-- `@ApplicationScoped` → Singleton CDI
+- `implements PanacheRepository<Cliente>` → Repository Pattern.
+- `@ApplicationScoped` → Singleton CDI.
 - Métodos custom de búsqueda
-- `Optional<T>` → Manejo moderno de null
+- `Optional<T>` → Manejo moderno de null.
 
 ---
 
-### **PASO 8: Crear ClienteResource (REST)**
+**Paso 8.** Crea `ClienteResource (REST)`.
 
 **Archivo:** `src/main/java/pe/banco/prestamos/resource/ClienteResource.java`
 
@@ -496,7 +496,7 @@ public class ClienteResource {
 
 ---
 
-### **PASO 9: Crear PrestamoResource**
+**Paso 9.** Crear PrestamoResource
 
 **Archivo:** `src/main/java/pe/banco/prestamos/resource/PrestamoResource.java`
 
