@@ -270,7 +270,7 @@ En este ejercicio usas **simétrico** porque es ideal para cifrar grandes volúm
 
 ## ⚠️ Limitaciones de la implementación actual
 
-### 🚨 Clave efímera (solo para DEMO).
+### Clave efímera (solo para DEMO).
 
 La clave se **regenera cada vez** que la aplicación arranca:
 
