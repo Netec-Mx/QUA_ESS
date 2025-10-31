@@ -16,7 +16,7 @@ Al finalizar la práctica, serás capaz de:
 ## Duración aproximada
 - 90 minutos.
 
---
+---
 
 ## Prerrequisitos
 
@@ -648,7 +648,7 @@ public class PrestamoResource {
 
 ### **PASO 10. Compilar y ejecutar.**
 
-**1. Compilar:**
+**1. Compilar.**
 
 **macOS/Linux:**
 ```bash
@@ -660,7 +660,7 @@ public class PrestamoResource {
 mvnw.cmd clean compile
 ```
 
-**2. Ejecutar en modo dev:**
+**2. Ejecutar en modo dev.**
 
 **macOS/Linux:**
 ```bash
@@ -672,7 +672,7 @@ mvnw.cmd clean compile
 mvnw.cmd quarkus:dev
 ```
 
-**3. Verificar:**
+**3. Verificar.**
 
 Deberías ver:
 ```
@@ -783,7 +783,7 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
   - Préstamo creado.
   - Estado: `ACTIVO`.
   - **12 cuotas generadas automáticamente.**
-  - Fechas de vencimiento mensuales
+  - Fechas de vencimiento mensuales.
 
 **Ejemplo de respuesta:**
 ```json
@@ -827,7 +827,7 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 ### **PRUEBA 4: pagar cuota.**
 
-1. Expande **PUT /prestamos/{id}/pagar-cuota/{numeroCuota}.**
+1. Expande **`PUT /prestamos/{id}/pagar-cuota/{numeroCuota}.`**
 2. Da click en **"Try it out".**
 3. Parámetros:
    - `id` = **1** (préstamo).
@@ -852,12 +852,12 @@ Abre Swagger UI: http://localhost:8080/q/swagger-ui
 
 ### **PRUEBA 5: listar los préstamos de un cliente.**
 
-1. Expande **GET /prestamos/cliente/{clienteId}.**
+1. Expande **`GET /prestamos/cliente/{clienteId}.`**
 2. Da click en **"Try it out".**
 3. `clienteId` = **1**.
 4. Da click en **"Execute"**.
 
-**Respuesta esperada:** Array con préstamos del cliente, incluyendo cuotas.
+**Respuesta esperada:** array con préstamos del cliente, incluyendo cuotas.
 
 ---
 
@@ -881,7 +881,7 @@ Intenta crear un cliente con DNI duplicado:
 
 ## Pruebas con curl
 
-### Crear Cliente
+### Crear cliente
 ```bash
 curl -X POST http://localhost:8080/clientes \
   -H "Content-Type: application/json" \
@@ -893,12 +893,12 @@ curl -X POST http://localhost:8080/clientes \
   }'
 ```
 
-### Listar Clientes
+### Listar clientes
 ```bash
 curl http://localhost:8080/clientes
 ```
 
-### Crear Préstamo
+### Crear préstamo
 ```bash
 curl -X POST http://localhost:8080/prestamos \
   -H "Content-Type: application/json" \
@@ -910,19 +910,19 @@ curl -X POST http://localhost:8080/prestamos \
   }'
 ```
 
-### Pagar Cuota
+### Pagar cuota
 ```bash
 curl -X PUT http://localhost:8080/prestamos/1/pagar-cuota/1
 ```
 
-### Listar Préstamos de Cliente
+### Listar préstamos del cliente
 ```bash
 curl http://localhost:8080/prestamos/cliente/1
 ```
 
 ---
 
-## Estructura Final del Proyecto
+## Estructura final del proyecto
 
 ```
 prestamos-service/
@@ -1073,19 +1073,19 @@ Lógica de negocio compleja encapsulada.
 
 ---
 
-## Solución de Problemas
+## Solución de problemas
 
-### Error: "role postgres does not exist"
+### ❌ Error: "role postgres does not exist".
 
-**Causa:** Usuario de PostgreSQL incorrecto
+**Causa:** usuario de PostgreSQL incorrecto.
 
-**Solución 1 (Cambiar usuario):**
+**Solución 1. Cambiar usuario.**
 ```properties
 quarkus.datasource.username=TU_USUARIO
 quarkus.datasource.password=TU_PASSWORD
 ```
 
-**Solución 2 (Usar H2 en memoria):**
+**Solución 2. Usar H2 en memoria.**
 
 En `pom.xml`, reemplaza:
 ```xml
@@ -1111,31 +1111,31 @@ quarkus.datasource.password=
 quarkus.datasource.jdbc.url=jdbc:h2:mem:prestamos_db
 ```
 
-### Error: "LazyInitializationException"
+### ❌ Error: "LazyInitializationException"
 
-**Causa:** Intentar acceder a colección lazy fuera de sesión Hibernate
+**Causa:** intentar acceder a colección lazy fuera de sesión Hibernate.
 
-**Solución:** Agregar `@JsonIgnore` en la relación inversa:
+**Solución.** Agregar `@JsonIgnore` en la relación inversa.
 ```java
 @JsonIgnore
 @OneToMany(mappedBy = "cliente")
 public List<Prestamo> prestamos;
 ```
 
-### Datos se borran al reiniciar
+### ❌ Datos se borran al reiniciar
 
 **Causa:** `database.generation=drop-and-create`
 
-**Solución:** Cambiar a:
+**Solución.** Cambiar a:
 ```properties
 quarkus.hibernate-orm.database.generation=update
 ```
 
-### Error: "No transaction is currently active"
+### ❌ Error: "No transaction is currently active"
 
-**Causa:** Falta `@Transactional` en método que modifica BD
+**Causa:** falta `@Transactional` en método que modifica BD.
 
-**Solución:**
+**Solución.**
 ```java
 @POST
 @Transactional  // ← Agregar
@@ -1144,11 +1144,11 @@ public Response crear(...) { ... }
 
 ---
 
-## 🔐 Plan B: H2 Database (Sin PostgreSQL)
+## Plan B: H2 Database (Sin PostgreSQL)
 
 Si tienes problemas con PostgreSQL, usa H2:
 
-**1. Cambiar dependencia en `pom.xml`:**
+**1. Cambia la dependencia en `pom.xml`:**
 ```xml
 <dependency>
     <groupId>io.quarkus</groupId>
@@ -1156,7 +1156,7 @@ Si tienes problemas con PostgreSQL, usa H2:
 </dependency>
 ```
 
-**2. Actualizar `application.properties`:**
+**2. Actualiza `application.properties`:**
 ```properties
 quarkus.datasource.db-kind=h2
 quarkus.datasource.username=sa
@@ -1168,24 +1168,24 @@ quarkus.datasource.jdbc.url=jdbc:h2:mem:prestamos_db;DB_CLOSE_DELAY=-1
 quarkus.h2.console.enabled=true
 ```
 
-**3. Acceder a H2 Console:**
+**3. Accede a H2 Console:**
 - URL: http://localhost:8080/q/h2-console
-- JDBC URL: `jdbc:h2:mem:prestamos_db`
-- Usuario: `sa`
-- Password: (vacío)
+- JDBC URL: `jdbc:h2:mem:prestamos_db`.
+- Usuario: `sa`.
+- Password: (vacío).
 
-**Ventajas H2:**
-- ✅ Cero configuración
-- ✅ En memoria (rápido)
-- ✅ Perfecto para desarrollo/demos
+**Ventajas de H2:**
+- Cero configuración.
+- Se ubica en memoria (rápido).
+- Perfecto para desarrollo/demos.
 
 **Desventajas H2:**
-- ❌ Datos volátiles (se pierden al apagar)
-- ❌ No para producción
+- Datos volátiles (se pierden al apagar).
+- No sirve para producción.
 
 ---
 
-## 📚 Recursos Adicionales
+## Recursos Adicionales
 
 ### Documentación
 
@@ -1197,36 +1197,36 @@ quarkus.h2.console.enabled=true
 ### Siguientes Pasos
 
 Después de dominar este capítulo:
-1. **Capítulo 5:** Bean Validation (`@NotNull`, `@Size`, `@Min`)
-2. **Capítulo 6:** Exception Handling centralizado
-3. **Capítulo 7:** Testing con RestAssured + TestContainers
-4. **Capítulo 8:** Seguridad (JWT, RBAC)
-5. **Capítulo 9:** Reactive Programming (Mutiny)
+- **Capítulo 5:** Bean Validation (`@NotNull`, `@Size`, `@Min`).
+- **Capítulo 6:** Exception Handling centralizado.
+- **Capítulo 7:** Testing con RestAssured + TestContainers.
+- **Capítulo 8:** Seguridad (JWT, RBAC).
+- **Capítulo 9:** Reactive Programming (Mutiny).
 
 ---
 
-## ✅ Checklist de Aprendizaje
+## Checklist de aprendizaje
 
 Después de completar este ejercicio, deberías poder:
 
-- [ ] Configurar Hibernate ORM con Panache
-- [ ] Crear entidades JPA con anotaciones
-- [ ] Implementar Active Record Pattern
-- [ ] Implementar Repository Pattern
-- [ ] Configurar relaciones @OneToMany y @ManyToOne
-- [ ] Usar @Transactional correctamente
-- [ ] Evitar LazyInitializationException con @JsonIgnore
-- [ ] Trabajar con BigDecimal para dinero
-- [ ] Generar datos relacionados automáticamente
-- [ ] Configurar PostgreSQL (o H2 alternativa)
-- [ ] Probar endpoints con Swagger UI
-- [ ] Usar Optional para manejo de null
+- [ ] Configurar Hibernate ORM con Panache.
+- [ ] Crear entidades JPA con anotaciones.
+- [ ] Implementar Active Record Pattern.
+- [ ] Implementar Repository Pattern.
+- [ ] Configurar relaciones `@OneToMany` y `@ManyToOne`.
+- [ ] Usar `@Transactional` correctamente.
+- [ ] Evitar LazyInitializationException con `@JsonIgnore`.
+- [ ] Trabajar con BigDecimal para dinero.
+- [ ] Generar datos relacionados automáticamente.
+- [ ] Configurar PostgreSQL (o H2 alternativa).
+- [ ] Probar endpoints con Swagger UI.
+- [ ] Usar Optional para manejo de null.
 
 ---
 
-## 🎉 Comparación con Capítulo 3
+## Comparación con capítulo 3
 
-### Capítulo 3 (Memoria)
+### Capítulo 3. Memoria
 ```java
 @ApplicationScoped
 public class CuentaService {
@@ -1239,7 +1239,7 @@ public class CuentaService {
 }
 ```
 
-### Capítulo 4 (Persistencia)
+### Capítulo 4. Persistencia
 ```java
 @ApplicationScoped
 public class ClienteRepository implements PanacheRepository<Cliente> {
@@ -1253,11 +1253,9 @@ public class ClienteRepository implements PanacheRepository<Cliente> {
 ```
 
 **Evolución:**
-- ❌ Map en memoria → ✅ Base de datos real
-- ❌ Datos volátiles → ✅ Persistencia permanente
-- ❌ Sin relaciones → ✅ Foreign keys y joins
-- ❌ Queries manuales → ✅ JPA/HQL automático
+- Map en memoria → base de datos real.
+- Datos volátiles → persistencia permanente.
+- Sin relaciones → foreign keys y joins.
+- Queries manuales → JPA/HQL automático.
 
 ---
-
-**🎉
