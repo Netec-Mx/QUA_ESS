@@ -660,7 +660,7 @@ En `application.properties`:
 quarkus.http.port=8081
 ```
 
-### Error: "CuentaService cannot be resolved".
+### ❌ Error: "CuentaService cannot be resolved".
 
 **Causa:** falta compilar.
 
