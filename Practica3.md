@@ -62,7 +62,7 @@ Map<String, Cuenta> (Datos en memoria)
 ---
 
 ## Instrucciones
-### Tarea 1
+### Tarea 1.
 **Paso 1.** Crea un proyecto Quarkus.
 
 **macOS/Linux/Git Bash:**
@@ -343,7 +343,7 @@ INFO  [io.quarkus] Listening on: http://localhost:8080
 
 ---
 
-### Tarea 2. Probar el microservicio
+### Tarea 2.
 
 ### URL importantes
 
