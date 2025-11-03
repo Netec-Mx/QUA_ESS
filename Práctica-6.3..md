@@ -1,42 +1,42 @@
-# 🔐 Parte 3: Autenticación con OIDC y Keycloak
+# Parte 3. Autenticación con OIDC y Keycloak
 
-## 📖 Descripción
+## Descripción
 
-En esta parte integramos **OpenID Connect (OIDC)** con **Keycloak** como proveedor de identidad externo para autenticar **clientes externos**. A diferencia de las partes anteriores donde nuestra aplicación gestionaba la autenticación, aquí delegamos esta responsabilidad a Keycloak.
+En esta parte, integras **OpenID Connect (OIDC)** con **Keycloak** como proveedor de identidad externo para autenticar **clientes externos**. A diferencia de las partes anteriores donde nuestra aplicación gestionaba la autenticación, aquí delegamos esta responsabilidad a Keycloak.
 
-### 🎯 Objetivos de Aprendizaje
+### Objetivos de aprendizaje
 
-- ✅ Entender qué es OIDC y cómo difiere de JWT propio
-- ✅ Configurar Keycloak como Identity Provider
-- ✅ Implementar autenticación federada
-- ✅ Gestionar usuarios y roles en Keycloak
-- ✅ Validar tokens emitidos por Keycloak en Quarkus
-- ✅ Implementar autorización basada en roles externos
+- ✅ Entender qué es OIDC y cómo difiere del JWT propio.
+- ✅ Configurar Keycloak como identity provider.
+- ✅ Implementar autenticación federada.
+- ✅ Gestionar usuarios y roles en Keycloak.
+- ✅ Validar tokens emitidos por Keycloak en Quarkus.
+- ✅ Implementar autorización basada en roles externos.
 
 ---
 
-## 🆚 Comparativa: Parte 2 (JWT) vs Parte 3 (OIDC)
+## Comparativa: parte 2 (JWT) vs. parte 3 (OIDC)
 
 | Aspecto | Parte 2: JWT Propio | Parte 3: OIDC + Keycloak |
 |---------|---------------------|--------------------------|
-| **Quién emite tokens** | Nuestra aplicación | Keycloak |
-| **Quién gestiona usuarios** | Nuestra aplicación | Keycloak |
-| **Quién gestiona roles** | Nuestra aplicación | Keycloak |
-| **Dónde se almacenan usuarios** | application.properties (mock) | Keycloak (BD propia) |
-| **Firma del token** | Nuestra clave RSA privada | Clave RSA de Keycloak |
-| **Validación del token** | Nuestra clave RSA pública | Clave pública de Keycloak |
-| **SSO entre apps** | No | Sí ✅ |
-| **Federación con otros IdP** | No | Sí ✅ (Google, GitHub, etc.) |
-| **Complejidad inicial** | Baja | Media-Alta |
-| **Uso típico** | APIs internas, empleados | Clientes externos, SaaS |
+| **Quién emite los tokens.** | Nuestra aplicación. | Keycloak. |
+| **Quién gestiona los usuarios.** | Nuestra aplicación. | Keycloak. |
+| **Quién gestiona los roles.** | Nuestra aplicación. | Keycloak. |
+| **Dónde se almacenan los usuarios.** | `application.properties` (mock). | Keycloak (BD propia). |
+| **Firma del token.** | La clave RSA es privada. | La clave RSA de Keycloak. |
+| **Validación del token.** | La clave RSA es pública. | La clave pública de Keycloak. |
+| **SSO entre apps.** | No. | Sí. |
+| **Federación con otros IdP.** | No. | Sí (Google, GitHub, etc.). |
+| **Complejidad inicial.** | Baja. | Media - alta. |
+| **Uso típico.** | APIs internas, empleados. | Clientes externos, SaaS. |
 
 ---
 
-## 🏗️ Arquitectura de la Solución
+## Arquitectura de la solución
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│                    Cliente Externo                         │
+│                    Cliente externo                         │
 │              (Navegador / Aplicación)                      │
 └──────────────────────┬─────────────────────────────────────┘
                        │
@@ -62,7 +62,7 @@ En esta parte integramos **OpenID Connect (OIDC)** con **Keycloak** como proveed
                        │ 4. Keycloak emite Access Token
                        ▼
            ┌───────────────────────┐
-           │   Cliente Externo     │
+           │   Cliente externo     │
            │   (guarda token)      │
            └───────────┬───────────┘
                        │
@@ -78,17 +78,17 @@ En esta parte integramos **OpenID Connect (OIDC)** con **Keycloak** como proveed
 
 ---
 
-## 📋 Requisitos Previos
+## Requisitos previos
 
-### Software Necesario
+### Software necesario
 
 | Herramienta | Versión | Para qué |
 |-------------|---------|----------|
-| **Docker** | 20.10+ | Ejecutar Keycloak |
-| **Java** | 17+ | Quarkus |
-| **Maven** | 3.8+ | Build del proyecto |
-| **curl** | Cualquiera | Pruebas |
-| **Python 3** | 3.6+ | Formatear JSON (opcional) |
+| **Docker** | 20.10+ | Ejecutar Keycloak. |
+| **Java** | 17+ | Quarkus. |
+| **Maven** | 3.8+ | Build del proyecto. |
+| **cURL** | Cualquiera | Pruebas. |
+| **Python 3** | 3.6+ | Formatear JSON (opcional). |
 
 ### Verificar Docker
 
@@ -98,15 +98,15 @@ docker --version
 ```
 
 Si no tienes Docker instalado:
-- **macOS**: `brew install docker` o descargar Docker Desktop
-- **Linux**: Seguir guía oficial de Docker
-- **Windows**: Docker Desktop for Windows
+- **macOS**: `brew install docker` o descargar Docker Desktop.
+- **Linux**: seguir guía oficial de Docker.
+- **Windows**: Docker Desktop for Windows.
 
 ---
 
-## 🚀 Paso 1: Levantar Keycloak con Docker
+## Paso 1. Levantar Keycloak con Docker
 
-### 1.1 Ejecutar el Contenedor
+### 1.1. Ejecutar el contenedor.
 
 ```bash
 docker run -p 8180:8080 \
@@ -118,25 +118,25 @@ docker run -p 8180:8080 \
 ```
 
 **Explicación de los parámetros:**
-- `-p 8180:8080`: Mapea puerto 8180 local → 8080 del contenedor (para no chocar con Quarkus en 8080)
-- `-e KEYCLOAK_ADMIN=admin`: Usuario admin de Keycloak
-- `-e KEYCLOAK_ADMIN_PASSWORD=admin`: Contraseña del admin
-- `--name keycloak-vaultcorp`: Nombre del contenedor
-- `start-dev`: Modo desarrollo (NO usar en producción)
+- `-p 8180:8080`: mapea del puerto 8180 local a el 8080 del contenedor (para no chocar con Quarkus en 8080).
+- `-e KEYCLOAK_ADMIN=admin`: usuario admin de Keycloak.
+- `-e KEYCLOAK_ADMIN_PASSWORD=admin`: contraseña del admin.
+- `--name keycloak-vaultcorp`: nombre del contenedor.
+- `start-dev`: modo desarrollo (**no** usar en producción).
 
-### 1.2 Verificar que está Corriendo
+### 1.2. Verificar que está corriendo.
 
-Espera 1-2 minutos y verifica en los logs:
+Espera de 1 a 2 minutos y verifica en los logs:
 
 ```
 Keycloak 23.0.0 on JVM started in 7.621s. Listening on: http://0.0.0.0:8080
 ```
 
-Abre el navegador en: `http://localhost:8180`
+Abre el navegador en: `http://localhost:8180`.
 
 Deberías ver la página de bienvenida de Keycloak.
 
-### 1.3 Comandos Útiles de Docker
+### 1.3. Comandos útiles de Docker.
 
 ```bash
 # Ver contenedores corriendo
@@ -151,127 +151,127 @@ docker stop keycloak-vaultcorp
 # Iniciar Keycloak nuevamente
 docker start keycloak-vaultcorp
 
-# Eliminar el contenedor (⚠️ borra toda la configuración)
+# Eliminar el contenedor (borra toda la configuración)
 docker rm keycloak-vaultcorp
 ```
 
 ---
 
-## ⚙️ Paso 2: Configurar Keycloak
+## Paso 2. Configurar Keycloak
 
-### 2.1 Acceder a la Consola de Administración
+### 2.1. Acceder a la consola de administración.
 
-1. Navega a: `http://localhost:8180`
-2. Click en **"Administration Console"**
+1. Navega a: `http://localhost:8180`.
+2. Da click en **"Administration Console".**
 3. Login:
-   - **Usuario**: `admin`
-   - **Password**: `admin`
+   - **Usuario**: `admin`.
+   - **Password**: `admin`.
 
-### 2.2 Crear un Realm
+### 2.2. Crear un Realm.
 
 Un **Realm** es un espacio aislado para gestionar usuarios, clientes y roles.
 
-1. En la esquina superior izquierda, click en **"master"** (dropdown)
-2. Click en **"Create realm"**
-3. **Realm name**: `vaultcorp`
-4. Click **"Create"**
+1. En la esquina superior izquierda, da click en **"master"** (dropdown).
+2. Da click en **"Create realm".**
+3. **Realm name**: `vaultcorp`.
+4. Da click **"Create".**
 
-✅ Ahora estás en el realm `vaultcorp`
+Ahora estás en el realm `vaultcorp`.
 
-### 2.3 Crear un Client (Nuestra App)
+### 2.3. Crear un Client (nuestra app).
 
 Un **Client** representa una aplicación que puede solicitar autenticación.
 
-1. En el menú lateral izquierdo: **Clients**
-2. Click **"Create client"**
+1. Ubícate en el menú lateral izquierdo: **Clients**.
+2. Da click en **"Create client"**.
 
 **Pantalla 1: General Settings**
-- **Client type**: `OpenID Connect` ✅
-- **Client ID**: `vault-api`
-- **Name**: `VaultCorp API`
-- **Description**: (opcional) "API de gestión de secretos"
-- Click **"Next"**
+- **Client type**: `OpenID Connect` ✅.
+- **Client ID**: `vault-api`.
+- **Name**: `VaultCorp API`.
+- **Description**: (opcional) "API de gestión de secretos".
+- Da click en **"Next"**.
 
 **Pantalla 2: Capability config**
-- **Client authentication**: `On` ✅
-- **Authorization**: `Off`
+- **Client authentication**: `On` ✅.
+- **Authorization**: `Off`.
 - **Authentication flow**:
-  - ✅ Standard flow
-  - ✅ Direct access grants
-- Click **"Next"**
+  - ✅ Standard flow.
+  - ✅ Direct access grants.
+- Da click en **"Next"**.
 
 **Pantalla 3: Login settings**
-- **Root URL**: `http://localhost:8080`
-- **Home URL**: `http://localhost:8080`
-- **Valid redirect URIs**: `http://localhost:8080/*`
-- **Valid post logout redirect URIs**: `http://localhost:8080/*`
-- **Web origins**: `http://localhost:8080`
-- Click **"Save"**
+- **Root URL**: `http://localhost:8080`.
+- **Home URL**: `http://localhost:8080`.
+- **Valid redirect URIs**: `http://localhost:8080/*`.
+- **Valid post logout redirect URIs**: `http://localhost:8080/*`.
+- **Web origins**: `http://localhost:8080`.
+- Da click en **"Save"**.
 
-### 2.4 Obtener el Client Secret
+### 2.4. Obtener el client cecret.
 
-1. En la página del client `vault-api`, click en la pestaña **"Credentials"**
-2. Copia el valor de **"Client secret"**
-3. **⚠️ IMPORTANTE**: Guárdalo en un lugar seguro, lo necesitarás después
+1. En la página del client `vault-api`, da click en la pestaña **"Credentials"**.
+2. Copia el valor de **"Client secret"**.
+3. **⚠️ Importante**: guárdalo en un lugar seguro, lo necesitarás después.
 
-Ejemplo: `3dQoUzQ7Y4TQ7eknNNxeDbWiAmMjPpVn`
+**Ejemplo**: `3dQoUzQ7Y4TQ7eknNNxeDbWiAmMjPpVn`
 
-### 2.5 Crear Roles
+### 2.5. Crear roles.
 
 Los **Realm Roles** definen permisos a nivel de realm.
 
-1. En el menú lateral: **Realm roles**
-2. Click **"Create role"**
+1. Ubícate en el menú lateral: **Realm roles**.
+2. Da click en **"Create role"**.
 
 **Rol 1: customer**
-- **Role name**: `customer`
-- **Description**: "Cliente básico"
-- Click **"Save"**
+- **Role name**: `customer`.
+- **Description**: "cliente básico".
+- Da click en **"Save"**.
 
 **Rol 2: premium-customer**
-- Click **"Create role"** nuevamente
-- **Role name**: `premium-customer`
-- **Description**: "Cliente premium"
-- Click **"Save"**
+- Da click en **"Create role"** nuevamente.
+- **Role name**: `premium-customer`.
+- **Description**: "cliente premium".
+- Da click en **"Save"**.
 
-### 2.6 Crear Usuarios
+### 2.6. Crear usuarios.
 
-1. En el menú lateral: **Users**
-2. Click **"Create new user"**
+1. Ubícate el menú lateral: **Users**.
+2. Da click en **"Create new user"**.
 
-**Usuario 1: Cliente Básico**
-- **Username**: `client001`
-- **Email**: `cliente1@empresa.com`
-- **First name**: `Carlos`
-- **Last name**: `Gómez`
-- **Email verified**: `On` ✅
-- **Required user actions**: (dejar vacío)
-- Click **"Create"**
+**Usuario 1: cliente básico**
+- **Username**: `client001`.
+- **Email**: `cliente1@empresa.com`.
+- **First name**: `Carlos`.
+- **Last name**: `Gómez`.
+- **Email verified**: `On` ✅.
+- **Required user actions**: (dejar vacío).
+- Da click en **"Create"**.
 
-Ahora asignar contraseña:
-- Click en pestaña **"Credentials"**
-- Click **"Set password"**
-- **Password**: `pass001`
-- **Password confirmation**: `pass001`
-- **Temporary**: `Off` ✅
-- Click **"Save"** y confirmar
+Ahora asigna una contraseña:
+- Da click en la pestaña **"Credentials"**.
+- Da click en **"Set password"**.
+- **Password**: `pass001`.
+- **Password confirmation**: `pass001`.
+- **Temporary**: `Off` ✅.
+- Da click en **"Save"** y confirma.
 
-Ahora asignar rol:
-- Click en pestaña **"Role mapping"**
-- Click **"Assign role"**
-- Seleccionar **`customer`**
-- Click **"Assign"**
+Ahora asigna el rol:
+- Da click en la pestaña **"Role mapping"**.
+- Da click en **"Assign role"**.
+- Selecciona **`customer`**.
+- Da click en **"Assign"**.
 
-**Usuario 2: Cliente Premium**
+**Usuario 2: cliente premium**
 - Repetir los pasos anteriores con:
-  - **Username**: `client002`
-  - **Email**: `cliente2@empresa.com`
-  - **First name**: `María`
-  - **Last name**: `López`
-  - **Password**: `pass002`
-  - **Rol**: `premium-customer`
+  - **Username**: `client002`.
+  - **Email**: `cliente2@empresa.com`.
+  - **First name**: `María`.
+  - **Last name**: `López`.
+  - **Password**: `pass002`.
+  - **Rol**: `premium-customer`.
 
-✅ **Resumen de Usuarios Creados:**
+✅ **Resumen de usuarios creados:**
 
 | Username | Password | Email | Rol |
 |----------|----------|-------|-----|
@@ -280,9 +280,9 @@ Ahora asignar rol:
 
 ---
 
-## 🔧 Paso 3: Configurar Quarkus
+## Paso 3. Configurar Quarkus
 
-### 3.1 Habilitar OIDC en application.properties
+### 3.1. Habilitar OIDC en `application.properties`.
 
 Edita `src/main/resources/application.properties` y agrega al final:
 
@@ -296,20 +296,20 @@ quarkus.oidc.tls.verification=none
 quarkus.oidc.application-type=service
 ```
 
-**⚠️ IMPORTANTE**: Reemplaza `TU-CLIENT-SECRET-AQUI` con el client secret que copiaste en el paso 2.4
+**⚠️ Importante**: reemplaza `TU-CLIENT-SECRET-AQUI` con el client secret que copiaste en el paso 2.4.
 
 **Explicación de las propiedades:**
 
 | Propiedad | Descripción |
 |-----------|-------------|
-| `quarkus.oidc.enabled` | Habilita OIDC (true) |
-| `quarkus.oidc.auth-server-url` | URL del realm de Keycloak |
-| `quarkus.oidc.client-id` | ID del client creado en Keycloak |
-| `quarkus.oidc.credentials.secret` | Client secret de Keycloak |
-| `quarkus.oidc.tls.verification` | Desactivar verificación SSL en dev |
-| `quarkus.oidc.application-type` | Tipo: service (API backend) |
+| `quarkus.oidc.enabled` | Habilita OIDC (true). |
+| `quarkus.oidc.auth-server-url` | URL del realm de Keycloak. |
+| `quarkus.oidc.client-id` | ID del client creado en Keycloak. |
+| `quarkus.oidc.credentials.secret` | Client secret de Keycloak. |
+| `quarkus.oidc.tls.verification` | Desactivar verificación SSL en dev. |
+| `quarkus.oidc.application-type` | Tipo: service (API backend). |
 
-### 3.2 Verificar Configuración Completa
+### 3.2. Verificar la configuración completa.
 
 Tu `application.properties` debería tener las 3 partes:
 
@@ -332,9 +332,9 @@ quarkus.oidc.auth-server-url=http://localhost:8180/realms/vaultcorp
 
 ---
 
-## 💻 Paso 4: Crear Endpoints Externos
+## Paso 4. Crear endpoints externos
 
-### 4.1 Actualizar Roles.java
+### 4.1. Actualizar `Roles.java`.
 
 Agrega los nuevos roles de clientes:
 
@@ -357,7 +357,7 @@ public class Roles {
 }
 ```
 
-### 4.2 Crear ExternalSecretResource.java
+### 4.2. Crear `ExternalSecretResource.java`.
 
 Crea `src/main/java/com/vaultcorp/resource/ExternalSecretResource.java`:
 
@@ -434,9 +434,9 @@ public class ExternalSecretResource {
 }
 ```
 
-### 4.3 Actualizar SecretService.java
+### 4.3. Actualizar `SecretService.java`.
 
-Agrega datos de prueba con niveles PUBLIC y CONFIDENTIAL:
+Agrega datos de prueba con niveles `PUBLIC` y `CONFIDENTIAL`:
 
 ```java
 private void initializeMockData() {
@@ -490,9 +490,9 @@ private void initializeMockData() {
 
 ---
 
-## 🧪 Paso 5: Probar la Integración
+## Paso 5. Probar la integración
 
-### 5.1 Levantar la Aplicación
+### 5.1. Levantar la aplicación.
 
 ```bash
 ./mvnw quarkus:dev
@@ -500,7 +500,7 @@ private void initializeMockData() {
 
 Verifica que no haya errores de configuración.
 
-### 5.2 Obtener Access Token de Keycloak
+### 5.2. Obtener "Access Token" de Keycloak.
 
 **Para cliente básico (customer):**
 
@@ -538,7 +538,7 @@ TOKEN=$(curl -s -X POST http://localhost:8180/realms/vaultcorp/protocol/openid-c
   | grep -o '"access_token":"[^"]*"' | cut -d'"' -f4)
 ```
 
-### 5.3 Probar Endpoints
+### 5.3. Probar endpoints.
 
 **Ver perfil:**
 ```bash
@@ -559,9 +559,9 @@ curl -i http://localhost:8080/api/external/secrets/confidential \
 # HTTP/1.1 403 Forbidden
 ```
 
-### 5.4 Ejecutar Script de Pruebas Automatizado
+### 5.4. Ejecutar script de pruebas automatizado.
 
-**IMPORTANTE**: Primero edita el script y agrega tu client secret:
+**Importante**: primero edita el script y agrega tu client secret.
 
 ```bash
 nano test-part3-oidc.sh
@@ -572,7 +572,7 @@ Busca y modifica:
 CLIENT_SECRET="TU-CLIENT-SECRET-AQUI"
 ```
 
-Por tu secret real.
+Pon tu secret real.
 
 Luego ejecuta:
 
@@ -583,13 +583,13 @@ chmod +x test-part3-oidc.sh
 
 ---
 
-## 📊 API Reference - Endpoints Parte 3
+## API Reference. Endpoints Parte 3.
 
 | Método | Ruta | Rol Requerido | Descripción |
 |--------|------|---------------|-------------|
-| `GET` | `/api/external/secrets/profile` | `customer`, `premium-customer` | Ver perfil del usuario |
-| `GET` | `/api/external/secrets/public` | `customer`, `premium-customer` | Listar secretos PUBLIC |
-| `GET` | `/api/external/secrets/confidential` | `premium-customer` | Listar secretos CONFIDENTIAL |
+| `GET` | `/api/external/secrets/profile` | `customer`, `premium-customer` | Ver perfil del usuario. |
+| `GET` | `/api/external/secrets/public` | `customer`, `premium-customer` | Listar secretos `PUBLIC`. |
+| `GET` | `/api/external/secrets/confidential` | `premium-customer` | Listar secretos `CONFIDENTIAL`. |
 
 **Headers necesarios:**
 ```
@@ -598,13 +598,13 @@ Authorization: Bearer <access-token-de-keycloak>
 
 ---
 
-## 💾 Persistir Configuración de Keycloak
+## Persistir configuración de Keycloak
 
-### Problema
+### ❌ Problema
 
 Al usar `start-dev`, Keycloak usa una base de datos H2 **en memoria**. Si detienes el contenedor, **se pierde toda la configuración**.
 
-### Solución 1: Exportar/Importar Configuración
+### Solución 1. Exportar/importar configuración.
 
 **Exportar:**
 
@@ -628,7 +628,7 @@ docker run -p 8180:8080 \
   start-dev --import-realm
 ```
 
-### Solución 2: Usar PostgreSQL (Producción)
+### Solución 2. Usar PostgreSQL (producción).
 
 **docker-compose.yml:**
 
@@ -680,9 +680,9 @@ docker-compose down
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
-### Problema: "Connection refused" al conectar con Keycloak
+### ❌ Problema: "Connection refused" al conectar con Keycloak.
 
 **Causa:** Keycloak no está corriendo.
 
@@ -693,10 +693,10 @@ docker ps
 docker start keycloak-vaultcorp
 ```
 
-### Problema: "401 Unauthorized" al usar token
+### ❌ Problema: "401 Unauthorized" al usar token.
 
 **Verificar:**
-1. ¿El token expiró? Los tokens OIDC expiran en 5 minutos (300s)
+1. ¿El token expiró? Los tokens OIDC expiran en 5 minutos (300s).
 2. ¿Copiaste bien el `client_secret` en `application.properties`?
 3. ¿La URL de Keycloak es correcta?
 
@@ -705,15 +705,15 @@ docker start keycloak-vaultcorp
 # Repetir el curl de obtención de token
 ```
 
-### Problema: "403 Forbidden" con cliente básico
+### ❌ Problema: "403 Forbidden" con cliente básico.
 
-**¡Eso es correcto!** El cliente básico (`customer`) NO puede acceder a secretos CONFIDENTIAL.
+**¡Eso es correcto!** El cliente básico (`customer`) **no** puede acceder a secretos `CONFIDENTIAL`.
 
-### Problema: Keycloak reinicia y pierdo la configuración
+### ❌ Problema: Keycloak reinicia y pierdo la configuración.
 
 **Solución:** Usa Docker Compose con PostgreSQL (ver sección "Persistir Configuración").
 
-### Problema: Puerto 8180 ya en uso
+### ❌ Problema: Puerto 8180 ya en uso.
 
 **Solución:**
 ```bash
@@ -728,59 +728,59 @@ quarkus.oidc.auth-server-url=http://localhost:8280/realms/vaultcorp
 
 ---
 
-## 🎓 Conceptos Clave
+## Conceptos clave
 
 ### ¿Qué es OIDC?
 
 **OpenID Connect (OIDC)** es un protocolo de autenticación construido sobre OAuth 2.0. Permite que las aplicaciones deleguen la autenticación a un **Identity Provider** (IdP) como Keycloak.
 
-### Flujo OIDC Simplificado
+### Flujo OIDC simplificado.
 
 ```
-1. Usuario → App: "Quiero acceder"
-2. App → Keycloak: "Autentica a este usuario"
-3. Usuario → Keycloak: Ingresa credenciales
-4. Keycloak → App: "Aquí está el token, está autenticado"
-5. App: Valida token y autoriza acceso
+1. Usuario → App: "quiero acceder".
+2. App → Keycloak: "autentica a este usuario".
+3. Usuario → Keycloak: ingresa credenciales.
+4. Keycloak → App: "aquí está el token, está autenticado".
+5. App: valida token y autoriza el acceso.
 ```
 
 ### Componentes OIDC
 
 | Componente | Descripción | En este ejercicio |
 |------------|-------------|-------------------|
-| **Identity Provider (IdP)** | Servicio que autentica usuarios | Keycloak |
-| **Relying Party (RP)** | Aplicación que confía en el IdP | Nuestra app Quarkus |
-| **Access Token** | Token JWT para acceder a recursos | Emitido por Keycloak |
-| **ID Token** | Token con info del usuario | Emitido por Keycloak |
-| **Realm** | Espacio aislado de usuarios/roles | `vaultcorp` |
-| **Client** | Aplicación registrada en el IdP | `vault-api` |
+| **Identity Provider (IdP)** | Servicio que autentica usuarios. | Keycloak. |
+| **Relying Party (RP)** | Aplicación que confía en el IdP. | Tu app Quarkus. |
+| **Access Token** | Token JWT para acceder a recursos. | Emitido por Keycloak. |
+| **ID Token** | Token con info del usuario. | Emitido por Keycloak. |
+| **Realm** | Espacio aislado de usuarios/roles. | `vaultcorp`. |
+| **Client** | Aplicación registrada en el IdP. | `vault-api`. |
 
 ### Ventajas de OIDC
 
-- ✅ **Single Sign-On (SSO)**: Un login para múltiples apps
-- ✅ **Federación**: Integración con Google, GitHub, etc.
-- ✅ **Centralización**: Gestión de usuarios en un solo lugar
-- ✅ **Seguridad**: Identity Provider especializado
-- ✅ **Escalabilidad**: Separación de responsabilidades
+- ✅ **Single Sign-On (SSO)**: un login para múltiples apps.
+- ✅ **Federación**: integración con Google, GitHub, etc.
+- ✅ **Centralización**: gestión de usuarios en un solo lugar.
+- ✅ **Seguridad**: identity provider especializado.
+- ✅ **Escalabilidad**: separación de responsabilidades.
 
 ### Desventajas de OIDC
 
-- ❌ **Dependencia externa**: Requiere IdP corriendo
-- ❌ **Complejidad**: Más componentes que gestionar
-- ❌ **Latencia**: Validación de tokens contra Keycloak
-- ❌ **Setup inicial**: Configuración más compleja
+- ❌ **Dependencia externa**: requiere IdP corriendo.
+- ❌ **Complejidad**: más componentes que gestionar.
+- ❌ **Latencia**: validación de tokens contra Keycloak.
+- ❌ **Setup inicial**: configuración más compleja.
 
 ---
 
-## 📚 Comparativa Final: Parte 1 vs 2 vs 3
+## Comparativa final. Parte 1 vs. 2 vs. 3
 
 | Aspecto | Parte 1 (Basic Auth) | Parte 2 (JWT) | Parte 3 (OIDC) |
 |---------|----------------------|---------------|----------------|
 | **Usuarios** | Admins/Auditores | Empleados | Clientes externos |
 | **Endpoints** | `/api/admin/*` | `/api/internal/*` | `/api/external/*` |
 | **Método** | Credenciales en cada request | Token JWT propio | Token OIDC de Keycloak |
-| **Gestión usuarios** | application.properties | Endpoint /login | Keycloak |
-| **Gestión roles** | application.properties | Código Java | Keycloak |
+| **Gestión de usuarios** | application.properties | Endpoint /login | Keycloak |
+| **Gestión de roles** | application.properties | Código Java | Keycloak |
 | **Expiración** | No | Sí (1 hora) | Sí (5 minutos) |
 | **SSO** | No | No | Sí ✅ |
 | **Complejidad** | Baja | Media | Alta |
@@ -788,52 +788,50 @@ quarkus.oidc.auth-server-url=http://localhost:8280/realms/vaultcorp
 
 ---
 
-## ✅ Checklist de Verificación
+## ✅ Checklist de verificación
 
-Antes de dar por completada la Parte 3:
-
-- [ ] Keycloak está corriendo en Docker
-- [ ] Realm `vaultcorp` creado
-- [ ] Client `vault-api` configurado con client secret
-- [ ] Roles `customer` y `premium-customer` creados
-- [ ] Usuarios `client001` y `client002` creados con contraseñas
-- [ ] Roles asignados a usuarios correctamente
-- [ ] `application.properties` tiene configuración OIDC completa
-- [ ] `ExternalSecretResource.java` creado
-- [ ] Cliente básico puede ver secretos PUBLIC
-- [ ] Cliente básico NO puede ver secretos CONFIDENTIAL (403)
-- [ ] Cliente premium SÍ puede ver secretos CONFIDENTIAL
-- [ ] Script `test-part3-oidc.sh` ejecuta sin errores
+- [ ] Keycloak está corriendo en Docker.
+- [ ] Realm `vaultcorp` creado.
+- [ ] Client `vault-api` configurado con client secret.
+- [ ] Roles `customer` y `premium-customer` creados.
+- [ ] Usuarios `client001` y `client002` creados con contraseñas.
+- [ ] Roles asignados a usuarios correctamente.
+- [ ] `application.properties` tiene configuración OIDC completa.
+- [ ] `ExternalSecretResource.java` creado.
+- [ ] Cliente básico puede ver secretos `PUBLIC`.
+- [ ] Cliente básico **no** puede ver secretos `CONFIDENTIAL` (403).
+- [ ] Cliente premium **sí** puede ver secretos `CONFIDENTIAL`.
+- [ ] Script `test-part3-oidc.sh` ejecuta sin errores.
 
 ---
 
-## 🚀 Próximos Pasos (Opcional)
+## Próximos pasos (opcional)
 
-### Mejoras Avanzadas
+### Mejoras avanzadas.
 
-1. **Integración con Google/GitHub**
-   - Configurar Identity Providers en Keycloak
-   - Permitir login social
+1. **Integración con Google/GitHub**.
+   - Configurar Identity Providers en Keycloak.
+   - Permitir login social.
 
-2. **Multi-tenancy con Organizations**
-   - Usar claim `organization` en tokens
-   - Filtrar secretos por organización
+2. **Multi-tenancy con Organizations**.
+   - Usar claim `organization` en tokens.
+   - Filtrar secretos por organización.
 
-3. **Refresh Tokens**
-   - Implementar renovación automática de tokens
-   - Mejor experiencia de usuario
+3. **Refresh Tokens**.
+   - Implementar renovación automática de tokens.
+   - Mejorar la experiencia del usuario.
 
-4. **Logout funcional**
-   - Endpoint de logout que invalida tokens en Keycloak
-   - Blacklist de tokens revocados
+4. **Logout funcional**.
+   - Endpoint de logout que invalida tokens en Keycloak.
+   - Blacklist de tokens revocados.
 
-5. **Admin UI con React**
-   - Interfaz gráfica para gestionar secretos
-   - Login con Keycloak desde navegador
+5. **Admin UI con React**.
+   - Interfaz gráfica para gestionar secretos.
+   - Login con Keycloak desde navegador.
 
 ---
 
-## 📖 Recursos Adicionales
+## Recursos adicionales
 
 - [Keycloak Documentation](https://www.keycloak.org/documentation)
 - [Quarkus OIDC Guide](https://quarkus.io/guides/security-oidc-bearer-token-authentication)
@@ -841,37 +839,3 @@ Antes de dar por completada la Parte 3:
 - [OAuth 2.0 RFC 6749](https://tools.ietf.org/html/rfc6749)
 
 ---
-
-## 📝 Notas para el Instructor
-
-### Preparación de la Clase
-
-**Antes de la clase:**
-1. Levantar Keycloak en tu máquina
-2. Configurar ngrok: `ngrok http 8180`
-3. Compartir URL de ngrok con alumnos
-4. Tener configuración de Keycloak exportada como backup
-
-**Durante la clase:**
-- Mostrar demo en vivo del flujo OIDC
-- Explicar diferencias con JWT propio
-- Enfatizar cuándo usar cada método
-- Resolver dudas sobre Keycloak
-
-**Después de la clase:**
-- Compartir export de configuración de Keycloak
-- Enviar guía de instalación de Docker
-- Dar tiempo para que repliquen en casa
-
-### Tiempos Estimados
-
-- Setup Keycloak: 10 min
-- Configurar Realm/Client/Roles/Usuarios: 15 min
-- Configurar Quarkus: 5 min
-- Crear endpoints: 15 min
-- Pruebas: 10 min
-- Discusión: 10 min
-
-**Total:** ~65 minutos
-
---
