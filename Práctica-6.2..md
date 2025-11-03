@@ -511,6 +511,6 @@ Antes de pasar a la parte 3, asegúrate de haber logrado:
 
 1. **JWT no es encriptación, es codificación**: cualquiera puede decodificar el payload con Base64.
 2. **La firma es lo que garantiza la integridad**: sin la clave privada, no se puede crear un token válido.
-3. **Stateless = escalabilidad**: Es perfecto para microservicios distribuidos.
+3. **Stateless = escalabilidad**: es perfecto para microservicios distribuidos.
 4. **La expiración es crítica**: los tokens **deben** tener tiempo de vida limitado.
 5. **Aislamiento por diseño**: el backend debe **siempre** filtrar por el usuario del token
