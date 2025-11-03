@@ -711,7 +711,7 @@ docker start keycloak-vaultcorp
 
 ### ❌ Problema: Keycloak reinicia y pierdo la configuración.
 
-**Solución:** Usa Docker Compose con PostgreSQL (ver sección "Persistir Configuración").
+**Solución:** usa Docker Compose con PostgreSQL (ver sección "Persistir Configuración").
 
 ### ❌ Problema: Puerto 8180 ya en uso.
 
