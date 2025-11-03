@@ -1,6 +1,6 @@
 # TasaCorp API, parte 1. Externalización de configuraciones
 
-## Capítulo 7. Configuración y perfiles en Quarkus (30 minutos).
+## Capítulo 7. Configuración y perfiles en Quarkus.
 
 ---
 
@@ -318,7 +318,7 @@ MAYOR PRIORIDAD
 MENOR PRIORIDAD
 ```
 
-**Regla de oro:** "El que está más arriba, gana". Si una propiedad se define en múltiples lugares, prevalece la de mayor prioridad.
+**Regla de oro:** "el que está más arriba, gana". Si una propiedad se define en múltiples lugares, prevalece la de mayor prioridad.
 
 ---
 
@@ -403,10 +403,10 @@ curl http://localhost:8080/api/tasas/config | jq
 }
 ```
 
-> **La comisión cambió de 2.5% → 9.99%**  
+> **La comisión cambió de 2.5 % → 9.99 %**  
 > 💡 **ENV > properties**
 
-### Mapeo de propiedades a variables de entorno
+### Mapeo de propiedades a variables de entorno.
 
 Quarkus convierte automáticamente las propiedades:
 
@@ -529,7 +529,7 @@ public class Service {
 }
 ```
 
-### ✅ Prioridades de carga.
+### Prioridades de carga
 
 ```
 System Properties (-D)    ← MÁXIMA PRIORIDAD
@@ -543,7 +543,7 @@ application.yaml
 Valores por defecto       ← MÍNIMA PRIORIDAD
 ```
 
-### ✅ Casos de uso
+### Casos de uso
 
 | Escenario | Mecanismo | Ejemplo |
 |-----------|-----------|---------|
@@ -584,9 +584,9 @@ $env:TASACORP_DAILY_LIMIT="500000"
 TASACORP_DAILY_LIMIT=500000 ./mvnw quarkus:dev
 ```
 
-### Ejercicio 2: Configuración Compleja con YAML
+### Ejercicio 2. Configuración Compleja con YAML.
 
-**Objetivo:** Agregar configuración de múltiples proveedores.
+**Objetivo:** agregar configuración de múltiples proveedores.
 
 En `application.yaml`:
 ```yaml
@@ -619,9 +619,9 @@ public interface ProvidersConfig {
 
 ---
 
-## 🚨 Problemas Comunes
+## Problemas comunes
 
-### ❌ Error: "Property not found"
+### ❌ Error: "Property not found".
 
 **Síntoma:**
 ```
@@ -630,11 +630,11 @@ but it could not be found in any config source
 ```
 
 **Solución:**
-1. Verificar que la propiedad existe en `application.properties`
-2. Verificar la ortografía exacta
-3. Asegurarse de que el archivo está en `src/main/resources/`
+1. Verificar que la propiedad existe en `application.properties`.
+2. Verificar la ortografía exacta.
+3. Asegurarse de que el archivo está en `src/main/resources/`.
 
-### ❌ Error: "Cannot convert value"
+### ❌ Error: "Cannot convert value".
 
 **Síntoma:**
 ```
@@ -642,11 +642,11 @@ SRCFG00040: Failed to convert "abc" to Integer
 ```
 
 **Solución:**
-- Verificar que el valor sea del tipo correcto
-- Para números: `tasacorp.limit=1000` (sin comillas)
-- Para strings: `app.name=TasaCorp API`
+- Verificar que el valor sea del tipo correcto.
+- Para números: `tasacorp.limit=1000`.
+- Para strings: `app.name=TasaCorp API`.
 
-### ❌ Variables de entorno no funcionan
+### ❌ Variables de entorno no funcionan.
 
 **En Windows PowerShell:**
 ```powershell
@@ -669,22 +669,22 @@ TASACORP_RATE=5.0 ./mvnw quarkus:dev
 
 ---
 
-## ✅ Checklist de Verificación
+## ✅ Checklist de verificación
 
-Antes de continuar a la PARTE 2, asegúrate de:
+Antes de continuar a la parte 2, asegúrate de que:
 
-- [ ] El proyecto compila sin errores
-- [ ] La aplicación arranca en modo dev
-- [ ] Puedes consultar `/api/tasas/config`
-- [ ] Entiendes la diferencia entre properties y yaml
-- [ ] Puedes sobrescribir valores con ENV vars
-- [ ] Entiendes las prioridades de carga
-- [ ] Sabes usar @ConfigProperty y @ConfigMapping
-- [ ] Probaste las 3 pruebas de prioridades
+- [ ] El proyecto compila sin errores.
+- [ ] La aplicación arranca en modo dev.
+- [ ] Puedes consultar `/api/tasas/config`.
+- [ ] Entiendes la diferencia entre properties y yaml.
+- [ ] Puedes sobrescribir valores con ENV vars.
+- [ ] Entiendes las prioridades de carga.
+- [ ] Sabes usar `@ConfigProperty` y `@ConfigMapping`.
+- [ ] Probaste las 3 pruebas de prioridades.
 
 ---
 
-## 📖 Recursos Adicionales
+## Recursos adicionales
 
 - [Quarkus Configuration Guide](https://quarkus.io/guides/config)
 - [MicroProfile Config Specification](https://github.com/eclipse/microprofile-config)
@@ -692,6 +692,8 @@ Antes de continuar a la PARTE 2, asegúrate de:
 
 ---
 
-## ➡️ Siguiente Paso
+## Siguiente paso
 
-Continúa con: **[README-PARTE2.md](README-PARTE2.md)** - Perfiles de Entorno y Configuración Sensible
+Continúa con: **[README-PARTE2.md](README-PARTE2.md)** - Perfiles de entorno y configuración sensible
+
+---
