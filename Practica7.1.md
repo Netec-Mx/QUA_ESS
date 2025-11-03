@@ -1,10 +1,10 @@
-# 🏦 TasaCorp API - PARTE 1: Externalización de Configuraciones
+# TasaCorp API, parte 1. Externalización de configuraciones
 
-## Capítulo 7: Configuración y Perfiles en Quarkus (30 minutos)
+## Capítulo 7. Configuración y perfiles en Quarkus (30 minutos).
 
 ---
 
-## 📋 Índice
+## Índice
 
 1. [Objetivo de Aprendizaje](#objetivo-de-aprendizaje)
 2. [Requisitos Previos](#requisitos-previos)
@@ -19,20 +19,20 @@
 
 ---
 
-## 🎯 Objetivo de Aprendizaje
+## Objetivos de aprendizaje
 
-Al finalizar esta parte, podrás:
+Al finalizar este apartado, podrás:
 
-✅ Externalizar configuraciones fuera del código fuente  
-✅ Usar `application.properties` y `application.yaml`  
-✅ Inyectar configuraciones con `@ConfigProperty` y `@ConfigMapping`  
-✅ Entender las **prioridades de carga** en Quarkus  
-✅ Sobrescribir configuraciones con variables de entorno  
-✅ Usar System Properties para configuración dinámica  
+✅ Externalizar configuraciones fuera del código fuente.   
+✅ Usar `application.properties` y `application.yaml`.   
+✅ Inyectar configuraciones con `@ConfigProperty` y `@ConfigMapping`.   
+✅ Entender las **prioridades de carga** en Quarkus.   
+✅ Sobrescribir configuraciones con variables de entorno.      
+✅ Usar System Properties para configuración dinámica.
 
 ---
 
-## 📦 Requisitos Previos
+## Requisitos previos
 
 ### Windows
 ```powershell
@@ -60,7 +60,7 @@ quarkus version
 
 ---
 
-## 🚀 Creación del Proyecto
+## Creación del proyecto
 
 ### Windows
 ```powershell
@@ -88,7 +88,7 @@ cd tasacorp-api
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 
 ### Windows
 ```powershell
@@ -119,11 +119,11 @@ src/main/java/pe/banco/tasacorp/
 
 ---
 
-## ⚙️ Configuración con application.properties
+## Configuración con `application.properties`
 
 Quarkus utiliza `application.properties` como archivo principal de configuración.
 
-**Ubicación:** `src/main/resources/application.properties`
+**Ubicación:** `src/main/resources/application.properties`.
 
 **Contenido básico:**
 
@@ -158,20 +158,20 @@ quarkus.http.port=8080
 quarkus.log.level=INFO
 ```
 
-### 📌 Conceptos Clave
+### Conceptos clave
 
-**1. Propiedades Simples:**
+**1. Propiedades simples.**
 ```properties
 app.name=TasaCorp API
 ```
 
-**2. Propiedades Jerárquicas:**
+**2. Propiedades jerárquicas.**
 ```properties
 tasacorp.currency.base=PEN
 tasacorp.currency.supported=USD,EUR,MXN
 ```
 
-**3. Propiedades de Quarkus:**
+**3. Propiedades de Quarkus.**
 ```properties
 quarkus.http.port=8080
 quarkus.log.level=INFO
@@ -179,7 +179,7 @@ quarkus.log.level=INFO
 
 ---
 
-## 📝 Configuración con application.yaml
+## Configuración con `application.yaml`
 
 YAML es una alternativa más legible para configuraciones complejas.
 
@@ -213,23 +213,23 @@ tasacorp:
     audit-enabled: true
 ```
 
-### ⚖️ Properties vs YAML
+### Properties vs. YAML
 
 | Característica | properties | yaml |
 |---------------|-----------|------|
-| **Sintaxis** | Plana | Jerárquica |
-| **Legibilidad** | Básica | Excelente |
-| **Listas** | Separadas por coma | Nativas |
+| **Sintaxis** | Plana. | Jerárquica. |
+| **Legibilidad** | Básica. | Excelente. |
+| **Listas** | Separadas por coma. | Nativas. |
 | **Comentarios** | `#` | `#` |
-| **Recomendado para** | Configs simples | Configs complejas |
+| **Recomendado para** | Configs simples. | Configs complejas. |
 
 ---
 
-## 💉 Inyección de Configuraciones
+## Inyección de configuraciones
 
 Quarkus ofrece dos formas principales de inyectar configuraciones.
 
-### 1️⃣ @ConfigProperty (Propiedades Individuales)
+### 1️. `@ConfigProperty` (propiedades individuales).
 
 **Uso simple en clases:**
 
@@ -252,7 +252,7 @@ public class TasaService {
 }
 ```
 
-### 2️⃣ @ConfigMapping (Mapeo de Objetos)
+### 2️. `@ConfigMapping` (mapeo de objetos).
 
 **Para configuraciones complejas:**
 
@@ -302,31 +302,29 @@ public class TasaService {
 
 ---
 
-## 📊 Prioridades de Carga
+## Prioridades de carga
 
-Quarkus sigue una jerarquía de prioridades para cargar configuraciones:
+Quarkus sigue una jerarquía de prioridades para cargar configuraciones.
 
 ```
-🔼 MAYOR PRIORIDAD
-1. System Properties (-D)
-2. Variables de entorno (ENV)  
-3. .env file (si existe)
-4. application.properties (perfil específico)
-5. application.properties (base)
-6. application.yaml
-7. Valores por defecto (@WithDefault)
-🔽 MENOR PRIORIDAD
+MAYOR PRIORIDAD
+1. System Properties (-D).
+2. Variables de entorno (ENV).  
+3. `.env file` (si existe).
+4. `application.properties` (perfil específico).
+5. `application.properties` (base).
+6. `application.yaml`.
+7. Valores por defecto (`@WithDefaul`t).
+MENOR PRIORIDAD
 ```
 
-### 📌 Regla de Oro
-
-**"El que está más arriba gana"** - Si una propiedad se define en múltiples lugares, prevalece la de mayor prioridad.
+**Regla de oro:** "El que está más arriba, gana". Si una propiedad se define en múltiples lugares, prevalece la de mayor prioridad.
 
 ---
 
-## 🧪 Pruebas Paso a Paso
+## Pruebas paso a paso
 
-### Prueba 1: Valor Base desde Properties
+### Prueba 1. Valor base desde "Properties".
 
 **1. Arrancar en modo DEV:**
 
@@ -361,17 +359,17 @@ curl http://localhost:8080/api/tasas/config | jq
 }
 ```
 
-> 💡 **Estos valores vienen de:** `application.properties`
+> 💡 **Estos valores vienen de:** `application.properties`.
 
 ---
 
-### Prueba 2: Sobrescribir con Variable de Entorno
+### Prueba 2. Sobrescribir con variable de entorno.
 
-Las variables de entorno tienen **MAYOR prioridad** que los archivos de configuración.
+Las variables de entorno tienen **mayor prioridad** que los archivos de configuración.
 
-**1. Para el servidor** (Ctrl+C)
+**1. Detén el servidor** (Ctrl+C).
 
-**2. Arrancar con variable de entorno:**
+**2. Arranca con variable de entorno:**
 
 #### Windows
 ```powershell
@@ -384,7 +382,7 @@ $env:TASACORP_COMMISSION_RATE="9.99"
 TASACORP_COMMISSION_RATE=9.99 ./mvnw quarkus:dev
 ```
 
-**3. Consultar de nuevo:**
+**3. Consulta, de nuevo.**
 
 #### Windows
 ```powershell
@@ -405,10 +403,10 @@ curl http://localhost:8080/api/tasas/config | jq
 }
 ```
 
-> ✅ **La comisión cambió de 2.5% → 9.99%**  
+> **La comisión cambió de 2.5% → 9.99%**  
 > 💡 **ENV > properties**
 
-### 📌 Mapeo de Propiedades a Variables de Entorno
+### Mapeo de propiedades a variables de entorno
 
 Quarkus convierte automáticamente las propiedades:
 
@@ -419,18 +417,18 @@ Quarkus convierte automáticamente las propiedades:
 | `quarkus.http.port` | `QUARKUS_HTTP_PORT` |
 
 **Reglas:**
-- Puntos (`.`) → Guiones bajos (`_`)
-- Todo en MAYÚSCULAS
+- Puntos (`.`) → Guiones bajos (`_`).
+- Todo en MAYÚSCULAS.
 
 ---
 
-### Prueba 3: System Properties (Máxima Prioridad)
+### Prueba 3. "System Properties" (máxima prioridad).
 
-Los System Properties (`-D`) tienen la **MÁXIMA prioridad**.
+Los "System Properties" (`-D`) tienen la **MÁXIMA prioridad**.
 
-**1. Para el servidor** (Ctrl+C)
+**1. Detén el servidor** (Ctrl+C).
 
-**2. Arrancar con System Property Y variable de entorno:**
+**2. Arranca con "System Property" y variable de entorno:**
 
 #### Windows
 ```powershell
@@ -443,7 +441,7 @@ $env:TASACORP_COMMISSION_RATE="9.99"
 TASACORP_COMMISSION_RATE=9.99 ./mvnw quarkus:dev -Dtasacorp.commission.rate=15.0
 ```
 
-**3. Consultar:**
+**3. Consulta:**
 
 #### Windows
 ```powershell
@@ -464,10 +462,10 @@ curl http://localhost:8080/api/tasas/config | jq
 }
 ```
 
-> ✅ **La comisión ahora es 15.0%**  
-> 💡 **System Property (-D) > ENV > properties**
+> ✅ **La comisión ahora es 15.0 % .**  
+> 💡 **System Property (-D) > ENV > properties.**
 
-### 🎯 Demostración de Prioridades
+### Demostración de prioridades
 
 | Fuente | Valor | ¿Ganó? |
 |--------|-------|--------|
@@ -477,11 +475,11 @@ curl http://localhost:8080/api/tasas/config | jq
 
 ---
 
-## 🧪 Verificación
+## Verificación
 
-### Prueba Completa de Conversión
+### Prueba completa de conversión.
 
-**Verificar que la comisión se aplica correctamente:**
+**Verifica que la comisión se aplica correctamente:**
 
 #### Windows
 ```powershell
@@ -493,7 +491,7 @@ curl "http://localhost:8080/api/tasas/convertir/USD?monto=1000"
 curl "http://localhost:8080/api/tasas/convertir/USD?monto=1000" | jq
 ```
 
-**Con comisión de 15.0%:**
+**Con comisión de 15.0 % :**
 ```json
 {
   "monto_origen": 1000.0,
@@ -511,9 +509,9 @@ curl "http://localhost:8080/api/tasas/convertir/USD?monto=1000" | jq
 
 ---
 
-## 📚 Conceptos Clave Aprendidos
+## Conceptos clave
 
-### ✅ Externalización de Configuraciones
+### ✅ Externalización de configuraciones.
 
 **Antes (hardcoded):**
 ```java
@@ -531,7 +529,7 @@ public class Service {
 }
 ```
 
-### ✅ Prioridades de Carga
+### ✅ Prioridades de carga.
 
 ```
 System Properties (-D)    ← MÁXIMA PRIORIDAD
@@ -545,22 +543,22 @@ application.yaml
 Valores por defecto       ← MÍNIMA PRIORIDAD
 ```
 
-### ✅ Casos de Uso
+### ✅ Casos de uso
 
 | Escenario | Mecanismo | Ejemplo |
 |-----------|-----------|---------|
 | Desarrollo local | properties | `tasacorp.commission.rate=0.0` |
 | CI/CD | ENV vars | `TASACORP_COMMISSION_RATE=2.5` |
 | Producción crítica | System Props | `-Dtasacorp.commission.rate=1.0` |
-| Configuración por defecto | @WithDefault | `@WithDefault("2.5")` |
+| Configuración por defecto | `@WithDefault` | `@WithDefault("2.5")` |
 
 ---
 
-## 🎓 Ejercicios Adicionales
+## Ejercicios adicionales
 
-### Ejercicio 1: Agregar Nueva Propiedad
+### Ejercicio 1. Agrega una nueva propiedad.
 
-**Objetivo:** Agregar un límite de conversión diaria.
+**Objetivo:** agregar un límite de conversión diaria.
 
 1. Agregar en `application.properties`:
 ```properties
