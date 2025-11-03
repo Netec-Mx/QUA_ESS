@@ -220,7 +220,7 @@ Un **Client** representa una aplicación que puede solicitar autenticación.
 
 Los **Realm Roles** definen permisos a nivel de realm.
 
-1. Ubícate en el menú lateral: **Realm roles**.
+1. Ubícate en el menú lateral: **"Realm roles"**.
 2. Da click en **"Create role"**.
 
 **Rol 1: customer**
