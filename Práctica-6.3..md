@@ -713,7 +713,7 @@ docker start keycloak-vaultcorp
 
 **Solución:** usa Docker Compose con PostgreSQL (ver sección "Persistir Configuración").
 
-### ❌ Problema: Puerto 8180 ya en uso.
+### ❌ Problema: puerto 8180 ya en uso.
 
 **Solución:**
 ```bash
