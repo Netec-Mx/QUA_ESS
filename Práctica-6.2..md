@@ -1,6 +1,6 @@
-# 🔐 Parte 2: Autenticación con JWT (JSON Web Token)
+# Parte 2. Autenticación con JWT (JSON Web Token)
 
-## 📚 ¿Qué es JWT?
+## ¿Qué es JWT?
 
 **JWT (JSON Web Token)** es un estándar abierto ([RFC 7519](https://tools.ietf.org/html/rfc7519)) que define una forma compacta y autocontenida de transmitir información de forma segura entre dos partes como un objeto JSON.
 
@@ -13,23 +13,23 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3ZhdWx0Y29ycC5jb20iLCJ
 │─────────── Header ──────────────│───────────── Payload ────────────│─── Signature ───│
 ```
 
-1. **Header**: Tipo de token y algoritmo de firma (Base64)
-2. **Payload**: Claims o datos del usuario (Base64)
-3. **Signature**: Firma criptográfica para verificar integridad (RSA/HMAC)
+1. **Header**: tipo de token y algoritmo de firma (Base64).
+2. **Payload**: claims o datos del usuario (Base64).
+3. **Signature**: firma criptográfica para verificar integridad (RSA/HMAC).
 
-### 🎯 Ventajas de JWT
+### Ventajas de un JWT
 
 | Ventaja | Descripción |
 |---------|-------------|
-| **Stateless** | El servidor no almacena sesiones, toda la info está en el token |
-| **Escalable** | Perfecto para microservicios distribuidos |
-| **Portátil** | Funciona entre diferentes dominios y servicios |
-| **Autocontenido** | El token incluye toda la información necesaria |
-| **Seguro** | Firmado criptográficamente (no puede alterarse) |
+| **Stateless** | El servidor no almacena sesiones, toda la info está en el token. |
+| **Escalable** | Perfecto para microservicios distribuidos. |
+| **Portátil** | Funciona entre diferentes dominios y servicios. |
+| **Autocontenido** | El token incluye toda la información necesaria. |
+| **Seguro** | Firmado criptográficamente (no puede alterarse). |
 
 ---
 
-## 🏗️ Arquitectura de la Solución
+## Arquitectura de la solución
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -86,18 +86,18 @@ eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3ZhdWx0Y29ycC5jb20iLCJ
 
 ---
 
-## 🔧 Requisitos Previos
+## Requisitos previos
 
-- ✅ Haber completado la **Parte 1** (Autenticación Básica)
-- ✅ Tener Quarkus corriendo: `./mvnw quarkus:dev`
-- ✅ Tener `curl` instalado para las pruebas
-- ✅ (Opcional) Python 3 para formatear JSON
+- ✅ Completar la **"parte 1"** (autenticación básica).
+- ✅ Tener Quarkus corriendo: `./mvnw quarkus:dev`.
+- ✅ Tener `cURL` instalado para las pruebas.
+- ✅ Tener Python 3 para formatear JSON (opcional).
 
 ---
 
-## 📦 Componentes Implementados
+## Componentes implementados
 
-### 1. **Generación de Llaves RSA**
+### 1. **Generación de llaves RSA.**
 
 ```bash
 # Llave privada (firma tokens)
@@ -107,7 +107,7 @@ src/main/resources/privateKey.pem
 src/main/resources/publicKey.pem
 ```
 
-### 2. **Servicio de JWT** (`JwtService.java`)
+### 2. **Servicio de JWT** (`JwtService.java`).
 
 ```java
 @ApplicationScoped
@@ -123,7 +123,7 @@ public class JwtService {
 }
 ```
 
-### 3. **Endpoint de Autenticación** (`AuthResource.java`)
+### 3. **Endpoint de autenticación** (`AuthResource.java`).
 
 ```java
 @POST
@@ -135,7 +135,7 @@ public Response login(LoginRequest request) {
 }
 ```
 
-### 4. **Endpoints Protegidos** (`InternalSecretResource.java`)
+### 4. **Endpoints protegidos** (`InternalSecretResource.java`).
 
 ```java
 @Path("/api/internal/secrets")
@@ -155,23 +155,23 @@ public class InternalSecretResource {
 
 ---
 
-## 🚀 Cómo Ejecutar el Ejercicio
+## Cómo ejecutar el ejercicio
 
-### Opción 1: Script Automatizado (Recomendado)
+### Opción 1. Script automatizado (recomendado).
 
 ```bash
-# Asegúrate de que Quarkus esté corriendo
+# Asegúrate de que Quarkus esté corriendo:
 ./mvnw quarkus:dev
 
-# En otra terminal, ejecuta el script de pruebas
+# En otra terminal, ejecuta el script de pruebas:
 ./test-part2-jwt.sh
 ```
 
 El script te guiará paso a paso por todas las pruebas con explicaciones educativas.
 
-### Opción 2: Pruebas Manuales con curl
+### Opción 2. Pruebas manuales con cURL.
 
-#### Paso 1: Hacer Login y Obtener Token
+#### Paso 1: hacer login y obtener el token.
 
 ```bash
 curl -X POST http://localhost:8080/api/auth/login \
@@ -191,14 +191,14 @@ curl -X POST http://localhost:8080/api/auth/login \
 }
 ```
 
-#### Paso 2: Guardar el Token
+#### Paso 2: guardar el token.
 
 ```bash
-# Guarda el token en una variable
+# Guarda el token en una variable:
 TOKEN="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
-#### Paso 3: Ver tu Perfil
+#### Paso 3: ver tu perfil.
 
 ```bash
 curl http://localhost:8080/api/internal/secrets/profile \
@@ -215,7 +215,7 @@ curl http://localhost:8080/api/internal/secrets/profile \
 }
 ```
 
-#### Paso 4: Crear un Secreto
+#### Paso 4: crear un secreto.
 
 ```bash
 curl -X POST http://localhost:8080/api/internal/secrets \
@@ -228,7 +228,7 @@ curl -X POST http://localhost:8080/api/internal/secrets \
   }'
 ```
 
-#### Paso 5: Ver tus Secretos
+#### Paso 5: ver tus secretos.
 
 ```bash
 curl http://localhost:8080/api/internal/secrets/my-secrets \
@@ -237,15 +237,15 @@ curl http://localhost:8080/api/internal/secrets/my-secrets \
 
 ---
 
-## 📋 Endpoints Disponibles
+## Endpoints disponibles
 
-### 🔓 Endpoint Público
+### Endpoint público
 
 | Método | Ruta | Descripción | Auth |
 |--------|------|-------------|------|
 | `POST` | `/api/auth/login` | Genera un JWT | No |
 
-**Request Body:**
+**Request body:**
 ```json
 {
   "username": "emp001",
@@ -262,13 +262,13 @@ curl http://localhost:8080/api/internal/secrets/my-secrets \
 }
 ```
 
-### 🔒 Endpoints Protegidos con JWT
+### Endpoints protegidos con JWT
 
 | Método | Ruta | Descripción | Rol Requerido |
 |--------|------|-------------|---------------|
-| `GET` | `/api/internal/secrets/profile` | Ver perfil del usuario | `employee` |
-| `GET` | `/api/internal/secrets/my-secrets` | Listar secretos propios | `employee` |
-| `POST` | `/api/internal/secrets` | Crear un secreto | `employee` |
+| `GET` | `/api/internal/secrets/profile` | Ver perfil del usuario. | `employee` |
+| `GET` | `/api/internal/secrets/my-secrets` | Listar secretos propios. | `employee` |
+| `POST` | `/api/internal/secrets` | Crear un secreto. | `employee` |
 
 **Todas las peticiones deben incluir:**
 ```
@@ -277,7 +277,7 @@ Authorization: Bearer <tu-token-jwt>
 
 ---
 
-## 👥 Usuarios de Prueba
+## Usuarios de prueba
 
 | Username | Password | Email | Rol |
 |----------|----------|-------|-----|
@@ -287,26 +287,26 @@ Authorization: Bearer <tu-token-jwt>
 
 ---
 
-## 🔍 Conceptos Clave Aprendidos
+## Conceptos clave
 
-### 1. **Stateless Authentication**
+### 1. **Stateless authentication**
 
 A diferencia de las sesiones tradicionales, JWT no requiere que el servidor almacene información de sesión. Todo está en el token.
 
 ```
 Sesiones Tradicionales              JWT (Stateless)
 ────────────────────────            ────────────────
-1. Login                            1. Login
-2. Servidor crea sesión             2. Servidor genera JWT
-3. Servidor guarda en memoria       3. Servidor NO guarda nada
-4. Cliente recibe session ID        4. Cliente recibe JWT
-5. Cliente envía cookie             5. Cliente envía Bearer token
-6. Servidor busca en memoria        6. Servidor valida firma
+1. Login.                            1. Login.
+2. Servidor crea sesión.             2. Servidor genera JWT.
+3. Servidor guarda en memoria.       3. Servidor NO guarda nada.
+4. Cliente recibe session ID.        4. Cliente recibe JWT.
+5. Cliente envía cookie.             5. Cliente envía bearer token.
+6. Servidor busca en memoria.        6. Servidor valida firma.
 ```
 
 ### 2. **Claims del JWT**
 
-Los **claims** son declaraciones sobre el usuario. En nuestro caso:
+Los **claims** son declaraciones sobre el usuario. En este caso:
 
 ```json
 {
@@ -321,7 +321,7 @@ Los **claims** son declaraciones sobre el usuario. En nuestro caso:
 }
 ```
 
-### 3. **Flujo de Autenticación**
+### 3. **Flujo de autenticación**
 
 ```
 ┌──────────┐                           ┌──────────┐
@@ -353,7 +353,7 @@ Los **claims** son declaraciones sobre el usuario. En nuestro caso:
      │                                      │
 ```
 
-### 4. **Aislamiento Multi-Tenancy**
+### 4. **Aislamiento multi-tenancy**
 
 Cada usuario solo puede acceder a **sus propios recursos**:
 
@@ -371,15 +371,15 @@ public Response getMySecrets() {
 }
 ```
 
-✅ **emp001** solo ve secretos con `ownerId = "emp001"`  
-✅ **emp002** solo ve secretos con `ownerId = "emp002"`  
-❌ **Ningún usuario puede ver secretos de otros**
+✅ **emp001** solo ve secretos con `ownerId = "emp001"`.  
+✅ **emp002** solo ve secretos con `ownerId = "emp002"`.  
+❌ **Ningún usuario puede ver secretos de otros.**
 
 ---
 
-## 🔐 Seguridad: RSA vs HMAC
+## Seguridad: RSA vs HMAC
 
-### RSA (Asimétrica) - Lo que usamos
+### RSA (asimétrica). Lo que usamos:
 
 ```
 ┌─────────────┐                    ┌─────────────┐
@@ -390,12 +390,12 @@ public Response getMySecrets() {
 │             │     alterarse)     │ KEY         │
 └─────────────┘                    └─────────────┘
 
-✅ Más seguro
-✅ Clave pública puede distribuirse
-✅ Ideal para microservicios
+✅ Más seguro.
+✅ La clave pública puede distribuirse.
+✅ Ideal para microservicios.
 ```
 
-### HMAC (Simétrica) - Alternativa
+### HMAC (simétrica). Alternativa:
 
 ```
 ┌─────────────┐                    ┌─────────────┐
@@ -406,13 +406,13 @@ public Response getMySecrets() {
 │             │                    │ SECRET KEY  │
 └─────────────┘                    └─────────────┘
 
-⚠️  Clave debe ser compartida
-⚠️  Menos seguro si se expone
+⚠️  La clave debe de ser compartida.
+⚠️  Menos seguro si se expone.
 ```
 
 ---
 
-## 🧪 Decodificar un JWT (Educativo)
+## Decodificar un JWT
 
 Puedes decodificar cualquier JWT en [jwt.io](https://jwt.io) o con este comando:
 
@@ -425,13 +425,13 @@ echo $TOKEN | awk -F'.' '{print $2}' | base64 -d | python3 -m json.tool
 ```
 
 **⚠️ Importante:** JWT **NO está encriptado**, solo está **codificado en Base64**. Por eso:
-- ❌ Nunca incluyas contraseñas o datos sensibles en el payload
-- ❌ Nunca confíes en un JWT sin verificar su firma
-- ✅ Siempre valida la firma antes de confiar en los claims
+- ❌ Nunca incluyas contraseñas o datos sensibles en el payload.
+- ❌ Nunca confíes en un JWT sin verificar su firma.
+- ✅ Siempre valida la firma antes de confiar en los claims.
 
 ---
 
-## ⚙️ Configuración (application.properties)
+## Configuración (`application.properties`).
 
 ```properties
 # Configuración JWT
@@ -448,31 +448,31 @@ quarkus.oidc.enabled=false
 
 ---
 
-## ❓ Troubleshooting
+## Troubleshooting
 
-### Problema: "Token issued to client quarkus-app is not active"
+### ❌ Problema: "Token issued to client quarkus-app is not active".
 
-**Causa:** Conflicto entre las extensiones `oidc` y `smallrye-jwt`.
+**Causa:** conflicto entre las extensiones `oidc` y `smallrye-jwt`.
 
-**Solución:** Asegúrate de tener en `application.properties`:
+**Solución:** asegúrate de tener en `application.properties`:
 ```properties
 quarkus.oidc.enabled=false
 ```
 
-### Problema: "401 Unauthorized" al usar el token
+### ❌ Problema: "401 Unauthorized" al usar el token.
 
 **Verificar:**
-1. ¿El header está correcto? `Authorization: Bearer <token>`
-2. ¿El token no expiró? Los tokens duran 1 hora
+1. ¿El header está correcto? `Authorization: Bearer <token>`.
+2. ¿El token expiró? Los tokens duran 1 hora.
 3. ¿Las llaves RSA existen en `src/main/resources/`?
 
-### Problema: No puedo ver los secretos de otro usuario
+### ❌ Problema: no puedo ver los secretos de otro usuario.
 
 **¡Eso es correcto!** Es una característica de seguridad. Cada usuario solo puede ver sus propios secretos.
 
 ---
 
-## 📚 Recursos Adicionales
+## Recursos adicionales
 
 - [RFC 7519 - JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519)
 - [Quarkus Security JWT Guide](https://quarkus.io/guides/security-jwt)
@@ -481,38 +481,36 @@ quarkus.oidc.enabled=false
 
 ---
 
-## 🎯 Próximos Pasos
+## Próximos pasos
 
-Una vez dominada la Parte 2, estás listo para:
+Una vez dominada la parte 2, estás listo para:
 
-### **Parte 3: OIDC con Keycloak** 🔜
-- Integración con proveedores de identidad externos
-- OpenID Connect (OIDC)
-- Single Sign-On (SSO)
-- Federación de identidades
-
----
-
-## ✅ Checklist de Verificación
-
-Antes de pasar a la Parte 3, asegúrate de haber logrado:
-
-- [ ] Login genera un JWT válido
-- [ ] Puedes ver tu perfil con el token
-- [ ] Puedes crear secretos asociados a tu usuario
-- [ ] Solo ves tus propios secretos (no los de otros)
-- [ ] Entiendes qué contiene un JWT (claims)
-- [ ] Sabes la diferencia entre RSA y HMAC
-- [ ] Comprendes el concepto de autenticación stateless
+### **Parte 3. OIDC con Keycloak**
+- Integración con proveedores de identidad externos.
+- OpenID Connect (OIDC).
+- Single Sign-On (SSO).
+- Federación de identidades.
 
 ---
 
-## 📝 Notas del Instructor
+## Checklist de verificación
 
-**Puntos clave para enfatizar con los alumnos:**
+Antes de pasar a la parte 3, asegúrate de haber logrado:
 
-1. **JWT no es encriptación, es codificación**: Cualquiera puede decodificar el payload con Base64
-2. **La firma es lo que garantiza la integridad**: Sin la clave privada, no se puede crear un token válido
-3. **Stateless = Escalabilidad**: Perfecto para microservicios distribuidos
-4. **Expiración es crítica**: Los tokens DEBEN tener tiempo de vida limitado
-5. **Aislamiento por diseño**: El backend debe SIEMPRE filtrar por el usuario del token
+- [ ] Que el login genere un JWT válido.
+- [ ] Que puedas ver tu perfil con el token.
+- [ ] Crear secretos asociados a tu usuario.
+- [ ] Solo ver tus propios secretos (no los de otros).
+- [ ] Entiendes qué contiene un JWT (claims).
+- [ ] Saber la diferencia entre RSA y HMAC.
+- [ ] Comprender el concepto de autenticación stateless-
+
+---
+
+## Puntos clave**
+
+1. **JWT no es encriptación, es codificación**: cualquiera puede decodificar el payload con Base64.
+2. **La firma es lo que garantiza la integridad**: sin la clave privada, no se puede crear un token válido.
+3. **Stateless = escalabilidad**: Es perfecto para microservicios distribuidos.
+4. **La expiración es crítica**: los tokens **deben** tener tiempo de vida limitado.
+5. **Aislamiento por diseño**: el backend debe **siempre** filtrar por el usuario del token
