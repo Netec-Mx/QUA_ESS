@@ -507,7 +507,7 @@ Antes de pasar a la parte 3, asegúrate de haber logrado:
 
 ---
 
-## Puntos clave**
+## Puntos clave
 
 1. **JWT no es encriptación, es codificación**: cualquiera puede decodificar el payload con Base64.
 2. **La firma es lo que garantiza la integridad**: sin la clave privada, no se puede crear un token válido.
