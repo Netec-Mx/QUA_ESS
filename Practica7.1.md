@@ -1,20 +1,20 @@
 # TasaCorp API, parte 1. Externalización de configuraciones
 
-## Capítulo 7. Configuración y perfiles en Quarkus.
+## Capítulo 7. Configuración y perfiles en Quarkus
 
 ---
 
 ## Índice
 
-1. [Objetivo de Aprendizaje](#objetivo-de-aprendizaje)
-2. [Requisitos Previos](#requisitos-previos)
-3. [Creación del Proyecto](#creación-del-proyecto)
-4. [Estructura del Proyecto](#estructura-del-proyecto)
+1. [Objetivo de aprendizaje](#objetivo-de-aprendizaje)
+2. [Requisitos previos](#requisitos-previos)
+3. [Creación del proyecto](#creación-del-proyecto)
+4. [Estructura del proyecto](#estructura-del-proyecto)
 5. [Configuración con application.properties](#configuración-con-applicationproperties)
 6. [Configuración con application.yaml](#configuración-con-applicationyaml)
-7. [Inyección de Configuraciones](#inyección-de-configuraciones)
-8. [Prioridades de Carga](#prioridades-de-carga)
-9. [Pruebas Paso a Paso](#pruebas-paso-a-paso)
+7. [Inyección de configuraciones](#inyección-de-configuraciones)
+8. [Prioridades de carga](#prioridades-de-carga)
+9. [Pruebas paso a paso](#pruebas-paso-a-paso)
 10. [Verificación](#verificación)
 
 ---
@@ -403,7 +403,7 @@ curl http://localhost:8080/api/tasas/config | jq
 }
 ```
 
-> **La comisión cambió de 2.5 % → 9.99 %**  
+> **La comisión cambió de 2.5 % → 9.99 % .**  
 > 💡 **ENV > properties**
 
 ### Mapeo de propiedades a variables de entorno.
@@ -503,9 +503,9 @@ curl "http://localhost:8080/api/tasas/convertir/USD?monto=1000" | jq
 ```
 
 **Cálculo:**
-- Convertido: 1000 × 3.75 = 3750 USD
-- Comisión: 3750 × 15% = 562.5 USD
-- Total: 3750 + 562.5 = 4312.5 USD
+- Convertido: 1000 × 3.75 = 3750 USD.
+- Comisión: 3750 × 15 % = 562.5 USD.
+- Total: 3750 + 562.5 = 4312.5 USD.
 
 ---
 
@@ -584,7 +584,7 @@ $env:TASACORP_DAILY_LIMIT="500000"
 TASACORP_DAILY_LIMIT=500000 ./mvnw quarkus:dev
 ```
 
-### Ejercicio 2. Configuración Compleja con YAML.
+### Ejercicio 2. Configuración compleja con YAML.
 
 **Objetivo:** agregar configuración de múltiples proveedores.
 
