@@ -1,4 +1,4 @@
-# 🏦 TasaCorp API - PARTE 2: Perfiles y Configuración Sensible
+# TasaCorp API, parte 2. Perfiles y configuración sensible
 
 ## Capítulo 7: Configuración y Perfiles en Quarkus (30 minutos)
 
