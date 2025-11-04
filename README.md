@@ -10,35 +10,35 @@ Te damos la bienvenida a la **plataforma de laboratorios** del curso **Quarkus**
 
 Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
 
-### [Práctica 1. Proyecto Quarkus: Hola, mundo](./Practica1.md) 
+### [Capítulo 1. Proyecto Quarkus: Hola, mundo](./Practica1.md) 
 - **Descripción**: desarrollo de microservicios en un proyecto básico de Quarkus con endpoint REST simple.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 2. Validador de cuentas bancarias con Contract-First](./Practica2.md)
+### [Capítulo 2. Validador de cuentas bancarias con Contract-First](./Practica2.md)
 - **Descripción**: implementar Contract-First con OpenAPI para validar números de una cuenta bancaria en un proyecto Quarkus.
 - ⏱️ **Duración estimada**: 90 min.
     
-### [Práctica 3. Microservicio de gestión de cuentas bancarias](./Practica3.md) 
+### [Capítulo 3. Microservicio de gestión de cuentas bancarias](./Practica3.md) 
 - **Descripción**: desarrollar por completo un microservicio REST con CRUD, inyección de dependencias (CDI) y arquitectura en capas.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 4. Sistema de préstamos bancarios con persistencia](Practica4.md)
+### [Capítulo 4. Sistema de préstamos bancarios con persistencia](Practica4.md)
  - **Descripción**: desarrollar por completo un microservicio con Hibernate ORM + Panache, persistencia en base de datos y patrones Active Record y Repository.
  - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 4.1. Persistencia reactiva con Panache](./Laboratorio_1.md) 
+### [Capítulo 4.1. Persistencia reactiva con Panache](./Laboratorio_1.md) 
 - **Descripción**: demostrar la persistencia reactiva usando Quarkus 3.28.3, Hibernate Reactive Panache y PostgreSQL.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 4.2. Clientes seguros: Always Encrypted](./Laboratorio_2.md)
+### [Capítulo 4.2. Clientes seguros: Always Encrypted](./Laboratorio_2.md)
 - **Descripción**: elaborar un sistema de gestión de clientes bancarios con cifrado transparente de columnas sensibles usando Always Encrypted.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 4.3. Cifrado de datos sensibles con Google Tink en Quarkus](./Laboratorio_1.md) 
+### [Capítulo 4.3. Cifrado de datos sensibles con Google Tink en Quarkus](./Laboratorio_1.md) 
 - **Descripción**: usar Google Tink con AES-256-GCM para la protección de datos sensibles antes de persistirlos en PostgreSQL.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Práctica 5. Sistema de evaluación crediticia: Quarkus](Practica5.md) 
+### [Capítulo 5. Sistema de evaluación crediticia: Quarkus](Practica5.md) 
 - **Descripción**: evaluar solicitudes de crédito de consumo mediante un algoritmo de scoring crediticio automatizado.
 - ⏱️ **Duración estimada**: 90 min.
 
@@ -66,7 +66,41 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
 - ⏱️ **Duración estimada**: 90 min.
 
+### [Capítulo 8. ](Practica7.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+- ⏱️ **Duración estimada**: 90 min.
 
+### [Capítulo 8.1. ](Practica7.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+- ⏱️ **Duración estimada**: 90 min.
+
+### [Capítulo 8.2. ](Practica7.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+- ⏱️ **Duración estimada**: 90 min.
+
+
+### [Capítulo 9. Sistema de Pre-Aprobación Crediticia Express](Capitulo9.md)
+- **Descripción**: sistema bancario de pre-aprobación crediticia que evalúa solicitudes en menos de 200ms.
+- ⏱️ **Duración estimada**: 90 min.
+
+
+### [Capítulo 10. Sistema e-commerce con patrón SAGA y redis caché](Capitulo10.md)
+- **Descripción**: Este ejercicio implementa un sistema de e-commerce completo usando microservicios con dos patrones avanzados.
+- ⏱️ **Duración estimada**: 90 min.
+
+
+### [Capítulo 10.1.Monitoreo con Grafana y Kibana en Quarkus](Capitulo10.1.md)
+- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+- ⏱️ **Duración estimada**: 90 min.
+
+### [Capítulo 11. Customer Service: CreditCore](Capitulo11.md)
+- **Descripción**: Microservicio de gestión de clientes empresariales con cifrado, caché y validaciones.
+- ⏱️ **Duración estimada**: 90 min.
+
+### [Capítulo 11.1. Scoring Service - Sistema de Score Crediticio](Capitulo11b.md)
+- **Descripción**: Microservicio reactivo para cálculo de score crediticio empresarial. Analiza múltiples factores para determinar la elegibilidad crediticia de clientes corporativos.
+- ⏱️ **Duración estimada**: 90 min.
+  
 ## 📬 **Contacto y más información**
 
 Si tienes alguna pregunta o necesitas más detalles, no dudes en [contactarnos](mailto:soporte@netec.com). También puedes encontrar más recursos en nuestra [página](https://netec.com).
