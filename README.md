@@ -66,16 +66,16 @@ Cada uno de estos laboratorios está diseñado para ofrecerte una experiencia pr
 - **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Capítulo 8. ](Practica7.md)
-- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+### [Capítulo 8. Evaluación crediticia: microservicio con Quarkus](Capitulo8.md)
+- **Descripción**: Sistema de evaluación crediticia distribuida que demuestra patrones de resiliencia y consumo de APIs REST con Quarkus.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Capítulo 8.1. ](Practica7.md)
-- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+### [Capítulo 8.1. Microservicios reales con Quarkus](Capitulo8.1.md)
+- **Descripción**: Sistema de evaluación crediticia implementado cuatro microservicios independientes que se comunican entre sí mediante REST API.
 - ⏱️ **Duración estimada**: 90 min.
 
-### [Capítulo 8.2. ](Practica7.md)
-- **Descripción**: TasaCorp es un sistema bancario para consulta y conversión de tasas de cambio de divisas. Este ejercicio práctico está diseñado para dominar la configuración y gestión de perfiles en Quarkus, cubriendo desde conceptos básicos hasta integración con HashiCorp Vault.
+### [Capítulo 8.2. Microservicios Contenerizados con Docker](Capitulo8.2.md)
+- **Descripción**: Sistema de evaluación crediticia implementado con 4 microservicios contenerizados usando Docker y orquestados con Docker Compose.
 - ⏱️ **Duración estimada**: 90 min.
 
 
